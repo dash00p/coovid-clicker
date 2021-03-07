@@ -46,14 +46,13 @@ export const commarize = (number: number): string => {
   ];
 
   if (number > 1e6) {
-    const expNumber: string = number.toExponential();
-    const exp = expNumber.split("e+")[1];
+    const exp: string = number.toExponential().split("e+")[1];
     let unit = Math.floor((parseInt(exp) - 3) / 3) * 3;
     const pow: any = "1e" + (unit + 3);
     // Calculate the remainder
     let num: number = number / (pow as number);
     const unitName: string = units[Math.floor(unit / 3) - 1];
-    return `${num.toFixed(num % 1 != 0 ? 2 : 0)} ${unitName}${
+    return `${num.toFixed(num % 1 != 0 ? 4 : 0)} ${unitName}${
       num >= 2 ? "s" : ""
     }`;
   }
