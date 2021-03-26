@@ -1,4 +1,4 @@
-import CoreComponent from "./Core.component.js";
+import CoreComponent from "./Core.component";
 
 class LayoutComponent extends CoreComponent {
   wrapper: any;

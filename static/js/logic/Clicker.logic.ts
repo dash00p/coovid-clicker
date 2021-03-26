@@ -1,4 +1,4 @@
-import { gameInstance } from "./Game.js";
+import { gameInstance } from "./Game";
 
 class Clicker {
   private static _instance;
@@ -32,13 +32,13 @@ class Clicker {
     this.increment = newValue;
   }
 
-  static getInstance(){
+  static getInstance() {
     return Clicker._instance;
   }
 }
 
 export const clickerInstance = () => {
   return Clicker.getInstance();
-}
+};
 
 export default Clicker;

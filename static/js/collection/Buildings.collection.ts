@@ -1,4 +1,6 @@
-export const buidlingList = [
+import { IBuilding } from "../logic/Building.logic";
+
+export const buidlingList: IBuilding[] = [
   {
     id: 1,
     baseAmount: 25,
@@ -94,7 +96,6 @@ export const buidlingList = [
   },
   {
     id: 3,
-    type: "",
     baseAmount: 5e12,
     amountMultiplier: 1.2,
     name: "Le Christ Cosmique",

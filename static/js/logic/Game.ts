@@ -1,28 +1,38 @@
-import Clicker from "./Clicker.logic.js";
-import Building from "./Building.logic.js";
-import DomHandler from "./DomHandler.js";
-import { config } from "../collection/Config.collection.js";
+import Clicker from "./Clicker.logic";
+import Building, { IBaseBuilding } from "./Building.logic";
+import DomHandler from "./DomHandler";
+import { config } from "../collection/Config.collection";
+import bootstrap from "../helper/Bootstrap.helper";
+
+interface ISave {
+  buildings: IBaseBuilding[];
+  currentAmount: number;
+}
 
 class Game {
-  private static _instance;
+  private static _instance: Game;
   currentAmount: number;
   clicker: Clicker;
   buildings: Building;
 
   constructor() {
-    if (Game._instance) return Game._instance;
+    if (Game._instance) {
+      return Game._instance;
+    }
     Game._instance = this;
     this.clicker = new Clicker();
     this.currentAmount = config.initialAmount;
     DomHandler.init();
     this.buildings = new Building();
     this.routine();
+    // must be called after routine();
+    bootstrap();
     this.loadSave();
   }
 
-  save() {
-    const buildingToSave = this.buildings.saveBuildings();
-    const save = {
+  save(): void {
+    const buildingToSave: IBaseBuilding[] = this.buildings.saveBuildings();
+    const save: ISave = {
       buildings: buildingToSave,
       currentAmount: this.currentAmount,
     };
@@ -30,7 +40,7 @@ class Game {
     console.log("Game has been saved !");
   }
 
-  loadSave() {
+  loadSave(): void {
     let save: string | null = localStorage.getItem("save");
     if (save !== null) {
       const saveObj: any = JSON.parse(atob(save));
@@ -46,25 +56,25 @@ class Game {
     }
   }
 
-  getAmount() {
+  getAmount(): number {
     return this.currentAmount;
   }
 
-  setAmount(newAmount) {
+  setAmount(newAmount: number): void {
     this.currentAmount = newAmount;
   }
 
-  incrementAmount(increment) {
+  incrementAmount(increment: number): number {
     this.currentAmount += increment;
     return this.currentAmount;
   }
 
-  tick() {
+  tick(): void {
     this.buildings.checkAvailableBuildings();
     this.buildings.tick(config.incomeTick);
   }
 
-  routine() {
+  routine(): void {
     setInterval(() => {
       this.tick();
     }, config.incomeTick);
@@ -74,12 +84,12 @@ class Game {
     }, config.saveTick);
   }
 
-  static getInstance() {
+  static getInstance(): Game {
     return Game._instance;
   }
 }
 
-export const gameInstance = () => {
+export const gameInstance: () => Game = () => {
   return Game.getInstance();
 };
 
