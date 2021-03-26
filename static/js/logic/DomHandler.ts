@@ -1,18 +1,19 @@
-import BuildingComponent from "../component/Building.component.js";
-import LayoutComponent from "../component/Layout.component.js";
-import { findChildrenbyId, commarize } from "../helper/Dom.helper.js";
-import { gameInstance } from "./Game.js";
-import { clickerInstance } from "./Clicker.logic.js";
-import EphemeralComponent from "../component/Ephemeral.component.js";
+import BuildingComponent from "../component/Building.component";
+import LayoutComponent from "../component/Layout.component";
+import { findChildrenbyId, commarize } from "../helper/Dom.helper";
+import { gameInstance } from "./Game";
+import { clickerInstance } from "./Clicker.logic";
+import EphemeralComponent from "../component/Ephemeral.component";
+import { IBuilding } from "./Building.logic";
 
-// This class is used to handle DOM interaction
+// this class is used to handle DOM interaction
 class DomHandler {
   static tickFrequency = 0;
   private static counter;
   private static productionCounter;
   private static buildingList;
 
-  static init() {
+  static init(): void {
     DomHandler.initLayout();
     DomHandler.counter = document.getElementById("counter");
     DomHandler.productionCounter = document.getElementById("productionCounter");
@@ -22,17 +23,18 @@ class DomHandler {
   }
 
   static renderCounter(
-    value,
-    buildingsProduction = undefined,
-    frequency = undefined
-  ) {
+    value: number,
+    buildingsProduction: number = undefined,
+    frequency: number = undefined
+  ): void {
     DomHandler.counter.textContent = commarize(value);
 
     if (frequency && (DomHandler.tickFrequency += frequency) % 1000 === 0) {
-      if (!(buildingsProduction == undefined))
+      if (!(typeof buildingsProduction === "undefined")) {
         DomHandler.productionCounter.textContent = commarize(
           buildingsProduction
         );
+      }
       if (DomHandler.tickFrequency % 5000 === 0) {
         DomHandler.tickFrequency = 0;
         document.title = `${commarize(value)} doses | Coovid Clicker`;
@@ -40,19 +42,25 @@ class DomHandler {
     }
   }
 
-  static counterClickHandler() {
-    new EphemeralComponent({ icon: "random", delay: 4000 });
+  static counterClickHandler(): void {
+    const ephemeral: EphemeralComponent = new EphemeralComponent({
+      icon: "random",
+      delay: 4000,
+    });
     DomHandler.renderCounter(clickerInstance().triggerClick());
   }
 
-  static createBuilding(newBuilding) {
-    const building = new BuildingComponent(newBuilding);
+  static createBuilding(newBuilding: IBuilding): void {
+    const building: BuildingComponent = new BuildingComponent(newBuilding);
     DomHandler.buildingList.appendChild(building);
   }
 
-  static renderBuilding(building) {
+  static renderBuilding(building: IBuilding): void {
     const { level, currentAmount, currentProduction } = building;
-    const component = findChildrenbyId(DomHandler.buildingList, building.id);
+    const component: any = findChildrenbyId(
+      DomHandler.buildingList,
+      building.id
+    );
 
     if (component) {
       component.state.level = level;
@@ -61,7 +69,7 @@ class DomHandler {
     }
   }
 
-  static initLayout() {
+  static initLayout(): void {
     document.body.appendChild(
       new LayoutComponent(/*{ children: new StatComponent() }*/)
     );

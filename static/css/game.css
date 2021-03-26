@@ -8,7 +8,7 @@ body {
   height: 50px;
   top: -50px;
   left: 0px;
-  animation: 2s linear 0.05s falling;
+  animation: 4s linear 0.05s falling;
 }
 
 @keyframes falling {
