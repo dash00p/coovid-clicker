@@ -3,6 +3,7 @@ import Building, { IBaseBuilding } from "./Building.logic";
 import DomHandler from "./DomHandler";
 import { config } from "../collection/Config.collection";
 import bootstrap from "../helper/Bootstrap.helper";
+import { log, logWithTimer } from "../helper/Console.helper";
 
 interface ISave {
   buildings: IBaseBuilding[];
@@ -40,7 +41,7 @@ class Game {
       currentAmount: this.currentAmount,
     };
     localStorage.setItem("save", btoa(JSON.stringify(save)));
-    console.log("Game has been saved !");
+    logWithTimer(`Game has been saved !`, 1);
   }
 
   loadSave(): void {
@@ -55,7 +56,7 @@ class Game {
       if (saveObj.currentAmount) {
         this.setAmount(saveObj.currentAmount);
       }
-      console.log("Save loaded !");
+      log("Save loaded !", 1);
     }
   }
 
@@ -79,28 +80,37 @@ class Game {
 
   routine(): void {
     setInterval(() => {
-      if (!this.onBackground){
+      if (!this.onBackground) {
         this.tick();
       }
     }, config.incomeTick);
 
     setInterval(() => {
-      if (!this.onBackground) this.save();
+      if (this.onBackground) {
+        this.backgroundUpgrade();
+        this.backgroundDate = new Date();
+      }
+
+      this.save();
     }, config.saveTick);
   }
 
   listenVisibility(): void {
     document.addEventListener("visibilitychange", function () {
+      // triggered when user switchs to another tab or desktop.
       const game = Game.getInstance();
       game.onBackground = document.hidden;
-      if(document.hidden)
-        game.backgroundDate = new Date();
+      if (game.onBackground) game.backgroundDate = new Date();
       else {
-        const millisecondsEllapsed =
-        (new Date().getTime() - game.backgroundDate.getTime());
-        game.buildings.tick(millisecondsEllapsed);
+        game.backgroundUpgrade();
       }
     });
+  }
+
+  backgroundUpgrade(): void {
+    const millisecondsEllapsed =
+      new Date().getTime() - this.backgroundDate.getTime();
+    this.buildings.tick(millisecondsEllapsed, true);
   }
 
   static getInstance(): Game {

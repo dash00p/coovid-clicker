@@ -8,6 +8,12 @@ export const log = (message, grade) => {
   }
 };
 
+export const logWithTimer = (message, grade) => {
+  if (grade <= logLevel) {
+    console.log(`[${new Date().toLocaleTimeString()}] ${message}`);
+  }
+};
+
 export const warn: (message: any) => void = (message): void => {
   console.warn(
     `%c${message}`,

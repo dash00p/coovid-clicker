@@ -116,7 +116,7 @@ class Building {
     return building;
   }
 
-  tick(frequency: number): void {
+  tick(frequency: number, isBackground?: boolean): void {
     let totalBuildingsProduction: number = 0;
     for (const building of this.currentBuildings) {
       totalBuildingsProduction += building.currentProduction;
@@ -126,11 +126,11 @@ class Building {
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
     totalBuildingsProduction = totalBuildingsProduction * (frequency / 1000);
 
-    DomHandler.renderCounter(
-      gameInstance().incrementAmount(totalBuildingsProduction),
-      realTotalProduction,
-      frequency
-    );
+    const increment = gameInstance().incrementAmount(totalBuildingsProduction);
+
+    if (!isBackground) {
+      DomHandler.renderCounter(increment, realTotalProduction, frequency);
+    }
   }
 
   saveBuildings(): IBaseBuilding[] {
@@ -141,9 +141,10 @@ class Building {
 
   loadBuildings(buildings: IBaseBuilding[]): void {
     const buildingsId: number[] = buildings.map((b) => b.id);
-    const availableBuildingsFromSave: IBuilding[] = this.avalaibleBuildings.filter(
-      (build: IBuilding) => buildingsId.includes(build.id)
-    );
+    const availableBuildingsFromSave: IBuilding[] =
+      this.avalaibleBuildings.filter((build: IBuilding) =>
+        buildingsId.includes(build.id)
+      );
     this.updateAvailableBuildings(availableBuildingsFromSave);
     for (const upgradeBuilding of availableBuildingsFromSave) {
       const savedBuilding: IBaseBuilding = buildings.find(

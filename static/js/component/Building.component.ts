@@ -45,7 +45,7 @@ class BuildingComponent extends CoreComponent {
         this.state.currentAmount
       )} - production ${commarize(this.state.currentProduction)} (${commarize(
         this.props.baseProduction
-      )} par unité)`
+      )} par unité)&nbsp;`
     );
   }
 
@@ -62,7 +62,7 @@ class BuildingComponent extends CoreComponent {
       this.component.state.currentProduction = newBuilding.currentProduction;
       this.component.state.level++;
     } else {
-      // if falsy, couldn't level building, then 👺
+      // if falsy, building couldn't be leveled up, then 👺
       this.component.updateText(this, "Engager 👺");
       setTimeout(() => {
         this.component.updateText(this, "Engager");
