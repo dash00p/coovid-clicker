@@ -8,7 +8,7 @@ export const bootstrap: () => void = (): void => {
     handler: TimerHandler,
     timeout?: number,
     ...args: any[]
-  ): any => {
+  ): number => {
     if (!lockInterval) {
       let intervalId: number = oldInterval(handler, timeout, ...args);
       return intervalId;

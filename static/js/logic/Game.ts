@@ -11,6 +11,8 @@ interface ISave {
 
 class Game {
   private static _instance: Game;
+  backgroundDate: Date;
+  onBackground: boolean;
   currentAmount: number;
   clicker: Clicker;
   buildings: Building;
@@ -25,6 +27,7 @@ class Game {
     DomHandler.init();
     this.buildings = new Building();
     this.routine();
+    this.listenVisibility();
     // must be called after routine();
     bootstrap();
     this.loadSave();
@@ -76,12 +79,28 @@ class Game {
 
   routine(): void {
     setInterval(() => {
-      this.tick();
+      if (!this.onBackground){
+        this.tick();
+      }
     }, config.incomeTick);
 
     setInterval(() => {
-      this.save();
+      if (!this.onBackground) this.save();
     }, config.saveTick);
+  }
+
+  listenVisibility(): void {
+    document.addEventListener("visibilitychange", function () {
+      const game = Game.getInstance();
+      game.onBackground = document.hidden;
+      if(document.hidden)
+        game.backgroundDate = new Date();
+      else {
+        const millisecondsEllapsed =
+        (new Date().getTime() - game.backgroundDate.getTime());
+        game.buildings.tick(millisecondsEllapsed);
+      }
+    });
   }
 
   static getInstance(): Game {
