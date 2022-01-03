@@ -1,10 +1,9 @@
 import CoreComponent from "./Core.component";
 
 class LayoutComponent extends CoreComponent {
-  wrapper: any;
   constructor(props = null) {
     super(props);
-    this.wrapper = this.createChildren("div", "");
+    this.wrapper = this.createChildren("div");
     this.render(this.wrapper);
   }
 }

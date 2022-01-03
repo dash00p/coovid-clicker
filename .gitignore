@@ -1,2 +1,4 @@
-﻿static/js/dist
+static/js/dist
 node_modules
+.DS_Store
+yarn.lock

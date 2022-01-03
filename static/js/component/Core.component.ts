@@ -1,8 +1,9 @@
 class CoreComponent extends HTMLElement {
   props: any;
-  wrapper: any;
+  wrapper: HTMLElement;
   state: { rendered: boolean; };
   component: any;
+  shadowRoot: ShadowRoot;
   
   constructor(props) {
     super();
@@ -50,14 +51,25 @@ class CoreComponent extends HTMLElement {
     node.childNodes[0].textContent = html;
   }
 
-  createChildren(type, content, subChildren = null) {
-    const el = document.createElement(type);
+  createChildren(type, content = "", subChildren = null) {
+    const el:HTMLElement = document.createElement(type);
     el.innerHTML = content;
     if (subChildren){
       subChildren.component = this;
       el.appendChild(subChildren);
     }
     return el;
+  }
+
+  create(type, content, customType = null) {
+    const el = document.createElement(type, { is:customType});
+    el.innerHTML = content;
+    this.shadowRoot.appendChild(el);
+
+  }
+
+  appendChild<T extends Node>(element: T): T {
+    return this.shadowRoot.appendChild(element);
   }
 }
 
