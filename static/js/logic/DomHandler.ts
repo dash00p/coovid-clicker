@@ -29,13 +29,13 @@ class DomHandler {
   ): void {
     DomHandler.counter.textContent = commarize(value);
 
-    if (frequency && (DomHandler.tickFrequency += frequency) % 1000 === 0) {
+    if (frequency && (DomHandler.tickFrequency++ > (1000/frequency))) {
       if (!(typeof buildingsProduction === "undefined")) {
         DomHandler.productionCounter.textContent = commarize(
           buildingsProduction
         );
       }
-      if (DomHandler.tickFrequency % 5000 === 0) {
+      if (DomHandler.tickFrequency > (5000/frequency)) {
         DomHandler.tickFrequency = 0;
         document.title = `${commarize(value)} doses | Coovid Clicker`;
       }
