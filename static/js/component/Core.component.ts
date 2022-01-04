@@ -18,13 +18,13 @@ class CoreComponent extends HTMLElement {
     }
   }
 
-  render(element, callback = null) {
+  render(element, callback = null): void {
     this.shadowRoot.appendChild(element);
     this.state.rendered = true;
     if (callback) callback();
   }
 
-  setClass(className) {
+  setClass(className): void {
     this.className = className;
   }
 
@@ -54,7 +54,7 @@ class CoreComponent extends HTMLElement {
   createChildren(type, content = "", subChildren = null) {
     const el:HTMLElement = document.createElement(type);
     el.innerHTML = content;
-    if (subChildren){
+    if (subChildren) {
       subChildren.component = this;
       el.appendChild(subChildren);
     }

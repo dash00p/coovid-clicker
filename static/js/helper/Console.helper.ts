@@ -1,6 +1,6 @@
-import { config } from "../collection/Config.collection";
+import config from "../collection/Config.collection.json";
 
-const logLevel = config.logLevel || 1;
+const logLevel = config.game.logLevel || 1;
 
 export const log = (message, grade) => {
   if (grade <= logLevel) {

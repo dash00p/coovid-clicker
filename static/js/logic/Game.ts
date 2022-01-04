@@ -1,7 +1,7 @@
 import Clicker from "./Clicker.logic";
 import Building, { IBaseBuilding } from "./Building.logic";
 import DomHandler from "./DomHandler";
-import { config } from "../collection/Config.collection";
+import config from "../collection/Config.collection.json";
 import bootstrap from "../helper/Bootstrap.helper";
 import { log, logWithTimer } from "../helper/Console.helper";
 
@@ -24,7 +24,7 @@ class Game {
     }
     Game._instance = this;
     this.clicker = new Clicker();
-    this.currentAmount = config.initialAmount;
+    this.currentAmount = config.game.initialAmount;
     DomHandler.init();
     this.buildings = new Building();
     this.routine();
@@ -75,7 +75,7 @@ class Game {
 
   tick(): void {
     this.buildings.checkAvailableBuildings();
-    this.buildings.tick(config.incomeTick);
+    this.buildings.tick(config.game.incomeTick);
   }
 
   routine(): void {
@@ -83,7 +83,7 @@ class Game {
       if (!this.onBackground) {
         this.tick();
       }
-    }, config.incomeTick);
+    }, config.game.incomeTick);
 
     setInterval(() => {
       if (this.onBackground) {
@@ -92,7 +92,7 @@ class Game {
       }
 
       this.save();
-    }, config.saveTick);
+    }, config.game.saveTick);
   }
 
   listenVisibility(): void {
@@ -100,7 +100,7 @@ class Game {
       // triggered when user switchs to another tab or desktop.
       const game = Game.getInstance();
       game.onBackground = document.hidden;
-      if (game.onBackground) game.backgroundDate = new Date();
+      if (game.onBackground) { game.backgroundDate = new Date(); }
       else {
         game.backgroundUpgrade();
       }
@@ -108,7 +108,7 @@ class Game {
   }
 
   backgroundUpgrade(): void {
-    const millisecondsEllapsed =
+    const millisecondsEllapsed: number =
       new Date().getTime() - this.backgroundDate.getTime();
     this.buildings.tick(millisecondsEllapsed, true);
   }

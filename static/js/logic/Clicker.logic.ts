@@ -1,43 +1,45 @@
 import { gameInstance } from "./Game";
 
 class Clicker {
-  private static _instance;
-  amount;
-  count;
-  increment; //current click value
+  private static _instance: Clicker;
+  amount: number;
+  count: number;
+  increment: number; // current click value
 
-  constructor(count = 0, increment = 1, amount = 0) {
-    if (Clicker._instance) return Clicker._instance;
+  constructor(count: number = 0, increment: number = 1, amount: number = 0) {
+    if (Clicker._instance) {
+      return Clicker._instance;
+    }
     Clicker._instance = this;
     console.log("Clicker alive");
     this.count = count;
     this.increment = increment;
   }
 
-  triggerClick() {
+  triggerClick(): number {
     console.log("Trigger click");
     return gameInstance().incrementAmount(this.addClick());
   }
 
-  addClick() {
+  addClick(): number {
     this.count++;
     return this.increment;
   }
 
-  get value() {
+  get value(): number {
     return this.increment;
   }
 
-  set value(newValue) {
+  set value(newValue: number) {
     this.increment = newValue;
   }
 
-  static getInstance() {
+  static getInstance(): Clicker {
     return Clicker._instance;
   }
 }
 
-export const clickerInstance = () => {
+export const clickerInstance: () => Clicker = (): Clicker => {
   return Clicker.getInstance();
 };
 
