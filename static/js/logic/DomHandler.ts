@@ -46,6 +46,7 @@ class DomHandler {
     const ephemeral: EphemeralComponent = new EphemeralComponent({
       icon: "random",
       delay: 4000,
+      event: "click"
     });
     DomHandler.renderCounter(clickerInstance().triggerClick());
   }

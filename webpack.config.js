@@ -1,13 +1,25 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const config = require("./static/js/collection/Config.collection.json");
 
 module.exports = {
   entry: "./static/js/index.ts",
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              additionalData: "$ephemeral-duration: " + config.visual.ephemeralTimer+"ms;"
+            }
+          }],
+        exclude: /node_modules/,
       },
       {
         test: /\.ts$/,
@@ -30,6 +42,7 @@ module.exports = {
         { from: "static/img/", to: "static/img/" },
       ],
     }),
+    new MiniCssExtractPlugin()
   ],
   resolve: {
     extensions: [".ts"],

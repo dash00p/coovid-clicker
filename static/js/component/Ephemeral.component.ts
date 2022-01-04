@@ -1,9 +1,11 @@
 import CoreComponent from "./Core.component";
-import { memeList } from "../collection/Memes.collection";
+import { memeList, IMeme } from "../collection/Memes.collection";
+import config from "../collection/Config.collection.json";
 
 interface IProps {
   delay: number;
   icon: "goblin" | "pogvid" | "random";
+  event: "click";
 }
 
 const styleTemplate: string = `
@@ -36,7 +38,11 @@ class EphemeralComponent extends CoreComponent {
   getSprite(name: string): string {
     let sprite: any = name;
     if (name === "random") {
-      sprite = memeList[Math.floor(Math.random() * memeList.length)];
+      let list: IMeme[] = memeList;
+      if (this.props.event) {
+        list.filter(mem => mem.event.includes(this.props.event));
+      }
+      sprite = list[Math.floor(Math.random() * list.length)];
       return `./static/img/${sprite.path}.${sprite.extension}`;
     }
     return `./static/img/${sprite}.png`;
@@ -51,12 +57,19 @@ class EphemeralComponent extends CoreComponent {
     const max: number = window.innerWidth - min;
     const left: number = Math.floor(Math.random() * (max - min / 2));
     this.style.left = left.toString();
+    this.style.animationDuration = this.randomizeDuration();
   }
 
   kill(): void {
     setTimeout(() => {
       this.parentNode.removeChild(this);
     }, this.props.delay);
+  }
+
+  randomizeDuration(): string {
+    const duration:number = config.visual.ephemeralTimer;
+    const factor:number = 4;
+    return `${(duration+(Math.random() * duration / factor - duration / (factor*2))).toFixed(2)}ms`;
   }
 }
 
