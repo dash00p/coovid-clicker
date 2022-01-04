@@ -1,2 +1,4 @@
 ﻿static/js/dist
 node_modules
+dist
+yarn.lock

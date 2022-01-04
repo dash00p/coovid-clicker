@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./static/js/index.ts",
@@ -13,10 +14,6 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
-      {
-        test: /\.(svg|gif|png|eot|woff|ttf)$/,
-        use: ["url-loader"],
-      },
     ],
   },
   output: {
@@ -27,6 +24,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Coovid Clicker",
       template: "index.html",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "static/img/", to: "static/img/" },
+      ],
     }),
   ],
   resolve: {
