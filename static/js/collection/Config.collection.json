@@ -6,6 +6,6 @@
     "logLevel": 1
   },
   "visual": {
-    "ephemeralTimer": 3500
+    "ephemeralTimer": 6500
   }
 }

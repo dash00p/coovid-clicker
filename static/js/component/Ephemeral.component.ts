@@ -3,7 +3,6 @@ import { memeList, IMeme } from "../collection/Memes.collection";
 import config from "../collection/Config.collection.json";
 
 interface IProps {
-  delay: number;
   icon: "goblin" | "pogvid" | "random";
   event: "click";
 }
@@ -29,10 +28,7 @@ class EphemeralComponent extends CoreComponent {
     this.render(this.wrapper);
     document.body.appendChild(this);
     this.setStyle();
-
-    if (props.delay) {
-      this.kill();
-    }
+    this.kill();
   }
 
   getSprite(name: string): string {
@@ -63,13 +59,13 @@ class EphemeralComponent extends CoreComponent {
   kill(): void {
     setTimeout(() => {
       this.parentNode.removeChild(this);
-    }, this.props.delay);
+    }, Number(this.style.animationDuration.slice(0, -2)));
   }
 
   randomizeDuration(): string {
-    const duration:number = config.visual.ephemeralTimer;
-    const factor:number = 4;
-    return `${(duration+(Math.random() * duration / factor - duration / (factor*2))).toFixed(2)}ms`;
+    const duration: number = config.visual.ephemeralTimer;
+    const factor: number = 1;
+    return `${(duration + (Math.random() * (duration / factor) - (duration / (factor * 2)))).toFixed(2)}ms`;
   }
 }
 
