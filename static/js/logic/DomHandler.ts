@@ -5,6 +5,7 @@ import { gameInstance } from "./Game";
 import { IBuilding } from "./Building.logic";
 import ClickerComponent from "../component/Clicker.component";
 import BuildingListComponent from "../component/BuildingList.component";
+import CounterComponent from "../component/Counter.component";
 
 // this class is used to handle DOM interaction
 class DomHandler {
@@ -16,10 +17,12 @@ class DomHandler {
 
   static init(): void {
     DomHandler.initLayout();
-    DomHandler.counter = document.getElementById("counter");
-    DomHandler.productionCounter = document.getElementById("productionCounter");
+    const counter:CounterComponent = new CounterComponent();
+    DomHandler.counter = counter.findById("counter");
+    DomHandler.productionCounter = counter.findById("productionCounter");
     DomHandler.buildingList = new BuildingListComponent();
     DomHandler.renderCounter(gameInstance().currentAmount);
+    DomHandler.layout.appendChild(counter);
     DomHandler.layout.appendChild(new ClickerComponent());
     DomHandler.layout.appendChild(DomHandler.buildingList);
   }

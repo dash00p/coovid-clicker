@@ -37,10 +37,10 @@ class CoreComponent extends HTMLElement {
   listen(ref: CoreComponent, name: string, val: string | number, callback: Function): void {
     const parent: CoreComponent = ref;
     Object.defineProperty(this.state, name, {
-      get():any {
+      get(): any {
         return parent.state[`_${name}`];
       },
-      set(value:string|number):void {
+      set(value: string | number): void {
         parent.state[`_${name}`] = value;
         if (parent.state.rendered && callback) { callback.call(ref); }
       },
@@ -48,15 +48,15 @@ class CoreComponent extends HTMLElement {
     parent.state[name] = val;
   }
 
-  updateContent(node:HTMLElement, html:string): void {
+  updateContent(node: HTMLElement, html: string): void {
     node.children[0].innerHTML = html;
   }
 
-  updateText(node:HTMLElement, html:string): void {
+  updateText(node: HTMLElement, html: string): void {
     node.childNodes[0].textContent = html;
   }
 
-  createChildren(type: string, content:string = "", subChildren:IEnhancedHTMLElement = null):HTMLElement {
+  createChildren(type: string, content: string = "", subChildren: IEnhancedHTMLElement = null): HTMLElement {
     const el: HTMLElement = document.createElement(type);
     el.innerHTML = content;
     if (subChildren) {
@@ -66,10 +66,14 @@ class CoreComponent extends HTMLElement {
     return el;
   }
 
-  create(type:string, content: string, customType: string = null): void {
+  create(type: string, content: string, customType: string = null): void {
     const el: HTMLElement = document.createElement(type, { is: customType });
     el.innerHTML = content;
     this.shadowRoot.appendChild(el);
+  }
+
+  setHTML(text: string): void {
+    this.shadowRoot.innerHTML = text;
   }
 
   appendChild<T extends Node>(element: T): T {
@@ -78,6 +82,10 @@ class CoreComponent extends HTMLElement {
 
   find(query: string): Node {
     return this.shadowRoot.querySelector(query);
+  }
+
+  findById(query: string): Node {
+    return this.shadowRoot.getElementById(query);
   }
 }
 
