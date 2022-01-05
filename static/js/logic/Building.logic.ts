@@ -126,7 +126,7 @@ class Building {
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
     totalBuildingsProduction = totalBuildingsProduction * (frequency / 1000);
 
-    const increment = gameInstance().incrementAmount(totalBuildingsProduction);
+    const increment:number = gameInstance().incrementAmount(totalBuildingsProduction);
 
     if (!isBackground) {
       DomHandler.renderCounter(increment, realTotalProduction, frequency);

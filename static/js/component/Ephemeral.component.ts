@@ -1,10 +1,10 @@
-import CoreComponent from "./Core.component";
-import { memeList, IMeme } from "../collection/Memes.collection";
+import CoreComponent, { ICoreComponentProps } from "./Core.component";
+import { memeList, IMeme, eventType } from "../collection/Memes.collection";
 import config from "../collection/Config.collection.json";
 
-interface IProps {
+interface IEphemeralComponentProps extends ICoreComponentProps {
   icon: "goblin" | "pogvid" | "random";
-  event: "click";
+  event: eventType.click;
 }
 
 const styleTemplate: string = `
@@ -15,9 +15,10 @@ const styleTemplate: string = `
 `;
 
 class EphemeralComponent extends CoreComponent {
+  props: IEphemeralComponentProps;
   wrapper: any;
 
-  constructor(props: IProps) {
+  constructor(props: IEphemeralComponentProps) {
     super(props);
 
     this.wrapper = this.createChildren(
@@ -36,7 +37,7 @@ class EphemeralComponent extends CoreComponent {
     if (name === "random") {
       let list: IMeme[] = memeList;
       if (this.props.event) {
-        list.filter(mem => mem.event.includes(this.props.event));
+        list = list.filter(mem => mem.event.includes(this.props.event));
       }
       sprite = list[Math.floor(Math.random() * list.length)];
       return `./static/img/${sprite.path}.${sprite.extension}`;

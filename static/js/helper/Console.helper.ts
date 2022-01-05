@@ -1,14 +1,14 @@
 import config from "../collection/Config.collection.json";
 
-const logLevel = config.game.logLevel || 1;
+const logLevel: number = config.game.logLevel || 1;
 
-export const log = (message, grade) => {
+export const log: (message: string, grade: number) => void = (message, grade) => {
   if (grade <= logLevel) {
     console.log(message);
   }
 };
 
-export const logWithTimer = (message, grade) => {
+export const logWithTimer: (message: string, grade: number) => void = (message, grade) => {
   if (grade <= logLevel) {
     console.log(`[${new Date().toLocaleTimeString()}] ${message}`);
   }

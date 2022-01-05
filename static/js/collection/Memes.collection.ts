@@ -4,7 +4,7 @@ export interface IMeme {
   event?: eventType[];
 }
 
-enum eventType {
+export enum eventType {
   click = "click"
 }
 

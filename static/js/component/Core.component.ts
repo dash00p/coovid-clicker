@@ -1,11 +1,17 @@
+import { IEnhancedHTMLElement } from "../type/html";
+
+export interface ICoreComponentProps {
+  children?: Node;
+}
+
 class CoreComponent extends HTMLElement {
-  props: any;
+  props: ICoreComponentProps;
   wrapper: HTMLElement;
   state: { rendered: boolean; };
   component: any;
   shadowRoot: ShadowRoot;
-  
-  constructor(props) {
+
+  constructor(props: ICoreComponentProps) {
     super();
 
     this.state = {
@@ -18,41 +24,40 @@ class CoreComponent extends HTMLElement {
     }
   }
 
-  render(element, callback = null): void {
+  render(element: Node, callback: Function = null): void {
     this.shadowRoot.appendChild(element);
     this.state.rendered = true;
-    if (callback) callback();
+    if (callback) { callback(); }
   }
 
-  setClass(className): void {
+  setClass(className: string): void {
     this.className = className;
   }
 
-  listen(ref, name, val) {
-    //this.state.listeners[ref] = get ref()
-    const parent = ref;
+  listen(ref: CoreComponent, name: string, val: string | number, callback: Function): void {
+    const parent: CoreComponent = ref;
     Object.defineProperty(this.state, name, {
-      get() {
+      get():any {
         return parent.state[`_${name}`];
       },
-      set(value) {
+      set(value:string|number):void {
         parent.state[`_${name}`] = value;
-        if (parent.state.rendered && parent.rerender) parent.rerender();
+        if (parent.state.rendered && callback) { callback(); }
       },
     });
     parent.state[name] = val;
   }
 
-  updateContent(node, html) {
-    node.childNodes[0].innerHTML = html;
+  updateContent(node:HTMLElement, html:string): void {
+    node.children[0].innerHTML = html;
   }
 
-  updateText(node, html) {
+  updateText(node:HTMLElement, html:string): void {
     node.childNodes[0].textContent = html;
   }
 
-  createChildren(type, content = "", subChildren = null) {
-    const el:HTMLElement = document.createElement(type);
+  createChildren(type: string, content:string = "", subChildren:IEnhancedHTMLElement = null):HTMLElement {
+    const el: HTMLElement = document.createElement(type);
     el.innerHTML = content;
     if (subChildren) {
       subChildren.component = this;
@@ -61,11 +66,10 @@ class CoreComponent extends HTMLElement {
     return el;
   }
 
-  create(type, content, customType = null) {
-    const el = document.createElement(type, { is:customType});
+  create(type:string, content: string, customType: string = null): void {
+    const el: HTMLElement = document.createElement(type, { is: customType });
     el.innerHTML = content;
     this.shadowRoot.appendChild(el);
-
   }
 
   appendChild<T extends Node>(element: T): T {

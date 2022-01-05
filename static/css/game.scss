@@ -9,6 +9,9 @@ body {
   top: -50px;
   left: 0px;
   animation: $ephemeral-duration linear 0.05s falling;
+  &:not(.interactive){
+    pointer-events: none;
+  }
 }
 
 @keyframes falling {

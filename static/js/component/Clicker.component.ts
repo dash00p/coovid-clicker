@@ -1,20 +1,22 @@
 import CoreComponent from "./Core.component";
 import EphemeralComponent from "./Ephemeral.component";
 import { clickerInstance } from "../logic/Clicker.logic";
+import { eventType } from "../collection/Memes.collection";
 
 class ClickerComponent extends CoreComponent {
   static customType: string = "game-clicker";
 
-  constructor(props = null) {
+  constructor(props:object = null) {
     super(props);
     this.create("button", "Click click", ClickerComponent.customType);
     this.onclick = this.handleClick;
   }
 
   handleClick(): void {
+    // tslint:disable-next-line: no-unused-expression
     new EphemeralComponent({
       icon: "random",
-      delay: 4000,
+      event: eventType.click
     });
     clickerInstance().triggerClick();
   }

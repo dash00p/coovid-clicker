@@ -37,9 +37,13 @@ class DomHandler {
       }
       if (DomHandler.tickFrequency > (5000/frequency)) {
         DomHandler.tickFrequency = 0;
-        document.title = `${commarize(value)} doses | Coovid Clicker`;
+        DomHandler.updateTitle(value);
       }
     }
+  }
+
+  static updateTitle(value: number): void {
+      document.title = `${commarize(value)} doses | Coovid Clicker`;
   }
 
   static createBuilding(newBuilding: IBuilding): void {

@@ -1,6 +1,7 @@
-import CoreComponent from "./Core.component";
+import CoreComponent, { ICoreComponentProps } from "./Core.component";
 import { buildInstance, IBuilding } from "../logic/Building.logic";
 import { commarize } from "../helper/Dom.helper";
+import { IEnhancedHTMLElement } from "../type/html";
 
 interface IState {
   level: number | null;
@@ -10,22 +11,25 @@ interface IState {
   name: string;
 }
 
+export interface IBuildingComponentProps extends ICoreComponentProps, IBuilding {}
+
 class BuildingComponent extends CoreComponent {
+  props: IBuildingComponentProps;
   wrapper: any;
   state: IState;
 
-  constructor(props: IBuilding) {
+  constructor(props: IBuildingComponentProps) {
     super(props);
 
-    const addButton: HTMLButtonElement = document.createElement("button");
+    const addButton: IEnhancedHTMLElement = document.createElement("button");
     addButton.textContent = "Engager";
     addButton.onclick = this.handleClick;
     this.wrapper = this.createChildren("li", "<span></span>", addButton);
-    this.listen(this, "level", this.props.level);
-    this.listen(this, "currentAmount", this.props.currentAmount);
-    this.listen(this, "currentProduction", this.props.baseProduction);
-    this.listen(this, "name", this.props.name);
-    this.render(this.wrapper, this.rerender());
+    this.listen(this, "level", this.props.level, this.rerender);
+    this.listen(this, "currentAmount", this.props.currentAmount, this.rerender);
+    this.listen(this, "currentProduction", this.props.baseProduction, this.rerender);
+    this.listen(this, "name", this.props.name, this.rerender);
+    this.render(this.wrapper, this.rerender);
   }
 
   getLevel(): number {

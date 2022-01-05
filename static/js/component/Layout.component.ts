@@ -1,10 +1,8 @@
-import CoreComponent from "./Core.component";
+import CoreComponent, { ICoreComponentProps } from "./Core.component";
 
 class LayoutComponent extends CoreComponent {
-  constructor(props = null) {
+  constructor(props: ICoreComponentProps = null) {
     super(props);
-    this.wrapper = this.createChildren("div");
-    this.render(this.wrapper);
   }
 }
 

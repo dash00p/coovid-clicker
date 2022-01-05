@@ -1,5 +1,5 @@
-export const findChildrenbyId = (parent: any, childrenId: any) => {
-  let child;
+export const findChildrenbyId:(parent:any, childrenId: any)=>any = (parent, childrenId) => {
+  let child:Node;
   for (let i: number = 0; i < parent.childNodes.length; i++) {
     if (
       parent.childNodes[i].props &&
@@ -12,8 +12,8 @@ export const findChildrenbyId = (parent: any, childrenId: any) => {
   return child;
 };
 
-export const findChildrenbyType = (parent: any, childrenType: string) => {
-  let child;
+export const findChildrenbyType:(parent:any, childrenType: any)=>any = (parent, childrenType) => {
+  let child:Node;
   for (let i: number = 0; i < parent.childNodes.length; i++) {
     if (
       parent.childNodes[i].props &&

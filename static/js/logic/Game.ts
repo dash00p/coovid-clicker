@@ -96,12 +96,11 @@ class Game {
   }
 
   listenVisibility(): void {
-    document.addEventListener("visibilitychange", function () {
+    document.addEventListener("visibilitychange", () => {
       // triggered when user switchs to another tab or desktop.
-      const game = Game.getInstance();
+      const game:Game = Game.getInstance();
       game.onBackground = document.hidden;
-      if (game.onBackground) { game.backgroundDate = new Date(); }
-      else {
+      if (game.onBackground) { game.backgroundDate = new Date(); } else {
         game.backgroundUpgrade();
       }
     });
@@ -111,6 +110,7 @@ class Game {
     const millisecondsEllapsed: number =
       new Date().getTime() - this.backgroundDate.getTime();
     this.buildings.tick(millisecondsEllapsed, true);
+    DomHandler.updateTitle(this.getAmount());
   }
 
   static getInstance(): Game {
