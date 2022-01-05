@@ -3,7 +3,11 @@
     "initialAmount": 0,
     "incomeTick": 17,
     "saveTick": 30000,
-    "logLevel": 1
+    "logLevel": 1,
+    "perk": {
+      "minTimer": 300,
+      "maxTimer": 600
+    }
   },
   "visual": {
     "ephemeralTimer": 6500

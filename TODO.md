@@ -7,6 +7,7 @@
 * Cloud Save
 * Hall of Fame
 * Click upgrades
+* Achievements
 
 # Enhancements
 * Building production balance

@@ -4,10 +4,18 @@ import DomHandler from "./DomHandler";
 import config from "../collection/Config.collection.json";
 import bootstrap from "../helper/Bootstrap.helper";
 import { log, logWithTimer } from "../helper/Console.helper";
+import { perkType } from "../collection/Perk.collection";
+import Perk from "./Perk.logic";
 
 interface ISave {
   buildings: IBaseBuilding[];
   currentAmount: number;
+  currentDate: Date;
+  stats: IStat;
+}
+
+interface IStat {
+  clickCount: number;
 }
 
 class Game {
@@ -16,7 +24,9 @@ class Game {
   onBackground: boolean;
   currentAmount: number;
   clicker: Clicker;
+  perk: Perk;
   buildings: Building;
+  level: number;
 
   constructor() {
     if (Game._instance) {
@@ -26,9 +36,11 @@ class Game {
     this.clicker = new Clicker();
     this.currentAmount = config.game.initialAmount;
     DomHandler.init();
+    this.perk = new Perk();
     this.buildings = new Building();
     this.routine();
     this.listenVisibility();
+    this.level = 1;
     // must be called after routine();
     bootstrap();
     this.loadSave();
@@ -39,6 +51,10 @@ class Game {
     const save: ISave = {
       buildings: buildingToSave,
       currentAmount: this.currentAmount,
+      currentDate: new Date(),
+      stats: {
+        clickCount: this.clicker.count
+      }
     };
     localStorage.setItem("save", btoa(JSON.stringify(save)));
     logWithTimer(`Game has been saved !`, 1);

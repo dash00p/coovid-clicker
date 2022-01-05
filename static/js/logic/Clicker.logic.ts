@@ -5,6 +5,7 @@ class Clicker {
   amount: number;
   count: number;
   increment: number; // current click value
+  baseIncrement: number;
 
   constructor(count: number = 0, increment: number = 1, amount: number = 0) {
     if (Clicker._instance) {
@@ -14,6 +15,7 @@ class Clicker {
     console.log("Clicker alive");
     this.count = count;
     this.increment = increment;
+    this.baseIncrement = increment;
   }
 
   triggerClick(): number {

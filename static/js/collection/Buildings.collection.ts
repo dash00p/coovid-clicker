@@ -113,7 +113,7 @@ export const buidlingList: IBuilding[] = [
     baseAmount: 1e15,
     amountMultiplier: 1.1,
     baseProduction: 9e7,
-    name: "ID 15",
+    name: "Robert the Bruce",
   },
   {
     id: 16,
