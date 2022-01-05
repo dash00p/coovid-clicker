@@ -1,10 +1,12 @@
-class BuildingList extends HTMLUListElement {
-    constructor() {
-      // toujours appeler « super » en premier dans le constructeur
-      super();
-    }
+import CoreComponent from "./Core.component";
+
+class BuildingListComponent extends CoreComponent {
+  static customType: string = "game-building-list";
+  constructor(props: object = null) {
+    super(props);
   }
+}
 
-  customElements.define("game-building-list", BuildingList, { extends: "ul" });
+customElements.define(BuildingListComponent.customType, BuildingListComponent);
 
-  export default BuildingList;
+export default BuildingListComponent;

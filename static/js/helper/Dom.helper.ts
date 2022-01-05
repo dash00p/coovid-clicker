@@ -1,25 +1,11 @@
 export const findChildrenbyId:(parent:any, childrenId: any)=>any = (parent, childrenId) => {
   let child:Node;
-  for (let i: number = 0; i < parent.childNodes.length; i++) {
+  for (let i: number = 0; i < parent.shadowRoot.childNodes.length; i++) {
     if (
-      parent.childNodes[i].props &&
-      parent.childNodes[i].props.id === childrenId
+      parent.shadowRoot.childNodes[i].props &&
+      parent.shadowRoot.childNodes[i].props.id === childrenId
     ) {
-      child = parent.childNodes[i];
-      break;
-    }
-  }
-  return child;
-};
-
-export const findChildrenbyType:(parent:any, childrenType: any)=>any = (parent, childrenType) => {
-  let child:Node;
-  for (let i: number = 0; i < parent.childNodes.length; i++) {
-    if (
-      parent.childNodes[i].props &&
-      parent.childNodes[i].props.id === childrenType
-    ) {
-      child = parent.childNodes[i];
+      child = parent.shadowRoot.childNodes[i];
       break;
     }
   }

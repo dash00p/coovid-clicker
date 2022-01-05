@@ -4,6 +4,7 @@ import { findChildrenbyId, commarize } from "../helper/Dom.helper";
 import { gameInstance } from "./Game";
 import { IBuilding } from "./Building.logic";
 import ClickerComponent from "../component/Clicker.component";
+import BuildingListComponent from "../component/BuildingList.component";
 
 // this class is used to handle DOM interaction
 class DomHandler {
@@ -17,9 +18,10 @@ class DomHandler {
     DomHandler.initLayout();
     DomHandler.counter = document.getElementById("counter");
     DomHandler.productionCounter = document.getElementById("productionCounter");
-    DomHandler.buildingList = document.getElementById("buildingList");
+    DomHandler.buildingList = new BuildingListComponent();
     DomHandler.renderCounter(gameInstance().currentAmount);
     DomHandler.layout.appendChild(new ClickerComponent());
+    DomHandler.layout.appendChild(DomHandler.buildingList);
   }
 
   static renderCounter(
@@ -29,13 +31,13 @@ class DomHandler {
   ): void {
     DomHandler.counter.textContent = commarize(value);
 
-    if (frequency && (DomHandler.tickFrequency++ > (1000/frequency))) {
+    if (frequency && (DomHandler.tickFrequency++ > (1000 / frequency))) {
       if (!(typeof buildingsProduction === "undefined")) {
         DomHandler.productionCounter.textContent = commarize(
           buildingsProduction
         );
       }
-      if (DomHandler.tickFrequency > (5000/frequency)) {
+      if (DomHandler.tickFrequency > (5000 / frequency)) {
         DomHandler.tickFrequency = 0;
         DomHandler.updateTitle(value);
       }
@@ -43,18 +45,16 @@ class DomHandler {
   }
 
   static updateTitle(value: number): void {
-      document.title = `${commarize(value)} doses | Coovid Clicker`;
+    document.title = `${commarize(value)} doses | Coovid Clicker`;
   }
 
   static createBuilding(newBuilding: IBuilding): void {
-    const building: BuildingComponent = new BuildingComponent(newBuilding);
-    DomHandler.buildingList.appendChild(building);
+    DomHandler.buildingList.appendChild(new BuildingComponent(newBuilding));
   }
 
   static renderBuilding(building: IBuilding): void {
     const { level, currentAmount, currentProduction } = building;
-    const component: any = findChildrenbyId(
-      DomHandler.buildingList,
+    const component: any = findChildrenbyId(DomHandler.buildingList,
       building.id
     );
 

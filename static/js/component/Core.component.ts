@@ -75,6 +75,10 @@ class CoreComponent extends HTMLElement {
   appendChild<T extends Node>(element: T): T {
     return this.shadowRoot.appendChild(element);
   }
+
+  find(query: string): Node {
+    return this.shadowRoot.querySelector(query);
+  }
 }
 
 export default CoreComponent;
