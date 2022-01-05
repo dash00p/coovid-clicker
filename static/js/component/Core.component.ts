@@ -27,7 +27,7 @@ class CoreComponent extends HTMLElement {
   render(element: Node, callback: Function = null): void {
     this.shadowRoot.appendChild(element);
     this.state.rendered = true;
-    if (callback) { callback(); }
+    if (callback) { callback.call(this); }
   }
 
   setClass(className: string): void {
@@ -42,7 +42,7 @@ class CoreComponent extends HTMLElement {
       },
       set(value:string|number):void {
         parent.state[`_${name}`] = value;
-        if (parent.state.rendered && callback) { callback(); }
+        if (parent.state.rendered && callback) { callback.call(ref); }
       },
     });
     parent.state[name] = val;
