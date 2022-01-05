@@ -4,7 +4,6 @@ import DomHandler from "./DomHandler";
 import config from "../collection/Config.collection.json";
 import bootstrap from "../helper/Bootstrap.helper";
 import { log, logWithTimer } from "../helper/Console.helper";
-import { perkType } from "../collection/Perk.collection";
 import Perk from "./Perk.logic";
 
 interface ISave {
@@ -63,10 +62,14 @@ class Game {
   loadSave(): void {
     let save: string | null = localStorage.getItem("save");
     if (save !== null) {
-      const saveObj: any = JSON.parse(atob(save));
+      const saveObj: ISave = JSON.parse(atob(save));
 
       if (saveObj.buildings && saveObj.buildings.length) {
         this.buildings.loadBuildings(saveObj.buildings);
+      }
+
+      if(saveObj.stats && saveObj.stats.clickCount) {
+        this.clicker.count = saveObj.stats.clickCount;
       }
 
       if (saveObj.currentAmount) {
