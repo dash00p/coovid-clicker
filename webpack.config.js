@@ -40,6 +40,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: "static/img/", to: "static/img/" },
+        { from: "static/sound/", to: "static/sound/" },
       ],
     }),
     new MiniCssExtractPlugin()

@@ -1,4 +1,4 @@
-import { gameInstance } from "./Game";
+import { gameInstance } from "./Game.logic";
 
 class Clicker {
   private static _instance: Clicker;

@@ -1,19 +1,23 @@
 import BuildingComponent from "../component/Building.component";
 import LayoutComponent from "../component/Layout.component";
 import { findChildrenbyId, commarize } from "../helper/Dom.helper";
-import { gameInstance } from "./Game";
+import { gameInstance } from "./Game.logic";
 import { IBuilding } from "./Building.logic";
 import ClickerComponent from "../component/Clicker.component";
 import BuildingListComponent from "../component/BuildingList.component";
 import CounterComponent from "../component/Counter.component";
+import PerksListComponent from "../component/PerkList.component";
+import { IPerk } from "../collection/Perk.collection";
 
 // this class is used to handle DOM interaction
 class DomHandler {
   static layout: LayoutComponent;
+  static clicker;
   static tickFrequency = 0;
   private static counter;
   private static productionCounter;
   private static buildingList;
+  private static perksList;
 
   static init(): void {
     DomHandler.initLayout();
@@ -21,10 +25,13 @@ class DomHandler {
     DomHandler.counter = counter.findById("counter");
     DomHandler.productionCounter = counter.findById("productionCounter");
     DomHandler.buildingList = new BuildingListComponent();
+    DomHandler.perksList = new PerksListComponent();
+    DomHandler.clicker = new ClickerComponent();
     DomHandler.renderCounter(gameInstance().currentAmount);
     DomHandler.layout.appendChild(counter);
-    DomHandler.layout.appendChild(new ClickerComponent());
+    DomHandler.layout.appendChild(DomHandler.clicker);
     DomHandler.layout.appendChild(DomHandler.buildingList);
+    DomHandler.layout.appendChild(DomHandler.perksList);
   }
 
   static renderCounter(
@@ -66,6 +73,10 @@ class DomHandler {
       component.state.currentAmount = currentAmount;
       component.state.currentProduction = currentProduction;
     }
+  }
+
+  static renderPerk(perkList: IPerk): void{
+    DomHandler.perksList.addPerk(perkList);
   }
 
   static initLayout(): void {

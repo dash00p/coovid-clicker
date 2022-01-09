@@ -15,5 +15,8 @@
 * Add version number
 * Enhance save information (date, version, ...)
 
+# Technical debt
+* Move type to definition files
+
 # Fixes
 *

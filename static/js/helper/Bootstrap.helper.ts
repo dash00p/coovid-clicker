@@ -1,6 +1,6 @@
 import { warn } from "./Console.helper";
 
-const oldInterval:(handler: TimerHandler, timeout?: number, ...args: any[]) => ReturnType<typeof setInterval> = window.setInterval;
+export const oldInterval:(handler: TimerHandler, timeout?: number, ...args: any[]) => ReturnType<typeof setInterval> = window.setInterval;
 const lockInterval:boolean = true;
 
 export const bootstrap: () => void = (): void => {

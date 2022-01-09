@@ -53,7 +53,7 @@ class Game {
       currentDate: new Date(),
       stats: {
         clickCount: this.clicker.count
-      }
+      },
     };
     localStorage.setItem("save", btoa(JSON.stringify(save)));
     logWithTimer(`Game has been saved !`, 1);

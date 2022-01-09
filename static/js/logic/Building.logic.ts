@@ -1,6 +1,6 @@
 import { buidlingList } from "../collection/Buildings.collection";
 import DomHandler from "./DomHandler";
-import { gameInstance } from "./Game";
+import { gameInstance } from "./Game.logic";
 import { log } from "../helper/Console.helper";
 
 export interface IBaseBuilding {

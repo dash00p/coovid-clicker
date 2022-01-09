@@ -5,6 +5,7 @@ export interface IPerk {
     duration: number;
     requiredLevel: number;
     id?: number;
+    isActive?: boolean;
 }
 
 
@@ -12,6 +13,7 @@ export enum perkType {
     clickMultiplicator = "clickMultiplicator",
     clickAddFixedValue = "clickAddFixedValue",
     clickAddRelativeValue = "clickAddRelativeValue",
+    clickAuto = "clickAuto"
 }
 
 export const perkList: IPerk[] = [
@@ -26,6 +28,10 @@ export const perkList: IPerk[] = [
         name: "+10 click",
         type: perkType.clickAddFixedValue,
         value: 10,
+        name: "Auto click (5/s)",
+        type: perkType.clickAuto,
+        isActive: true,
+        value: 15,
         requiredLevel: 1,
         duration: 30000
     },

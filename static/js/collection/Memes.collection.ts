@@ -5,7 +5,8 @@ export interface IMeme {
 }
 
 export enum eventType {
-  click = "click"
+  click = "click",
+  perk = "perk"
 }
 
 export const memeList: IMeme[] = [
@@ -469,4 +470,9 @@ export const memeList: IMeme[] = [
     extension: "gif",
     event: [eventType.click],
   },
+  {
+    path: "wow",
+    extension: "gif",
+    event: [eventType.perk]
+  }
 ];

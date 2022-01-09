@@ -1,13 +1,21 @@
+import { oldInterval } from "../helper/Bootstrap.helper";
 import { IEnhancedHTMLElement } from "../type/html";
 
 export interface ICoreComponentProps {
   children?: Node;
+  handleClick?: ((this: GlobalEventHandlers, ev: MouseEvent, args?: any) => any) | null;
+  context?: any;
+  killOnClick?: boolean;
+}
+
+export interface ICoreComponentsState {
+  rendered: boolean;
 }
 
 class CoreComponent extends HTMLElement {
   props: ICoreComponentProps;
   wrapper: HTMLElement;
-  state: { rendered: boolean; };
+  state: ICoreComponentsState;
   component: any;
   shadowRoot: ShadowRoot;
 
@@ -22,6 +30,14 @@ class CoreComponent extends HTMLElement {
     if (props && props.children) {
       this.appendChild(props.children);
     }
+
+    if (props && props.handleClick) {
+      const that:this = this;
+      this.onclick = function (this: GlobalEventHandlers, ev: MouseEvent, args?: any): any {
+        props.handleClick.call(props.context ?? this, ev);
+        if(props.killOnClick) { that.kill(0); }
+      };
+    }
   }
 
   render(element: Node, callback: Function = null): void {
@@ -30,8 +46,8 @@ class CoreComponent extends HTMLElement {
     if (callback) { callback.call(this); }
   }
 
-  setClass(className: string): void {
-    this.className = className;
+  addClass(className: string): void {
+    this.className += className + " ";
   }
 
   listen(ref: CoreComponent, name: string, val: string | number, callback: Function): void {
@@ -48,8 +64,8 @@ class CoreComponent extends HTMLElement {
     parent.state[name] = val;
   }
 
-  updateContent(node: HTMLElement, html: string): void {
-    node.children[0].innerHTML = html;
+  updateContent(node: Element, html: string): void {
+    node.innerHTML = html;
   }
 
   updateText(node: HTMLElement, html: string): void {
@@ -80,12 +96,26 @@ class CoreComponent extends HTMLElement {
     return this.shadowRoot.appendChild(element);
   }
 
-  find(query: string): Node {
+  find(query: string): Element {
     return this.shadowRoot.querySelector(query);
   }
 
   findById(query: string): Node {
     return this.shadowRoot.getElementById(query);
+  }
+
+  kill(lifetime: number): void {
+    setTimeout(() => {
+      this.remove();
+    }, lifetime);
+  }
+
+  setInterval(
+    handler: TimerHandler,
+    timeout?: number,
+    ...args: any[]
+  ): ReturnType<typeof setInterval> {
+    return oldInterval(handler, timeout, ...args);
   }
 }
 

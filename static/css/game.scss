@@ -1,3 +1,5 @@
+$perk-animation-height: 30px;
+
 body {
   overflow: hidden;
 }
@@ -12,6 +14,15 @@ body {
   &:not(.interactive){
     pointer-events: none;
   }
+  &.interactive{
+    cursor:pointer;
+  }
+  &.perk{
+    animation:
+      $ephemeral-duration linear 0.05s flying-2,
+      3500ms cubic-bezier(.5,-700,.5, 700) y-1 infinite;
+    left: -2vh;
+  }
 }
 
 @keyframes falling {
@@ -22,3 +33,53 @@ body {
     transform: translateY(110vh);
   }
 }
+
+@keyframes flying-2 {
+  from {
+    left:-2vw;
+  }
+  to {
+    left:110vw;
+  }
+}
+
+@keyframes flying {
+  0% {
+    transform: translate(-2vw, -$perk-animation-height);
+  }
+  10% {
+    transform: translate(6.5vw, $perk-animation-height);
+  }
+  20% {
+    transform: translate(18vw, -$perk-animation-height);
+  }
+  30% {
+    transform: translate(29.5vw, $perk-animation-height);
+  }
+  40% {
+    transform: translate(41vw, -$perk-animation-height);
+  }
+  50% {
+    transform: translate(52.5vw, $perk-animation-height);    
+  }
+  60% {
+    transform: translate(64vw, -$perk-animation-height);
+  }
+  70% {
+    transform: translate(75.5vw, $perk-animation-height);
+  }
+  80% {
+    transform: translate(87vw, -$perk-animation-height);
+  }
+  90% {
+    transform: translate(98.5vw,$perk-animation-height);
+  }
+  100% {
+    transform: translate(110vw, -$perk-animation-height);
+  }
+  
+}
+
+// @keyframes y-1 {
+//   to { transform: translateY(calc($perk-animation-height + 0.2px)); }
+// }

@@ -1,4 +1,4 @@
-import CoreComponent from "./Core.component";
+import CoreComponent, { ICoreComponentProps } from "./Core.component";
 import EphemeralComponent from "./Ephemeral.component";
 import { clickerInstance } from "../logic/Clicker.logic";
 import { eventType } from "../collection/Memes.collection";
@@ -6,7 +6,7 @@ import { eventType } from "../collection/Memes.collection";
 class ClickerComponent extends CoreComponent {
   static customType: string = "game-clicker";
 
-  constructor(props:object = null) {
+  constructor(props:ICoreComponentProps = null) {
     super(props);
     this.create("button", "Click click", ClickerComponent.customType);
     this.onclick = this.handleClick;

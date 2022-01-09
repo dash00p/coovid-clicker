@@ -42,7 +42,7 @@ class BuildingComponent extends CoreComponent {
 
   rerender(): void {
     this.updateContent(
-      this.wrapper,
+      this.find("span"),
       `${this.getImageSrc() ? `<img src='${this.getImageSrc()}' />` : ""} ${
         this.state.name
       } (${this.state.level}) - coût ${commarize(
