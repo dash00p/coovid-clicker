@@ -5,8 +5,9 @@
     "saveTick": 30000,
     "logLevel": 1,
     "perk": {
-      "minTimer": 300,
-      "maxTimer": 600
+      "duration": 11000,
+      "minTimer": 300000,
+      "maxTimer": 600000
     }
   },
   "visual": {

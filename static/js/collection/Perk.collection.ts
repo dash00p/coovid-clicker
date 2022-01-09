@@ -28,6 +28,10 @@ export const perkList: IPerk[] = [
         name: "+10 click",
         type: perkType.clickAddFixedValue,
         value: 10,
+        requiredLevel: 1,
+        duration: 20000
+    },
+    {
         name: "Auto click (5/s)",
         type: perkType.clickAuto,
         isActive: true,

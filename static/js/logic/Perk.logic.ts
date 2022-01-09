@@ -33,13 +33,13 @@ class Perk {
             new EphemeralComponent({
                 icon: "wow",
                 event: eventType.perk,
-                duration: 12000,
+                duration: config.game.perk.duration,
                 handleClick: this.selectRandomBonus,
                 context: this,
                 killOnClick: true
             });
             this.routine();
-        }, 10000/*timer*/);
+        }, timer);
     }
 
     selectRandomBonus(): any{
@@ -91,7 +91,7 @@ class Perk {
                 },1000/perk.value);
                 break;
         }
-        setTimeout(()=>{clearInterval(intervalId);}, perk.duration);
+        setTimeout(()=> {clearInterval(intervalId);}, perk.duration);
     }
 }
 
