@@ -6,8 +6,8 @@
     "logLevel": 1,
     "perk": {
       "duration": 11000,
-      "minTimer": 300000,
-      "maxTimer": 600000
+      "minTimer": 120000,
+      "maxTimer": 300000
     }
   },
   "visual": {

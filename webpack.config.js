@@ -43,7 +43,9 @@ module.exports = {
         { from: "static/sound/", to: "static/sound/" },
       ],
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin({
+      filename:"style.[contenthash].css"
+    })
   ],
   resolve: {
     extensions: [".ts"],

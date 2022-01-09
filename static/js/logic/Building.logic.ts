@@ -11,6 +11,7 @@ export interface IBaseBuilding {
 export interface IBuilding extends IBaseBuilding {
   amountMultiplier: number;
   baseAmount: number;
+  neededProduction?: number;
   baseProduction: number;
   currentAmount?: number;
   currentProduction?: number;
@@ -25,6 +26,7 @@ class Building {
   private static _instance: Building;
   avalaibleBuildings;
   currentBuildings: IBuilding[];
+  private totalProduction: number;
 
   constructor() {
     if (Building._instance) {
@@ -42,7 +44,9 @@ class Building {
     log("Checking newly available buildings", 3);
     const newAvailableBuildings: IBuilding[] = this.avalaibleBuildings.filter(
       (build) =>
-        build.baseAmount <= gameInstance().currentAmount && !build.available
+        ((!build.neededProduction && build.baseAmount <= gameInstance().currentAmount) ||
+         build.neededProduction <= this.totalProduction)
+         && !build.available
     );
     this.updateAvailableBuildings(newAvailableBuildings);
   }
@@ -123,6 +127,7 @@ class Building {
     }
 
     const realTotalProduction: number = totalBuildingsProduction;
+    this.totalProduction = realTotalProduction;
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
     totalBuildingsProduction = totalBuildingsProduction * (frequency / 1000);
 
