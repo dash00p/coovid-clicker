@@ -42,7 +42,7 @@ class Perk {
         }, timer);
     }
 
-    selectRandomBonus(): any{
+    selectRandomBonus(): any {
         const availablePerks: IPerk[] = perkList.filter(p => p.requiredLevel <= gameInstance().level);
         const newPerk: IPerk = availablePerks[Math.floor(Math.random() * availablePerks.length)];
         const id: number = +new Date();

@@ -37,7 +37,7 @@ class EphemeralComponent extends CoreComponent {
     this.kill(Number(this.style.animationDuration.slice(0, 5)));
   }
 
-  playSound(file: string): void{
+  playSound(file: string): void {
     const audio: HTMLAudioElement = new Audio(`./static/sound/${file}`);
     audio.addEventListener("canplaythrough", event => {
       /* the audio is now playable; play it if permissions allow */

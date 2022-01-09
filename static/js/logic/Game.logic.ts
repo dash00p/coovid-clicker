@@ -5,6 +5,7 @@ import config from "../collection/Config.collection.json";
 import bootstrap from "../helper/Bootstrap.helper";
 import { log, logWithTimer } from "../helper/Console.helper";
 import Perk from "./Perk.logic";
+import app from "../../../package.json";
 
 interface ISave {
   buildings: IBaseBuilding[];
@@ -19,6 +20,7 @@ interface IStat {
 
 class Game {
   private static _instance: Game;
+  version: string;
   backgroundDate: Date;
   onBackground: boolean;
   currentAmount: number;
@@ -32,6 +34,7 @@ class Game {
       return Game._instance;
     }
     Game._instance = this;
+    this.version = app.version;
     this.clicker = new Clicker();
     this.currentAmount = config.game.initialAmount;
     DomHandler.init();

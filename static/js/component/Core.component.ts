@@ -110,6 +110,12 @@ class CoreComponent extends HTMLElement {
     }, lifetime);
   }
 
+  setStyle(styleContent: string): void {
+    const style: HTMLStyleElement = document.createElement("style");
+    style.textContent = styleContent;
+    this.shadowRoot.appendChild(style);
+  }
+
   setInterval(
     handler: TimerHandler,
     timeout?: number,

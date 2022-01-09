@@ -8,6 +8,7 @@ import BuildingListComponent from "../component/BuildingList.component";
 import CounterComponent from "../component/Counter.component";
 import PerksListComponent from "../component/PerkList.component";
 import { IPerk } from "../collection/Perk.collection";
+import FooterComponent from "../component/Footer.component";
 
 // this class is used to handle DOM interaction
 class DomHandler {
@@ -32,6 +33,7 @@ class DomHandler {
     DomHandler.layout.appendChild(DomHandler.clicker);
     DomHandler.layout.appendChild(DomHandler.buildingList);
     DomHandler.layout.appendChild(DomHandler.perksList);
+    DomHandler.layout.appendChild(new FooterComponent());
   }
 
   static renderCounter(
@@ -75,7 +77,7 @@ class DomHandler {
     }
   }
 
-  static renderPerk(perkList: IPerk): void{
+  static renderPerk(perkList: IPerk): void {
     DomHandler.perksList.addPerk(perkList);
   }
 

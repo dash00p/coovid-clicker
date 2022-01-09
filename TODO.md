@@ -1,13 +1,14 @@
 # Features
-* Perks
-* Temporary bonus
-* Temporary malus
-* Sound effects
-* Account
-* Cloud Save
-* Hall of Fame
+* ~~Perks~~
+  *  Temporary bonus
+  * Temporary malus
+* ~~Sound effects~~
 * Click upgrades
+* Building upgrades
 * Achievements
+* Cloud Save
+* Account
+* Hall of Fame
 
 # Enhancements
 * Building production balance

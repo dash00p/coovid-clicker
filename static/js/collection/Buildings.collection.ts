@@ -54,11 +54,11 @@ export const buidlingList: IBuilding[] = [
   {
     id: 8,
     amountMultiplier: 1.15,
-    baseAmount: 8e6,
+    baseAmount: 6e6,
     baseProduction: 2e3,
     description: "Faîtes moi confiances les potos.",
     name: "Patoche Balkanoche",
-    neededProduction: 3000,
+    neededProduction: 6000,
   },
   {
     id: 9,
@@ -67,7 +67,7 @@ export const buidlingList: IBuilding[] = [
     baseProduction: 3.5e3,
     description: "C'était sûr qu'il allait venir.",
     name: "Sardoche",
-    neededProduction: 10000,
+    neededProduction: 15000,
   },
   {
     id: 10,
@@ -76,7 +76,7 @@ export const buidlingList: IBuilding[] = [
     baseProduction: 1e4,
     description: "Quelqu'un a le code de la wifi ?",
     name: "Jean-Michel Cinquejet",
-    neededProduction: 25000,
+    neededProduction: 30000,
   },
   {
     id: 11,
@@ -103,7 +103,7 @@ export const buidlingList: IBuilding[] = [
     baseProduction: 1.5e6,
     description: "On m'a appelée ?",
     name: "Jeanne d'Haussecourt",
-    neededProduction: 10000,
+    neededProduction: 1000000,
   },
   {
     id: 3,
@@ -111,7 +111,7 @@ export const buidlingList: IBuilding[] = [
     baseAmount: 5e12,
     baseProduction: 5e6,
     name: "Le Christ Cosmique",
-    neededProduction: 50000,
+    neededProduction: 5000000,
   },
   {
     id: 14,
@@ -119,7 +119,7 @@ export const buidlingList: IBuilding[] = [
     baseAmount: 2e13,
     baseProduction: 1.5e7,
     name: "Maître Miyagi",
-    neededProduction: 200000,
+    neededProduction: 10000000,
   },
   {
     id: 15,
@@ -127,7 +127,7 @@ export const buidlingList: IBuilding[] = [
     baseAmount: 1e15,
     baseProduction: 9e7,
     name: "Robert the Bruce",
-    neededProduction: 600000,
+    neededProduction: 60000000,
   },
   {
     id: 16,
@@ -135,7 +135,7 @@ export const buidlingList: IBuilding[] = [
     baseAmount: 5e16,
     baseProduction: 9e8,
     name: "ID 16",
-    neededProduction: 2000000,
+    neededProduction: 100000000,
   },
   {
     id: 17,
@@ -143,7 +143,7 @@ export const buidlingList: IBuilding[] = [
     baseAmount: 1e18,
     baseProduction: 1.5e10,
     name: "ID 17",
-    neededProduction: 5000000,
+    neededProduction: 700000000,
   },
   {
     id: 18,
@@ -151,7 +151,7 @@ export const buidlingList: IBuilding[] = [
     baseAmount: 1.5e20,
     baseProduction: 9e10,
     name: "ID 18",
-    neededProduction: 10000000,
+    neededProduction: 1000000000,
   },
 ];
 export default {
