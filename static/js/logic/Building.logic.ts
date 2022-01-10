@@ -1,4 +1,4 @@
-import { buidlingList } from "../collection/Buildings.collection";
+import { buildingList, upgradeList } from "../collection/Buildings.collection";
 import DomHandler from "./DomHandler";
 import { gameInstance } from "./Game.logic";
 import { log } from "../helper/Console.helper";
@@ -6,10 +6,17 @@ import { log } from "../helper/Console.helper";
 export interface IBaseBuilding {
   id: number;
   level?: number;
+  activeUpgrades?: IBuildingUpgrade[];
 }
 
 export interface IBuildingUpgrade {
-
+  id: number;
+  buildingId?: number;
+  cost?: number;
+  description?: string;
+  multiplicator?: number;
+  name?: string;
+  requestedLevel?: number;
 }
 
 export interface IBuilding extends IBaseBuilding {
@@ -24,7 +31,6 @@ export interface IBuilding extends IBaseBuilding {
   };
   name: string;
   neededProduction?: number;
-  upgrades?: IBuildingUpgrade[];
 }
 
 class Building {
@@ -38,7 +44,7 @@ class Building {
       return Building._instance;
     }
     Building._instance = this;
-    this.avalaibleBuildings = buidlingList.sort(
+    this.avalaibleBuildings = buildingList.sort(
       (a, b) => a.baseAmount - b.baseAmount
     );
     this.currentBuildings = [];
@@ -50,8 +56,8 @@ class Building {
     const newAvailableBuildings: IBuilding[] = this.avalaibleBuildings.filter(
       (build) =>
         ((!build.neededProduction && build.baseAmount <= gameInstance().currentAmount) ||
-         build.neededProduction <= this.totalProduction)
-         && !build.available
+          build.neededProduction <= this.totalProduction)
+        && !build.available
     );
     this.updateAvailableBuildings(newAvailableBuildings);
   }
@@ -86,6 +92,7 @@ class Building {
       level: 0,
       currentAmount: newBuilding.baseAmount,
       currentProduction: 0,
+      activeUpgrades: []
     };
     this.currentBuildings.push(build);
     DomHandler.createBuilding(build);
@@ -125,6 +132,29 @@ class Building {
     return building;
   }
 
+  upgradeBuilding(upgradeId: number, fromSave: boolean = false): any {
+    const upgrade: IBuildingUpgrade = upgradeList.find(u => u.id === upgradeId);
+    const building: IBuilding = this.currentBuildings.find(b => b.id === upgrade.buildingId);
+    if (!fromSave && (!upgrade || !building || upgrade.cost > gameInstance().currentAmount)) { return false; }
+
+    const { id, multiplicator, name, description, cost } = upgrade;
+    building.activeUpgrades.push({
+      id,
+      cost,
+      description,
+      multiplicator,
+      name
+    });
+    building.currentProduction *= multiplicator;
+
+    if (!fromSave) {
+      DomHandler.renderCounter(
+        gameInstance().incrementAmount(-cost)
+      );
+    }
+    return building;
+  }
+
   tick(frequency: number, isBackground?: boolean): void {
     let totalBuildingsProduction: number = 0;
     for (const building of this.currentBuildings) {
@@ -136,7 +166,7 @@ class Building {
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
     totalBuildingsProduction = totalBuildingsProduction * (frequency / 1000);
 
-    const increment:number = gameInstance().incrementAmount(totalBuildingsProduction);
+    const increment: number = gameInstance().incrementAmount(totalBuildingsProduction);
 
     if (!isBackground) {
       DomHandler.renderCounter(increment, realTotalProduction, frequency);
@@ -145,7 +175,13 @@ class Building {
 
   saveBuildings(): IBaseBuilding[] {
     return this.currentBuildings.map((b) => {
-      return { id: b.id, level: b.level };
+      return {
+        id: b.id,
+        level: b.level,
+        activeUpgrades: b.activeUpgrades.map(u => {
+          return { id: u.id };
+        })
+      };
     });
   }
 
@@ -156,17 +192,21 @@ class Building {
         buildingsId.includes(build.id)
       );
     this.updateAvailableBuildings(availableBuildingsFromSave);
-    for (const upgradeBuilding of availableBuildingsFromSave) {
+    for (const leveledUpBuilding of availableBuildingsFromSave) {
       const savedBuilding: IBaseBuilding = buildings.find(
-        (b) => b.id === upgradeBuilding.id
+        (b) => b.id === leveledUpBuilding.id
       );
-      DomHandler.renderBuilding(
-        this.levelUpBuilding(
-          upgradeBuilding.id,
-          savedBuilding.level,
-          true
-        ) as IBuilding
-      );
+      let building:IBuilding = this.levelUpBuilding(
+        leveledUpBuilding.id,
+        savedBuilding.level,
+        true
+      ) as IBuilding;
+      if (savedBuilding.activeUpgrades) {
+        for (const upgrade of savedBuilding.activeUpgrades) {
+          building = this.upgradeBuilding(upgrade.id, true);
+        }
+      }
+      DomHandler.renderBuilding(building);
     }
   }
 

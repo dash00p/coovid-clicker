@@ -65,7 +65,7 @@ class DomHandler {
   }
 
   static renderBuilding(building: IBuilding): void {
-    const { level, currentAmount, currentProduction } = building;
+    const { level, currentAmount, currentProduction, activeUpgrades } = building;
     const component: any = findChildrenbyId(DomHandler.buildingList,
       building.id
     );
@@ -74,6 +74,7 @@ class DomHandler {
       component.state.level = level;
       component.state.currentAmount = currentAmount;
       component.state.currentProduction = currentProduction;
+      component.state.upgrades = activeUpgrades;
     }
   }
 

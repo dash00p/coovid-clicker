@@ -32,25 +32,29 @@ class CoreComponent extends HTMLElement {
     }
 
     if (props && props.handleClick) {
-      const that:this = this;
+      const that: this = this;
       this.onclick = function (this: GlobalEventHandlers, ev: MouseEvent, args?: any): any {
         props.handleClick.call(props.context ?? this, ev);
-        if(props.killOnClick) { that.kill(0); }
+        if (props.killOnClick) { that.kill(0); }
       };
     }
   }
 
-  render(element: Node, callback: Function = null): void {
+  render(element: Node, callbackList?: Function[]): void {
     this.shadowRoot.appendChild(element);
     this.state.rendered = true;
-    if (callback) { callback.call(this); }
+    if (callbackList) {
+      for (const callback of callbackList) {
+        callback.call(this);
+      }
+    }
   }
 
   addClass(className: string): void {
     this.className += className + " ";
   }
 
-  listen(ref: CoreComponent, name: string, val: string | number, callback: Function): void {
+  listen(ref: CoreComponent, name: string, val: string | number | object, callbackList: Function[]): void {
     const parent: CoreComponent = ref;
     Object.defineProperty(this.state, name, {
       get(): any {
@@ -58,14 +62,27 @@ class CoreComponent extends HTMLElement {
       },
       set(value: string | number): void {
         parent.state[`_${name}`] = value;
-        if (parent.state.rendered && callback) { callback.call(ref); }
+        if (parent.state.rendered && callbackList) {
+          for (const callback of callbackList) {
+            callback.call(ref);
+          }
+        }
       },
     });
     parent.state[name] = val;
   }
 
-  updateContent(node: Element, html: string): void {
+  clearContent(node: Element): void {
+    node.innerHTML = ``;
+  }
+
+  updateContent(node: Element, html: string, elementsToAppend?: IEnhancedHTMLElement[]): void {
     node.innerHTML = html;
+    if (elementsToAppend && elementsToAppend.length) {
+      for (const element of elementsToAppend) {
+        node.append(element);
+      }
+    }
   }
 
   updateText(node: HTMLElement, html: string): void {
@@ -88,15 +105,19 @@ class CoreComponent extends HTMLElement {
     this.shadowRoot.appendChild(el);
   }
 
-  setHTML(text: string): void {
-    this.shadowRoot.innerHTML = text;
+  setHTML<T extends HTMLElement>(text: string, parent?: T): void {
+    if (parent) {
+      parent.innerHTML = text;
+    } else { this.shadowRoot.innerHTML = text; }
   }
 
-  appendChild<T extends Node>(element: T): T {
-    return this.shadowRoot.appendChild(element);
+  appendChild<T extends Node>(element: T, parent?: T): T {
+    if (parent) {
+      return parent.appendChild(element);
+    } else { return this.shadowRoot.appendChild(element); }
   }
 
-  find(query: string): Element {
+  find(query: string): HTMLElement {
     return this.shadowRoot.querySelector(query);
   }
 

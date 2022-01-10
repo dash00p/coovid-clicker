@@ -1,6 +1,162 @@
-import { IBuilding } from "../logic/Building.logic";
+import { IBuilding, IBuildingUpgrade } from "../logic/Building.logic";
 
-export const buidlingList: IBuilding[] = [
+export const upgradeList: IBuildingUpgrade[] = [
+  {
+    id: 1,
+    buildingId: 1,
+    cost: 500,
+    multiplicator: 2,
+    name: "Casio Pro",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 2,
+    buildingId: 1,
+    cost: 5000,
+    multiplicator: 2,
+    name: "Casio Plus",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 3,
+    buildingId: 1,
+    cost: 20000,
+    multiplicator: 2,
+    name: "Casio Pro Plus",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 4,
+    buildingId: 2,
+    cost: 10000,
+    multiplicator: 2,
+    name: "La chloroquine pour les nuls",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 5,
+    buildingId: 2,
+    cost: 30000,
+    multiplicator: 2,
+    name: "Cloroquina para tontos",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 6,
+    buildingId: 2,
+    cost: 60000,
+    multiplicator: 2,
+    name: "Хлорохин для чайников",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 7,
+    buildingId: 4,
+    cost: 50000,
+    multiplicator: 2,
+    name: "Ouh.",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 8,
+    buildingId: 4,
+    cost: 100000,
+    multiplicator: 2,
+    name: "Ouh. Ouh.",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 9,
+    buildingId: 4,
+    cost: 200000,
+    multiplicator: 2,
+    name: "Ouh. Ouh. Ouh.",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 10,
+    buildingId: 3,
+    cost: 160000,
+    multiplicator: 1,
+    name: "Placeholder",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 22,
+    buildingId: 8,
+    cost: 3e7,
+    multiplicator: 2,
+    name: "Optimisation fiscale",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 23,
+    buildingId: 8,
+    cost: 1.2e8,
+    multiplicator: 2,
+    name: "Erreur de la banque en votre faveur",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 24,
+    buildingId: 8,
+    cost: 6e8,
+    multiplicator: 2,
+    name: "Exempté d'impôt",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 25,
+    buildingId: 9,
+    cost: 1.5e8,
+    multiplicator: 2,
+    name: "Abdul",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 25,
+    buildingId: 9,
+    cost: 6e8,
+    multiplicator: 2,
+    name: "Coquelicot",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 25,
+    buildingId: 9,
+    cost: 3e9,
+    multiplicator: 2,
+    name: "Abricot",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 28,
+    buildingId: 10,
+    cost: 1e9,
+    multiplicator: 2,
+    name: "Forfait illimité",
+    description: "",
+    requestedLevel: 10
+  },
+];
+
+export const buildingList: IBuilding[] = [
   {
     id: 1,
     amountMultiplier: 1.1,
@@ -156,5 +312,5 @@ export const buidlingList: IBuilding[] = [
   },
 ];
 export default {
-  buidlingList,
+  buidlingList: buildingList,
 };
