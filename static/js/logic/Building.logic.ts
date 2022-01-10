@@ -8,18 +8,23 @@ export interface IBaseBuilding {
   level?: number;
 }
 
+export interface IBuildingUpgrade {
+
+}
+
 export interface IBuilding extends IBaseBuilding {
   amountMultiplier: number;
   baseAmount: number;
-  neededProduction?: number;
   baseProduction: number;
   currentAmount?: number;
   currentProduction?: number;
   description?: string;
-  name: string;
   img?: {
     src: string;
   };
+  name: string;
+  neededProduction?: number;
+  upgrades?: IBuildingUpgrade[];
 }
 
 class Building {

@@ -18,9 +18,9 @@ export enum perkType {
 
 export const perkList: IPerk[] = [
     {
-        name: "Double click",
+        name: "Pentaclick",
         type: perkType.clickMultiplicator,
-        value: 2,
+        value: 5,
         requiredLevel: 1,
         duration: 15000
     },
