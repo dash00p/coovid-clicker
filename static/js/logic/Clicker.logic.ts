@@ -1,5 +1,6 @@
 import DomHandler from "./DomHandler";
 import { gameInstance } from "./Game.logic";
+import { perkInstance } from "./Perk.logic";
 
 class Clicker {
   private static _instance: Clicker;
@@ -38,7 +39,12 @@ class Clicker {
   }
 
   refreshIncrementFromBuildings(totalBuildingsProduction: number): void {
-    this.increment = Math.max(totalBuildingsProduction / 10, 1);
+    this.baseIncrement = Math.max(totalBuildingsProduction / 10, 1);
+    if(perkInstance().activePerks.length) {
+      perkInstance().applyPassiveBonus();
+    } else {
+      this.increment = this.baseIncrement;
+    }
     DomHandler.clicker.updateIncrement(this.increment);
   }
 

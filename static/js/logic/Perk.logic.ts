@@ -9,9 +9,14 @@ import DomHandler from "./DomHandler";
 import { buildInstance } from "./Building.logic";
 
 class Perk {
+    private static _instance: Perk;
     _activePerks: IPerk[];
 
     constructor() {
+        if (Perk._instance) {
+            return Perk._instance;
+        }
+        Perk._instance = this;
         this._activePerks = [];
         this.routine();
     }
@@ -67,7 +72,7 @@ class Perk {
 
     applyPassiveBonus(): void {
         let clickerValue: number = clickerInstance().baseIncrement;
-        let productionMultiplicator:number = 1;
+        let productionMultiplicator: number = 1;
         for (const perk of this.activePerks.filter(p => !p.isActive)) {
             switch (perk.type) {
                 case perkType.clickMultiplicator:
@@ -83,20 +88,29 @@ class Perk {
         }
         buildInstance().currentMultiplicator = productionMultiplicator;
         clickerInstance().value = clickerValue;
+        DomHandler.clicker.updateIncrement(clickerValue);
     }
 
     applyActiveBonus(perk: IPerk): void {
-        const instance:any = DomHandler.clicker;
+        const instance: any = DomHandler.clicker;
         let intervalId: number;
         switch (perk.type) {
             case perkType.clickAuto:
                 intervalId = instance.setInterval(() => {
                     DomHandler.clicker.handleClick();
-                },1000/perk.value);
+                }, 1000 / perk.value);
                 break;
         }
-        setTimeout(()=> {clearInterval(intervalId);}, perk.duration);
+        setTimeout(() => { clearInterval(intervalId); }, perk.duration);
+    }
+
+    static getInstance(): Perk {
+        return Perk._instance;
     }
 }
+
+export const perkInstance: () => Perk = (): Perk => {
+    return Perk.getInstance();
+};
 
 export default Perk;
