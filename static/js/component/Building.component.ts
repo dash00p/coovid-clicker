@@ -72,10 +72,10 @@ class BuildingComponent extends CoreComponent {
       this.setHTML("Améliorations: ", this.find("ul li"));
       for(const upgrade of availableUpgrades) {
         const upgradeButton: IEnhancedHTMLElement = document.createElement("button");
-        upgradeButton.textContent = `${upgrade.name} (${upgrade.cost})`;
         upgradeButton.props = {
-          initialText: `${upgrade.name} (${upgrade.cost})`
+          initialText: `${upgrade.name} (${commarize(upgrade.cost)})`
         }
+        upgradeButton.textContent = `${upgradeButton.props.initialText}`;
         upgradeButton.onclick = (ev) => { this.handleUpgradeClick(upgrade.id, ev);};
         this.appendChild(upgradeButton, this.find("ul li"));
     }

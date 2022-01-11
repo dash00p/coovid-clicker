@@ -2,7 +2,7 @@ import { IBuilding, IBuildingUpgrade } from "../logic/Building.logic";
 
 export const upgradeList: IBuildingUpgrade[] = [
   {
-    id: 1,
+    id: 10,
     buildingId: 1,
     cost: 500,
     multiplicator: 2,
@@ -11,7 +11,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 10
   },
   {
-    id: 2,
+    id: 11,
     buildingId: 1,
     cost: 5000,
     multiplicator: 2,
@@ -20,7 +20,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 20
   },
   {
-    id: 3,
+    id: 12,
     buildingId: 1,
     cost: 20000,
     multiplicator: 2,
@@ -29,7 +29,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 30
   },
   {
-    id: 4,
+    id: 20,
     buildingId: 2,
     cost: 10000,
     multiplicator: 2,
@@ -38,7 +38,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 10
   },
   {
-    id: 5,
+    id: 21,
     buildingId: 2,
     cost: 30000,
     multiplicator: 2,
@@ -47,7 +47,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 20
   },
   {
-    id: 6,
+    id: 22,
     buildingId: 2,
     cost: 60000,
     multiplicator: 2,
@@ -56,7 +56,16 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 30
   },
   {
-    id: 7,
+    id: 30,
+    buildingId: 3,
+    cost: 160000000,
+    multiplicator: 1,
+    name: "Placeholder",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 40,
     buildingId: 4,
     cost: 50000,
     multiplicator: 2,
@@ -65,94 +74,211 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 10
   },
   {
-    id: 8,
+    id: 41,
     buildingId: 4,
-    cost: 100000,
+    cost: 1e6,
     multiplicator: 2,
     name: "Ouh. Ouh.",
     description: "",
     requestedLevel: 20
   },
   {
-    id: 9,
+    id: 42,
     buildingId: 4,
-    cost: 200000,
+    cost: 2e6,
     multiplicator: 2,
     name: "Ouh. Ouh. Ouh.",
     description: "",
     requestedLevel: 30
   },
   {
-    id: 10,
-    buildingId: 3,
-    cost: 160000,
-    multiplicator: 1,
-    name: "Placeholder",
+    id: 50,
+    buildingId: 5,
+    cost: 1e6,
+    multiplicator: 2,
+    name: "Kit de survie pour scout",
     description: "",
     requestedLevel: 10
   },
   {
-    id: 22,
-    buildingId: 8,
+    id: 51,
+    buildingId: 5,
+    cost: 4e6,
+    multiplicator: 2,
+    name: "Cape en nylon",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 52,
+    buildingId: 5,
+    cost: 1.2e7,
+    multiplicator: 2,
+    name: "Richardmobile",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 60,
+    buildingId: 6,
+    cost: 9e6,
+    multiplicator: 2,
+    name: "Séance de dédicace",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 61,
+    buildingId: 6,
+    cost: 1.5e7,
+    multiplicator: 2,
+    name: "Compilation DVD",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 62,
+    buildingId: 6,
+    cost: 5e7,
+    multiplicator: 2,
+    name: "Ouverture d'un compte JustFans",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 70,
+    buildingId: 7,
     cost: 3e7,
+    multiplicator: 2,
+    name: "Paire de mouffles",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 71,
+    buildingId: 7,
+    cost: 1.2e8,
+    multiplicator: 2,
+    name: "Fermette à rénover",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 72,
+    buildingId: 7,
+    cost: 6e8,
+    multiplicator: 2,
+    name: "👌",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 80,
+    buildingId: 8,
+    cost: 1.3e8,
     multiplicator: 2,
     name: "Optimisation fiscale",
     description: "",
     requestedLevel: 10
   },
   {
-    id: 23,
+    id: 81,
     buildingId: 8,
-    cost: 1.2e8,
+    cost: 5e8,
     multiplicator: 2,
     name: "Erreur de la banque en votre faveur",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 20
   },
   {
-    id: 24,
+    id: 82,
     buildingId: 8,
-    cost: 6e8,
+    cost: 1e9,
     multiplicator: 2,
     name: "Exempté d'impôt",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 30
   },
   {
-    id: 25,
+    id: 90,
     buildingId: 9,
-    cost: 1.5e8,
+    cost: 7e8,
     multiplicator: 2,
     name: "Abdul",
     description: "",
     requestedLevel: 10
   },
   {
-    id: 25,
+    id: 91,
     buildingId: 9,
-    cost: 6e8,
+    cost: 1.2e9,
     multiplicator: 2,
     name: "Coquelicot",
     description: "",
     requestedLevel: 20
   },
   {
-    id: 25,
+    id: 92,
     buildingId: 9,
-    cost: 3e9,
+    cost: 6e9,
     multiplicator: 2,
     name: "Abricot",
     description: "",
     requestedLevel: 30
   },
   {
-    id: 28,
+    id: 100,
     buildingId: 10,
-    cost: 1e9,
+    cost: 4e9,
     multiplicator: 2,
     name: "Forfait illimité",
     description: "",
     requestedLevel: 10
+  },
+  {
+    id: 101,
+    buildingId: 10,
+    cost: 1.2e10,
+    multiplicator: 2,
+    name: "Client premium à vie",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 102,
+    buildingId: 10,
+    cost: 6e10,
+    multiplicator: 2,
+    name: "Nano-puce sous-cutanée",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 110,
+    buildingId: 11,
+    cost: 3e10,
+    multiplicator: 2,
+    name: "LEEEEEEEEEEEEEEEEEEEE",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 111,
+    buildingId: 11,
+    cost: 9e10,
+    multiplicator: 2,
+    name: "ROOOOOOOOOOOOY",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 112,
+    buildingId: 11,
+    cost: 3.2e11,
+    multiplicator: 2,
+    name: "JEEEEEEEENNKINS",
+    description: "",
+    requestedLevel: 30
   },
 ];
 
@@ -188,6 +314,7 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.15,
     baseAmount: 1e4,
     baseProduction: 25,
+    "description": "Le justicier masqué",
     name: "Richard sans peur",
     neededProduction: 50,
   },

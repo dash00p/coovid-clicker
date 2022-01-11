@@ -64,9 +64,6 @@ class Game {
 
   loadSave(): void {
     let save: string | null = localStorage.getItem("save");
-    // if (IS_DEV) {
-    //   save = "eyJidWlsZGluZ3MiOlt7ImlkIjoxLCJsZXZlbCI6OTEsImFjdGl2ZVVwZ3JhZGVzIjpbXX0seyJpZCI6MiwibGV2ZWwiOjM5LCJhY3RpdmVVcGdyYWRlcyI6W119LHsiaWQiOjQsImxldmVsIjo0MywiYWN0aXZlVXBncmFkZXMiOltdfSx7ImlkIjo1LCJsZXZlbCI6NDUsImFjdGl2ZVVwZ3JhZGVzIjpbXX0seyJpZCI6NiwibGV2ZWwiOjI3LCJhY3RpdmVVcGdyYWRlcyI6W119LHsiaWQiOjcsImxldmVsIjoyNiwiYWN0aXZlVXBncmFkZXMiOltdfSx7ImlkIjo4LCJsZXZlbCI6MTgsImFjdGl2ZVVwZ3JhZGVzIjpbeyJpZCI6MjJ9LHsiaWQiOjIzfV19LHsiaWQiOjksImxldmVsIjoxNywiYWN0aXZlVXBncmFkZXMiOltdfSx7ImlkIjoxMCwibGV2ZWwiOjYsImFjdGl2ZVVwZ3JhZGVzIjpbXX0seyJpZCI6MTEsImxldmVsIjowLCJhY3RpdmVVcGdyYWRlcyI6W119LHsiaWQiOjEyLCJsZXZlbCI6MCwiYWN0aXZlVXBncmFkZXMiOltdfSx7ImlkIjoxMywibGV2ZWwiOjAsImFjdGl2ZVVwZ3JhZGVzIjpbXX0seyJpZCI6MywibGV2ZWwiOjAsImFjdGl2ZVVwZ3JhZGVzIjpbXX1dLCJjdXJyZW50QW1vdW50IjoyMjg0MTkzNzIwLjE2NTIyODQsImN1cnJlbnREYXRlIjoiMjAyMi0wMS0xMFQyMjowMjoyNC4zNzdaIiwic3RhdHMiOnsiY2xpY2tDb3VudCI6MjUwMTl9fQ==";
-    // }
 
     if (save !== null) {
       const saveObj: ISave = JSON.parse(atob(save));
