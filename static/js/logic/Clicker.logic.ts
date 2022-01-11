@@ -1,3 +1,4 @@
+import DomHandler from "./DomHandler";
 import { gameInstance } from "./Game.logic";
 
 class Clicker {
@@ -34,6 +35,11 @@ class Clicker {
 
   set value(newValue: number) {
     this.increment = newValue;
+  }
+
+  refreshIncrementFromBuildings(totalBuildingsProduction: number): void {
+    this.increment = Math.max(totalBuildingsProduction / 10, 1);
+    DomHandler.clicker.updateIncrement(this.increment);
   }
 
   static getInstance(): Clicker {

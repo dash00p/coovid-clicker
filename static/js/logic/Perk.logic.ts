@@ -6,6 +6,7 @@ import { log } from "../helper/Console.helper";
 import EphemeralComponent from "../component/Ephemeral.component";
 import { eventType } from "../collection/Memes.collection";
 import DomHandler from "./DomHandler";
+import { buildInstance } from "./Building.logic";
 
 class Perk {
     _activePerks: IPerk[];
@@ -66,6 +67,7 @@ class Perk {
 
     applyPassiveBonus(): void {
         let clickerValue: number = clickerInstance().baseIncrement;
+        let productionMultiplicator:number = 1;
         for (const perk of this.activePerks.filter(p => !p.isActive)) {
             switch (perk.type) {
                 case perkType.clickMultiplicator:
@@ -74,10 +76,12 @@ class Perk {
                 case perkType.clickAddFixedValue:
                     clickerValue += perk.value;
                     break;
-                case perkType.clickAuto:
+                case perkType.productionMultiplicator:
+                    productionMultiplicator *= perk.value;
                     break;
             }
         }
+        buildInstance().currentMultiplicator = productionMultiplicator;
         clickerInstance().value = clickerValue;
     }
 

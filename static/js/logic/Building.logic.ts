@@ -2,6 +2,7 @@ import { buildingList, upgradeList } from "../collection/Buildings.collection";
 import DomHandler from "./DomHandler";
 import { gameInstance } from "./Game.logic";
 import { log } from "../helper/Console.helper";
+import { clickerInstance } from "./Clicker.logic";
 
 export interface IBaseBuilding {
   id: number;
@@ -37,6 +38,7 @@ class Building {
   private static _instance: Building;
   avalaibleBuildings;
   currentBuildings: IBuilding[];
+  currentMultiplicator: number;
   private totalProduction: number;
 
   constructor() {
@@ -48,6 +50,7 @@ class Building {
       (a, b) => a.baseAmount - b.baseAmount
     );
     this.currentBuildings = [];
+    this.currentMultiplicator = 1;
     this.checkAvailableBuildings();
   }
 
@@ -122,6 +125,7 @@ class Building {
       DomHandler.renderCounter(
         gameInstance().incrementAmount(-building.currentAmount)
       );
+      clickerInstance().refreshIncrementFromBuildings(this.getTotalProduction());
     }
 
     building.currentAmount =
@@ -145,31 +149,28 @@ class Building {
       multiplicator,
       name
     });
+    building.baseProduction *= multiplicator;
     building.currentProduction *= multiplicator;
 
     if (!fromSave) {
       DomHandler.renderCounter(
         gameInstance().incrementAmount(-cost)
       );
+      clickerInstance().refreshIncrementFromBuildings(this.getTotalProduction());
     }
     return building;
   }
 
   tick(frequency: number, isBackground?: boolean): void {
-    let totalBuildingsProduction: number = 0;
-    for (const building of this.currentBuildings) {
-      totalBuildingsProduction += building.currentProduction;
-    }
-
-    const realTotalProduction: number = totalBuildingsProduction;
-    this.totalProduction = realTotalProduction;
+    let totalBuildingsProduction: number = this.getTotalProduction();
+    const currentProduction: number = totalBuildingsProduction * this.currentMultiplicator;
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
-    totalBuildingsProduction = totalBuildingsProduction * (frequency / 1000);
+    totalBuildingsProduction = currentProduction * (frequency / 1000);
 
     const increment: number = gameInstance().incrementAmount(totalBuildingsProduction);
 
     if (!isBackground) {
-      DomHandler.renderCounter(increment, realTotalProduction, frequency);
+      DomHandler.renderCounter(increment, currentProduction, frequency);
     }
   }
 
@@ -183,6 +184,15 @@ class Building {
         })
       };
     });
+  }
+
+  getTotalProduction(): number {
+    let totalBuildingsProduction: number = 0;
+    for (const building of this.currentBuildings) {
+      totalBuildingsProduction += building.currentProduction;
+    }
+    this.totalProduction = totalBuildingsProduction;
+    return totalBuildingsProduction;
   }
 
   loadBuildings(buildings: IBaseBuilding[]): void {
@@ -208,6 +218,7 @@ class Building {
       }
       DomHandler.renderBuilding(building);
     }
+    clickerInstance().refreshIncrementFromBuildings(this.getTotalProduction());
   }
 
   static getInstance(): Building {

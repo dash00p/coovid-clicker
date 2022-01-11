@@ -13,7 +13,8 @@ export enum perkType {
     clickMultiplicator = "clickMultiplicator",
     clickAddFixedValue = "clickAddFixedValue",
     clickAddRelativeValue = "clickAddRelativeValue",
-    clickAuto = "clickAuto"
+    clickAuto = "clickAuto",
+    productionMultiplicator = "productionMultiplicator"
 }
 
 export const perkList: IPerk[] = [
@@ -36,6 +37,13 @@ export const perkList: IPerk[] = [
         type: perkType.clickAuto,
         isActive: true,
         value: 15,
+        requiredLevel: 1,
+        duration: 30000
+    },
+    {
+        name: "Double-production",
+        type: perkType.productionMultiplicator,
+        value: 2,
         requiredLevel: 1,
         duration: 30000
     },
