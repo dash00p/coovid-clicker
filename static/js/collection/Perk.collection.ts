@@ -1,11 +1,12 @@
 export interface IPerk {
     name: string;
     type: perkType;
-    value: number;
+    value?: number;
     duration: number;
     requiredLevel: number;
     id?: number;
-    isActive?: boolean;
+    isActive: boolean;
+    order?: number;
 }
 
 
@@ -14,37 +15,49 @@ export enum perkType {
     clickAddFixedValue = "clickAddFixedValue",
     clickAddRelativeValue = "clickAddRelativeValue",
     clickAuto = "clickAuto",
-    productionMultiplicator = "productionMultiplicator"
+    productionMultiplicator = "productionMultiplicator",
+    fortuneGift = "powerClick"
 }
 
 export const perkList: IPerk[] = [
     {
+        duration: 45000,
+        isActive: true,
         name: "Pentaclick",
+        requiredLevel: 1,
         type: perkType.clickMultiplicator,
         value: 5,
-        requiredLevel: 1,
-        duration: 15000
     },
     {
-        name: "+10 click",
-        type: perkType.clickAddFixedValue,
-        value: 10,
-        requiredLevel: 1,
-        duration: 20000
-    },
-    {
-        name: "Auto click (15/s)",
-        type: perkType.clickAuto,
+        duration: 45000,
         isActive: true,
-        value: 15,
+        name: "Production click",
         requiredLevel: 1,
-        duration: 30000
+        type: perkType.clickAddFixedValue,
     },
     {
+        duration: 30000,
+        isActive: false,
+        name: "Auto click (15/s)",
+        requiredLevel: 1,
+        type: perkType.clickAuto,
+        value: 15,
+    },
+    {
+        duration: 30000,
+        isActive: false,
         name: "Double-production",
+        order: 1,
+        requiredLevel: 1,
         type: perkType.productionMultiplicator,
         value: 2,
-        requiredLevel: 1,
-        duration: 30000
     },
+    {
+        duration: 10000,
+        isActive: false,
+        name: "Fortune gift",
+        order: 3,
+        requiredLevel: 1,
+        type: perkType.fortuneGift,
+    }
 ];

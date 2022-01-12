@@ -39,7 +39,7 @@ class Building {
   avalaibleBuildings;
   currentBuildings: IBuilding[];
   currentMultiplicator: number;
-  private totalProduction: number;
+  totalProduction: number;
 
   constructor() {
     if (Building._instance) {

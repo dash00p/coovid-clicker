@@ -60,7 +60,7 @@ class Perk {
         });
 
         this.applyPassiveBonus();
-        this.applyActiveBonus(newPerk);
+        this.applyActiveBonus();
         log(`New perk applied : ${newPerk.name}`, 1);
         setTimeout(() => {
             this.activePerks.splice(this.activePerks.findIndex(p => p.id === id), 1);
@@ -70,28 +70,50 @@ class Perk {
         }, newPerk.duration);
     }
 
+    // bonus that do not imply user interaction.
     applyPassiveBonus(): void {
+        for (const perk of this.activePerks.filter(p => !p.isActive).sort((a, b) => a.order - b.order)) {
+            switch (perk.type) {
+                case perkType.productionMultiplicator:
+                    buildInstance().currentMultiplicator = perk.value;
+                    break;
+                case perkType.clickAuto:
+                    const instance: any = DomHandler.clicker;
+                    let intervalId: number = instance.setInterval(() => {
+                        DomHandler.clicker.handleClick();
+                    }, 1000 / perk.value);
+                    setTimeout(() => { clearInterval(intervalId); }, perk.duration);
+                    break;
+                case perkType.fortuneGift:
+                    gameInstance().currentAmount += Math.trunc(gameInstance().currentAmount / 10);
+                    break;
+            }
+        }
+    }
+
+    // bonus that imply user interaction to be effective.
+    applyActiveBonus(): void {
         let clickerValue: number = clickerInstance().baseIncrement;
-        let productionMultiplicator: number = 1;
-        for (const perk of this.activePerks.filter(p => !p.isActive)) {
+        for (const perk of this.activePerks.filter(p => p.isActive)) {
             switch (perk.type) {
                 case perkType.clickMultiplicator:
                     clickerValue *= perk.value;
                     break;
                 case perkType.clickAddFixedValue:
-                    clickerValue += perk.value;
-                    break;
-                case perkType.productionMultiplicator:
-                    productionMultiplicator *= perk.value;
+                    // add 10^x to each click. x = 10% of current production (with bonus)
+                    const exponent: number = (
+                        Math.trunc(buildInstance().totalProduction * buildInstance().currentMultiplicator) / 10)
+                        .toString().length;
+                    clickerValue += Math.pow(10, exponent);
                     break;
             }
         }
-        buildInstance().currentMultiplicator = productionMultiplicator;
         clickerInstance().value = clickerValue;
         DomHandler.clicker.updateIncrement(clickerValue);
     }
 
-    applyActiveBonus(perk: IPerk): void {
+    // bonus that imply user interaction to be effective.
+    applyActiveBonusOld(perk: IPerk): void {
         const instance: any = DomHandler.clicker;
         let intervalId: number;
         switch (perk.type) {
