@@ -4,6 +4,12 @@ import { clickerInstance } from "../logic/Clicker.logic";
 import { eventType } from "../collection/Memes.collection";
 import { commarize } from "../helper/Dom.helper";
 
+const styleContent = `
+  button {
+    font-family: 'Quicksand', sans-serif;
+  }
+`
+
 class ClickerComponent extends CoreComponent {
   static customType: string = "game-clicker";
 
@@ -11,6 +17,7 @@ class ClickerComponent extends CoreComponent {
     super(props);
     this.create("button", "Click click", ClickerComponent.customType);
     this.onclick = this.handleClick;
+    this.setStyle(styleContent);
   }
 
   handleClick(): void {

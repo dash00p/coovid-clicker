@@ -44,8 +44,8 @@ class Clicker {
       perkInstance().applyPassiveBonus();
     } else {
       this.increment = this.baseIncrement;
+      DomHandler.clicker.updateIncrement(this.increment);
     }
-    DomHandler.clicker.updateIncrement(this.increment);
   }
 
   static getInstance(): Clicker {

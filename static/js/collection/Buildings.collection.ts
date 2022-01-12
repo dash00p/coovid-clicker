@@ -377,7 +377,7 @@ export const buildingList: IBuilding[] = [
     baseProduction: 5e5,
     description: "Les bugs n'ont qu'à bien se tenir.",
     name: "Canard man",
-    neededProduction: 5e5,
+    neededProduction: 2e6,
   },
   {
     id: 13,
@@ -386,7 +386,7 @@ export const buildingList: IBuilding[] = [
     baseProduction: 1.5e6,
     description: "On m'a appelée ?",
     name: "Jeanne d'Haussecourt",
-    neededProduction: 2e6,
+    neededProduction: 1e7,
   },
   {
     id: 3,
@@ -394,7 +394,7 @@ export const buildingList: IBuilding[] = [
     baseAmount: 5e12,
     baseProduction: 5e6,
     name: "Le Christ Cosmique",
-    neededProduction: 8e6,
+    neededProduction: 5e7,
   },
   {
     id: 14,
@@ -402,7 +402,7 @@ export const buildingList: IBuilding[] = [
     baseAmount: 2e13,
     baseProduction: 1.5e7,
     name: "Maître Miyagi",
-    neededProduction: 3e8,
+    neededProduction: 1e8,
   },
   {
     id: 15,
@@ -410,7 +410,7 @@ export const buildingList: IBuilding[] = [
     baseAmount: 1e15,
     baseProduction: 9e7,
     name: "Bruce Lomsaley",
-    neededProduction: 1.5e9,
+    neededProduction: 5e8,
   },
   {
     id: 16,
@@ -418,7 +418,7 @@ export const buildingList: IBuilding[] = [
     baseAmount: 5e16,
     baseProduction: 9e8,
     name: "Petyr",
-    neededProduction: 9e10,
+    neededProduction: 1e9,
   },
   {
     id: 17,
@@ -427,7 +427,7 @@ export const buildingList: IBuilding[] = [
     baseProduction: 1.5e11,
     name: "Heenok",
     description:"Inclinez-vous devant le Roi, quitte à avoir mal aux chevilles.",
-    neededProduction: 7e8,
+    neededProduction: 5e9,
   },
   {
     id: 18,
@@ -435,7 +435,7 @@ export const buildingList: IBuilding[] = [
     baseAmount: 1.5e20,
     baseProduction: 9e10,
     name: "Mère",
-    neededProduction: 1e12,
+    neededProduction: 1e10,
   },
 ];
 export default {

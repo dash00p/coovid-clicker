@@ -6,6 +6,7 @@ export interface IPerk {
     requiredLevel: number;
     id?: number;
     isActive: boolean;
+    isApplied?: boolean;
     order?: number;
 }
 
@@ -38,7 +39,7 @@ export const perkList: IPerk[] = [
     {
         duration: 30000,
         isActive: false,
-        name: "Auto click (15/s)",
+        name: "Auto click",
         requiredLevel: 1,
         type: perkType.clickAuto,
         value: 15,

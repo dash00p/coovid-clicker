@@ -7,6 +7,7 @@ import EphemeralComponent from "../component/Ephemeral.component";
 import { eventType } from "../collection/Memes.collection";
 import DomHandler from "./DomHandler";
 import { buildInstance } from "./Building.logic";
+import { commarize } from "../helper/Dom.helper";
 
 class Perk {
     private static _instance: Perk;
@@ -55,27 +56,28 @@ class Perk {
         this.activePerks.push({
             ...newPerk, id
         });
-        DomHandler.renderPerk({
-            ...newPerk, id
-        });
-
         this.applyPassiveBonus();
         this.applyActiveBonus();
+        // must be render after apply bonus to render the proper name.
+        DomHandler.renderPerk(this.activePerks.find(p => p.id === id));
+
         log(`New perk applied : ${newPerk.name}`, 1);
         setTimeout(() => {
             this.activePerks.splice(this.activePerks.findIndex(p => p.id === id), 1);
             this.activePerks = [...this.activePerks];
             log(`Perk unapplied : ${newPerk.name}`, 1);
             this.applyPassiveBonus();
+            this.applyActiveBonus();
         }, newPerk.duration);
     }
 
     // bonus that do not imply user interaction.
     applyPassiveBonus(): void {
-        for (const perk of this.activePerks.filter(p => !p.isActive).sort((a, b) => a.order - b.order)) {
+        let productionMultiplicator:number = 1;
+        for (const perk of this.activePerks.filter(p => !p.isActive && !p.isApplied).sort((a, b) => a.order - b.order)) {
             switch (perk.type) {
                 case perkType.productionMultiplicator:
-                    buildInstance().currentMultiplicator = perk.value;
+                    productionMultiplicator *= perk.value;
                     break;
                 case perkType.clickAuto:
                     const instance: any = DomHandler.clicker;
@@ -83,12 +85,17 @@ class Perk {
                         DomHandler.clicker.handleClick();
                     }, 1000 / perk.value);
                     setTimeout(() => { clearInterval(intervalId); }, perk.duration);
+                    perk.name += ` (${perk.value}/s)`;
                     break;
                 case perkType.fortuneGift:
-                    gameInstance().currentAmount += Math.trunc(gameInstance().currentAmount / 10);
+                    const perkAmount: number = Math.trunc(gameInstance().currentAmount / 10);
+                    gameInstance().currentAmount += perkAmount;
+                    perk.name += ` (${commarize(perkAmount)})`;
+                    perk.isApplied= true;
                     break;
             }
         }
+        buildInstance().currentMultiplicator = productionMultiplicator;
     }
 
     // bonus that imply user interaction to be effective.
@@ -102,28 +109,16 @@ class Perk {
                 case perkType.clickAddFixedValue:
                     // add 10^x to each click. x = 10% of current production (with bonus)
                     const exponent: number = (
-                        Math.trunc(buildInstance().totalProduction * buildInstance().currentMultiplicator) / 10)
+                        Math.trunc(buildInstance().totalProduction * buildInstance().currentMultiplicator / 10))
                         .toString().length;
-                    clickerValue += Math.pow(10, exponent);
+                    const perkAmount: number = Math.pow(10, exponent);
+                    clickerValue += perkAmount;
+                    perk.name += `(+${commarize(perkAmount)})`;
                     break;
             }
         }
         clickerInstance().value = clickerValue;
         DomHandler.clicker.updateIncrement(clickerValue);
-    }
-
-    // bonus that imply user interaction to be effective.
-    applyActiveBonusOld(perk: IPerk): void {
-        const instance: any = DomHandler.clicker;
-        let intervalId: number;
-        switch (perk.type) {
-            case perkType.clickAuto:
-                intervalId = instance.setInterval(() => {
-                    DomHandler.clicker.handleClick();
-                }, 1000 / perk.value);
-                break;
-        }
-        setTimeout(() => { clearInterval(intervalId); }, perk.duration);
     }
 
     static getInstance(): Perk {

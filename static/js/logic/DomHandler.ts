@@ -78,8 +78,8 @@ class DomHandler {
     }
   }
 
-  static renderPerk(perkList: IPerk): void {
-    DomHandler.perksList.addPerk(perkList);
+  static renderPerk(newPerk: IPerk): void {
+    DomHandler.perksList.addPerk(newPerk);
   }
 
   static initLayout(): void {

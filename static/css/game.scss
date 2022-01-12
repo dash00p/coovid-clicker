@@ -1,7 +1,12 @@
 $perk-animation-height: 30px;
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap');
+
 body {
   overflow: hidden;
+  background: #1e1e1e;
+  color:#f9f9f9;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .ephemeral {

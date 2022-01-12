@@ -16,6 +16,7 @@ interface IState {
 const styleContent:string = `
   button {
     margin-right: 5px;
+    font-family: 'Quicksand', sans-serif;
   }
 `;
 
