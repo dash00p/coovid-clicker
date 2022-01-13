@@ -280,6 +280,33 @@ export const upgradeList: IBuildingUpgrade[] = [
     description: "",
     requestedLevel: 30
   },
+  {
+    id: 120,
+    buildingId: 12,
+    cost: 1.5e11,
+    multiplicator: 2,
+    name: "Lampe à UV du commisaire Magret",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 121,
+    buildingId: 12,
+    cost: 4.5e11,
+    multiplicator: 2,
+    name: "Ceinture de grenades canards",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 122,
+    buildingId: 12,
+    cost: 1.6e12,
+    multiplicator: 2,
+    name: "Gant du conquérant",
+    description: "",
+    requestedLevel: 30
+  },
 ];
 
 export const buildingList: IBuilding[] = [

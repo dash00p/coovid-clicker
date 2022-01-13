@@ -86,6 +86,7 @@ class Perk {
                     }, 1000 / perk.value);
                     setTimeout(() => { clearInterval(intervalId); }, perk.duration);
                     perk.name += ` (${perk.value}/s)`;
+                    perk.isApplied= true;
                     break;
                 case perkType.fortuneGift:
                     const perkAmount: number = Math.trunc(gameInstance().currentAmount / 10);
