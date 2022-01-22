@@ -1,7 +1,7 @@
 export const upgradeList: IBuildingUpgrade[] = [
   {
     id: 10,
-    buildingId: 1,
+    buildingId: buildingType.chercheur,
     cost: 500,
     multiplicator: 2,
     name: "Casio Pro",
@@ -10,7 +10,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 11,
-    buildingId: 1,
+    buildingId: buildingType.chercheur,
     cost: 5000,
     multiplicator: 2,
     name: "Casio Plus",
@@ -19,7 +19,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 12,
-    buildingId: 1,
+    buildingId: buildingType.chercheur,
     cost: 20000,
     multiplicator: 2,
     name: "Casio Pro Plus",
@@ -28,7 +28,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 20,
-    buildingId: 2,
+    buildingId: buildingType.raoult,
     cost: 10000,
     multiplicator: 2,
     name: "La chloroquine pour les nuls",
@@ -37,7 +37,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 21,
-    buildingId: 2,
+    buildingId: buildingType.raoult,
     cost: 30000,
     multiplicator: 2,
     name: "Cloroquina para tontos",
@@ -46,7 +46,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 22,
-    buildingId: 2,
+    buildingId: buildingType.raoult,
     cost: 60000,
     multiplicator: 2,
     name: "Хлорохин для чайников",
@@ -54,17 +54,8 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 30
   },
   {
-    id: 30,
-    buildingId: 3,
-    cost: 160000000,
-    multiplicator: 1,
-    name: "Placeholder",
-    description: "",
-    requestedLevel: 10
-  },
-  {
     id: 40,
-    buildingId: 4,
+    buildingId: buildingType.monkey,
     cost: 50000,
     multiplicator: 2,
     name: "Ouh.",
@@ -73,7 +64,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 41,
-    buildingId: 4,
+    buildingId: buildingType.monkey,
     cost: 1e6,
     multiplicator: 2,
     name: "Ouh. Ouh.",
@@ -82,7 +73,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 42,
-    buildingId: 4,
+    buildingId: buildingType.monkey,
     cost: 2e6,
     multiplicator: 2,
     name: "Ouh. Ouh. Ouh.",
@@ -91,7 +82,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 50,
-    buildingId: 5,
+    buildingId: buildingType.richard,
     cost: 1e6,
     multiplicator: 2,
     name: "Kit de survie pour scout",
@@ -100,7 +91,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 51,
-    buildingId: 5,
+    buildingId: buildingType.richard,
     cost: 4e6,
     multiplicator: 2,
     name: "Cape en nylon",
@@ -109,7 +100,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 52,
-    buildingId: 5,
+    buildingId: buildingType.richard,
     cost: 1.2e7,
     multiplicator: 2,
     name: "Richardmobile",
@@ -118,7 +109,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 60,
-    buildingId: 6,
+    buildingId: buildingType.lorenzo,
     cost: 9e6,
     multiplicator: 2,
     name: "Séance de dédicace",
@@ -127,7 +118,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 61,
-    buildingId: 6,
+    buildingId: buildingType.lorenzo,
     cost: 1.5e7,
     multiplicator: 2,
     name: "Compilation DVD",
@@ -136,7 +127,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 62,
-    buildingId: 6,
+    buildingId: buildingType.lorenzo,
     cost: 5e7,
     multiplicator: 2,
     name: "Ouverture d'un compte JustFans",
@@ -145,7 +136,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 70,
-    buildingId: 7,
+    buildingId: buildingType.thamos,
     cost: 3e7,
     multiplicator: 2,
     name: "Paire de mouffles",
@@ -154,7 +145,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 71,
-    buildingId: 7,
+    buildingId: buildingType.thamos,
     cost: 1.2e8,
     multiplicator: 2,
     name: "Fermette à rénover",
@@ -163,7 +154,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 72,
-    buildingId: 7,
+    buildingId: buildingType.thamos,
     cost: 6e8,
     multiplicator: 2,
     name: "👌",
@@ -172,7 +163,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 80,
-    buildingId: 8,
+    buildingId: buildingType.patoche,
     cost: 1.3e8,
     multiplicator: 2,
     name: "Optimisation fiscale",
@@ -181,7 +172,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 81,
-    buildingId: 8,
+    buildingId: buildingType.patoche,
     cost: 5e8,
     multiplicator: 2,
     name: "Erreur de la banque en votre faveur",
@@ -190,7 +181,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 82,
-    buildingId: 8,
+    buildingId: buildingType.patoche,
     cost: 1e9,
     multiplicator: 2,
     name: "Exempté d'impôt",
@@ -199,7 +190,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 90,
-    buildingId: 9,
+    buildingId: buildingType.sardoche,
     cost: 7e8,
     multiplicator: 2,
     name: "Abdul",
@@ -208,7 +199,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 91,
-    buildingId: 9,
+    buildingId: buildingType.sardoche,
     cost: 1.2e9,
     multiplicator: 2,
     name: "Coquelicot",
@@ -217,7 +208,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 92,
-    buildingId: 9,
+    buildingId: buildingType.sardoche,
     cost: 6e9,
     multiplicator: 2,
     name: "Abricot",
@@ -226,7 +217,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 100,
-    buildingId: 10,
+    buildingId: buildingType.jeanMichel,
     cost: 4e9,
     multiplicator: 2,
     name: "Forfait illimité",
@@ -235,7 +226,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 101,
-    buildingId: 10,
+    buildingId: buildingType.jeanMichel,
     cost: 1.2e10,
     multiplicator: 2,
     name: "Client premium à vie",
@@ -244,16 +235,16 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 102,
-    buildingId: 10,
+    buildingId: buildingType.jeanMichel,
     cost: 6e10,
-    multiplicator: 2,
+    multiplicator: 3,
     name: "Nano-puce sous-cutanée",
     description: "",
     requestedLevel: 30
   },
   {
     id: 110,
-    buildingId: 11,
+    buildingId: buildingType.leeroy,
     cost: 3e10,
     multiplicator: 2,
     name: "LEEEEEEEEEEEEEEEEEEEE",
@@ -262,7 +253,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 111,
-    buildingId: 11,
+    buildingId: buildingType.leeroy,
     cost: 9e10,
     multiplicator: 2,
     name: "ROOOOOOOOOOOOY",
@@ -271,16 +262,16 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 112,
-    buildingId: 11,
+    buildingId: buildingType.leeroy,
     cost: 3.2e11,
-    multiplicator: 2,
+    multiplicator: 3,
     name: "JEEEEEEEENNKINS",
     description: "",
     requestedLevel: 30
   },
   {
     id: 120,
-    buildingId: 12,
+    buildingId: buildingType.canardMan,
     cost: 1.5e11,
     multiplicator: 2,
     name: "Lampe à UV du commisaire Magret",
@@ -289,7 +280,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 121,
-    buildingId: 12,
+    buildingId: buildingType.canardMan,
     cost: 4.5e11,
     multiplicator: 2,
     name: "Ceinture de grenades canards",
@@ -298,11 +289,119 @@ export const upgradeList: IBuildingUpgrade[] = [
   },
   {
     id: 122,
-    buildingId: 12,
+    buildingId: buildingType.canardMan,
     cost: 1.6e12,
     multiplicator: 2,
     name: "Gant du conquérant",
     description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 130,
+    buildingId: buildingType.jeanne,
+    cost: 6e11,
+    multiplicator: 2,
+    name: "Paquet de galettes Saint-Michel",
+    description: "Pur beurre.",
+    requestedLevel: 10
+  },
+  {
+    id: 131,
+    buildingId: buildingType.jeanne,
+    cost: 1.8e12,
+    multiplicator: 2,
+    name: "xXx D4RK J34NN3 xXx",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 132,
+    buildingId: buildingType.jeanne,
+    cost: 5e12,
+    multiplicator: 3,
+    name: "Manteau ignifugé",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 30,
+    buildingId: buildingType.christ,
+    cost: 2.5e12,
+    multiplicator: 2,
+    name: "Bâton de Merlin",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 31,
+    buildingId: buildingType.christ,
+    cost: 7.5e12,
+    multiplicator: 2,
+    name: "Couronne de joyaux",
+    description: "Digne d'un grand monarque.",
+    requestedLevel: 20
+  },
+  {
+    id: 32,
+    buildingId: buildingType.christ,
+    cost: 2e13,
+    multiplicator: 3,
+    name: "Prophétie de Sylvanus Oriana",
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 140,
+    buildingId: buildingType.miyagi,
+    cost: 1e13,
+    multiplicator: 2,
+    name: "Keikogi en soie d'exception",
+    description: "",
+    requestedLevel: 10
+  },
+  {
+    id: 141,
+    buildingId: buildingType.miyagi,
+    cost: 3e13,
+    multiplicator: 2,
+    name: "Mode d'emploi du Gōjū-ryū",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 142,
+    buildingId: buildingType.miyagi,
+    cost: 9e13,
+    multiplicator: 3,
+    name: `"Sensei 8": Autobiographie`,
+    description: "",
+    requestedLevel: 30
+  },
+  {
+    id: 150,
+    buildingId: buildingType.bruce,
+    cost: 4e13,
+    multiplicator: 2,
+    name: "Larme saline",
+    description: "Un immense topaze, joyau de la famille Lomsaley.",
+    requestedLevel: 10
+  },
+  {
+    id: 151,
+    buildingId: buildingType.bruce,
+    cost: 1.2e14,
+    multiplicator: 2,
+    name: "Certificat de propriété d'une mine de sel",
+    description: "",
+    requestedLevel: 20
+  },
+  {
+    id: 152,
+    buildingId: buildingType.bruce,
+    cost: 3.6e14,
+    multiplicator: 3,
+    name: `Triggered`,
+    description: "Aren't you Bruce ?",
     requestedLevel: 30
   },
 ];
