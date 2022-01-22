@@ -1,7 +1,6 @@
 import CoreComponent, { ICoreComponentProps } from "./Core.component";
 import EphemeralComponent from "./Ephemeral.component";
 import { clickerInstance } from "../logic/Clicker.logic";
-import { eventType } from "../collection/Memes.collection";
 import { commarize } from "../helper/Dom.helper";
 
 const styleContent = `
@@ -24,7 +23,7 @@ class ClickerComponent extends CoreComponent {
     // tslint:disable-next-line: no-unused-expression
     new EphemeralComponent({
       icon: "random",
-      event: eventType.click
+      event: memeEventType.click
     });
     clickerInstance().triggerClick();
   }

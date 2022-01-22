@@ -1,5 +1,5 @@
 import Clicker from "./Clicker.logic";
-import Building, { IBaseBuilding } from "./Building.logic";
+import Building from "./Building.logic";
 import DomHandler from "./DomHandler";
 import config from "../collection/Config.collection.json";
 import bootstrap from "../helper/Bootstrap.helper";

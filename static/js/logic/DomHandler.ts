@@ -2,12 +2,10 @@ import BuildingComponent from "../component/Building.component";
 import LayoutComponent from "../component/Layout.component";
 import { findChildrenbyId, commarize } from "../helper/Dom.helper";
 import { gameInstance } from "./Game.logic";
-import { IBuilding } from "./Building.logic";
 import ClickerComponent from "../component/Clicker.component";
 import BuildingListComponent from "../component/BuildingList.component";
 import CounterComponent from "../component/Counter.component";
 import PerksListComponent from "../component/PerkList.component";
-import { IPerk } from "../collection/Perk.collection";
 import FooterComponent from "../component/Footer.component";
 
 // this class is used to handle DOM interaction

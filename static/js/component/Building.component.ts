@@ -1,5 +1,5 @@
 import CoreComponent, { ICoreComponentProps } from "./Core.component";
-import { buildInstance, IBuilding, IBuildingUpgrade } from "../logic/Building.logic";
+import { buildInstance } from "../logic/Building.logic";
 import { commarize } from "../helper/Dom.helper";
 import { IEnhancedHTMLElement } from "../type/html";
 import { upgradeList } from "../collection/Buildings.collection";

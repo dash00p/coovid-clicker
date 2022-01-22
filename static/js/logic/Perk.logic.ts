@@ -1,10 +1,9 @@
 import config from "../collection/Config.collection.json";
-import { IPerk, perkList, perkType } from "../collection/Perk.collection";
+import { perkList } from "../collection/Perk.collection";
 import { gameInstance } from "./Game.logic";
 import { clickerInstance } from "../logic/Clicker.logic";
 import { log } from "../helper/Console.helper";
 import EphemeralComponent from "../component/Ephemeral.component";
-import { eventType } from "../collection/Memes.collection";
 import DomHandler from "./DomHandler";
 import { buildInstance } from "./Building.logic";
 import { commarize } from "../helper/Dom.helper";
@@ -39,7 +38,7 @@ class Perk {
             // tslint:disable-next-line: no-unused-expression
             new EphemeralComponent({
                 icon: "wow",
-                event: eventType.perk,
+                event: memeEventType.perk,
                 duration: config.game.perk.duration,
                 handleClick: this.selectRandomBonus,
                 context: this,

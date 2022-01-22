@@ -1,5 +1,3 @@
-import { IBuilding, IBuildingUpgrade } from "../logic/Building.logic";
-
 export const upgradeList: IBuildingUpgrade[] = [
   {
     id: 10,
@@ -311,14 +309,14 @@ export const upgradeList: IBuildingUpgrade[] = [
 
 export const buildingList: IBuilding[] = [
   {
-    id: 1,
+    id: buildingType.chercheur,
     amountMultiplier: 1.1,
     baseAmount: 25,
     baseProduction: 0.2,
     name: "Chercheur",
   },
   {
-    id: 2,
+    id: buildingType.raoult,
     amountMultiplier: 1.2,
     baseAmount: 1.5e2,
     baseProduction: 1,
@@ -326,7 +324,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 1,
   },
   {
-    id: 4,
+    id: buildingType.monkey,
     amountMultiplier: 1.15,
     baseAmount: 1e3,
     baseProduction: 5,
@@ -337,7 +335,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 10,
   },
   {
-    id: 5,
+    id: buildingType.richard,
     amountMultiplier: 1.15,
     baseAmount: 1e4,
     baseProduction: 25,
@@ -346,7 +344,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 50,
   },
   {
-    id: 6,
+    id: buildingType.lorenzo,
     amountMultiplier: 1.15,
     baseAmount: 1e5,
     baseProduction: 1e2,
@@ -354,7 +352,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 300,
   },
   {
-    id: 7,
+    id: buildingType.thamos,
     amountMultiplier: 1.15,
     baseAmount: 1.2e6,
     baseProduction: 1e3,
@@ -362,7 +360,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 1e3,
   },
   {
-    id: 8,
+    id: buildingType.patoche,
     amountMultiplier: 1.15,
     baseAmount: 6e6,
     baseProduction: 2e3,
@@ -371,7 +369,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 6e3,
   },
   {
-    id: 9,
+    id: buildingType.sardoche,
     amountMultiplier: 1.15,
     baseAmount: 1.6e7,
     baseProduction: 3.5e3,
@@ -380,7 +378,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 2.5e4,
   },
   {
-    id: 10,
+    id: buildingType.jeanMichel,
     amountMultiplier: 1.15,
     baseAmount: 2.4e8,
     baseProduction: 1e4,
@@ -389,7 +387,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 7.5e4,
   },
   {
-    id: 11,
+    id: buildingType.leeroy,
     amountMultiplier: 1.15,
     baseAmount: 4e9,
     baseProduction: 1e5,
@@ -398,7 +396,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 1.5e5,
   },
   {
-    id: 12,
+    id: buildingType.canardMan,
     amountMultiplier: 1.15,
     baseAmount: 4e10,
     baseProduction: 5e5,
@@ -407,7 +405,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 2e6,
   },
   {
-    id: 13,
+    id: buildingType.jeanne,
     amountMultiplier: 1.1,
     baseAmount: 2.8e11,
     baseProduction: 1.5e6,
@@ -416,7 +414,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 1e7,
   },
   {
-    id: 3,
+    id: buildingType.christ,
     amountMultiplier: 1.2,
     baseAmount: 5e12,
     baseProduction: 5e6,
@@ -424,7 +422,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 5e7,
   },
   {
-    id: 14,
+    id: buildingType.miyagi,
     amountMultiplier: 1.1,
     baseAmount: 2e13,
     baseProduction: 1.5e7,
@@ -432,7 +430,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 1e8,
   },
   {
-    id: 15,
+    id: buildingType.bruce,
     amountMultiplier: 1.1,
     baseAmount: 1e15,
     baseProduction: 9e7,
@@ -440,7 +438,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 5e8,
   },
   {
-    id: 16,
+    id: buildingType.petyr,
     amountMultiplier: 1.1,
     baseAmount: 5e16,
     baseProduction: 9e8,
@@ -448,7 +446,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 1e9,
   },
   {
-    id: 17,
+    id: buildingType.heenok,
     amountMultiplier: 1.1,
     baseAmount: 1e18,
     baseProduction: 1.5e11,
@@ -457,7 +455,7 @@ export const buildingList: IBuilding[] = [
     neededProduction: 5e9,
   },
   {
-    id: 18,
+    id: buildingType.mother,
     amountMultiplier: 1.1,
     baseAmount: 1.5e20,
     baseProduction: 9e10,

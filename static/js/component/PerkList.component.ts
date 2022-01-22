@@ -1,4 +1,3 @@
-import { IPerk } from "../collection/Perk.collection";
 import CoreComponent from "./Core.component";
 import PerkComponent from "./Perk.component";
 

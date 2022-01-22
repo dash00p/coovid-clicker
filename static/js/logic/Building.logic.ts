@@ -4,36 +4,6 @@ import { gameInstance } from "./Game.logic";
 import { log } from "../helper/Console.helper";
 import { clickerInstance } from "./Clicker.logic";
 
-export interface IBaseBuilding {
-  id: number;
-  level?: number;
-  activeUpgrades?: IBuildingUpgrade[];
-}
-
-export interface IBuildingUpgrade {
-  id: number;
-  buildingId?: number;
-  cost?: number;
-  description?: string;
-  multiplicator?: number;
-  name?: string;
-  requestedLevel?: number;
-}
-
-export interface IBuilding extends IBaseBuilding {
-  amountMultiplier: number;
-  baseAmount: number;
-  baseProduction: number;
-  currentAmount?: number;
-  currentProduction?: number;
-  description?: string;
-  img?: {
-    src: string;
-  };
-  name: string;
-  neededProduction?: number;
-}
-
 class Building {
   private static _instance: Building;
   avalaibleBuildings;

@@ -1,4 +1,3 @@
-import { IPerk } from "../collection/Perk.collection";
 import CoreComponent, { ICoreComponentProps, ICoreComponentsState } from "./Core.component";
 
 interface IPerkState extends ICoreComponentsState {

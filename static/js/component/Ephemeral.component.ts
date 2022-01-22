@@ -1,10 +1,10 @@
 import CoreComponent, { ICoreComponentProps } from "./Core.component";
-import { memeList, IMeme, eventType } from "../collection/Memes.collection";
+import { memeList } from "../collection/Memes.collection";
 import config from "../collection/Config.collection.json";
 
 interface IEphemeralComponentProps extends ICoreComponentProps {
   icon: "goblin" | "pogvid" | "random" | "wow";
-  event: eventType;
+  event: memeEventType;
   duration?: number;
 }
 
@@ -30,7 +30,7 @@ class EphemeralComponent extends CoreComponent {
     this.render(this.wrapper);
     document.body.appendChild(this);
     this.setStyle();
-    if(props.event === eventType.perk) {
+    if(props.event === memeEventType.perk) {
       this.playSound("wow.mp3");
     }
 
@@ -67,11 +67,11 @@ class EphemeralComponent extends CoreComponent {
     style.textContent = styleTemplate;
     this.shadowRoot.appendChild(style);
     this.addClass("ephemeral");
-    if (this.props.event === eventType.click) {
+    if (this.props.event === memeEventType.click) {
       this.style.left = this.randomizePlacement("left").toString();
     } else {
       this.addClass("interactive");
-      if (this.props.event === eventType.perk) {
+      if (this.props.event === memeEventType.perk) {
         this.addClass("perk");
         this.style.top = this.randomizePlacement("top").toString();
         style.textContent = `
