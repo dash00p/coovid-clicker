@@ -1,4 +1,4 @@
-import CoreComponent, { ICoreComponentProps } from "./Core.component.js";
+import CoreComponent from "./Core.component";
 
 interface IStatComponenttProps extends ICoreComponentProps {
   img?: {

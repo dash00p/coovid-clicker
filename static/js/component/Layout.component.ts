@@ -1,4 +1,4 @@
-import CoreComponent, { ICoreComponentProps } from "./Core.component";
+import CoreComponent from "./Core.component";
 
 class LayoutComponent extends CoreComponent {
   constructor(props: ICoreComponentProps = null) {

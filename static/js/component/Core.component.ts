@@ -1,16 +1,4 @@
 import { oldInterval } from "../helper/Bootstrap.helper";
-import { IEnhancedHTMLElement } from "../type/html";
-
-export interface ICoreComponentProps {
-  children?: Node;
-  handleClick?: ((this: GlobalEventHandlers, ev: MouseEvent, args?: any) => any) | null;
-  context?: any;
-  killOnClick?: boolean;
-}
-
-export interface ICoreComponentsState {
-  rendered: boolean;
-}
 
 class CoreComponent extends HTMLElement {
   props: ICoreComponentProps;

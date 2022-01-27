@@ -3,6 +3,7 @@ import DomHandler from "./DomHandler";
 import { gameInstance } from "./Game.logic";
 import { log } from "../helper/Console.helper";
 import { clickerInstance } from "./Clicker.logic";
+import { bonusInstance } from "./Bonus.logic";
 
 class Building {
   private static _instance: Building;
@@ -10,6 +11,7 @@ class Building {
   currentBuildings: IBuilding[];
   currentMultiplicator: number;
   totalProduction: number;
+  totalProductionWithoutMultiplicator: number;
 
   constructor() {
     if (Building._instance) {
@@ -161,7 +163,8 @@ class Building {
     for (const building of this.currentBuildings) {
       totalBuildingsProduction += building.currentProduction;
     }
-    this.totalProduction = totalBuildingsProduction;
+    this.totalProductionWithoutMultiplicator = totalBuildingsProduction;
+    this.totalProduction = totalBuildingsProduction * bonusInstance().totalMultiplicator;
     return totalBuildingsProduction;
   }
 

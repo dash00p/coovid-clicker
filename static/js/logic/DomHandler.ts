@@ -7,6 +7,7 @@ import BuildingListComponent from "../component/BuildingList.component";
 import CounterComponent from "../component/Counter.component";
 import PerksListComponent from "../component/PerkList.component";
 import FooterComponent from "../component/Footer.component";
+import BonusListComponent from "../component/BonusList.component";
 
 // this class is used to handle DOM interaction
 class DomHandler {
@@ -17,6 +18,7 @@ class DomHandler {
   private static productionCounter;
   private static buildingList;
   private static perksList;
+  private static bonusList;
 
   static init(): void {
     DomHandler.initLayout();
@@ -26,11 +28,13 @@ class DomHandler {
     DomHandler.buildingList = new BuildingListComponent();
     DomHandler.perksList = new PerksListComponent();
     DomHandler.clicker = new ClickerComponent();
+    DomHandler.bonusList = new BonusListComponent();
     DomHandler.renderCounter(gameInstance().currentAmount);
     DomHandler.layout.appendChild(counter);
     DomHandler.layout.appendChild(DomHandler.clicker);
     DomHandler.layout.appendChild(DomHandler.buildingList);
     DomHandler.layout.appendChild(DomHandler.perksList);
+    DomHandler.layout.appendChild(DomHandler.bonusList);
     DomHandler.layout.appendChild(new FooterComponent());
   }
 
@@ -78,6 +82,10 @@ class DomHandler {
 
   static renderPerk(newPerk: IPerk): void {
     DomHandler.perksList.addPerk(newPerk);
+  }
+
+  static renderBonus(bonus: IBonus): void {
+    DomHandler.bonusList.addBonus(bonus);
   }
 
   static initLayout(): void {

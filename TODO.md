@@ -1,10 +1,11 @@
 # Features
 * ~~Perks~~
-  *  Temporary bonus
+  *  ~~Temporary bonus~~
   * Temporary malus
 * ~~Sound effects~~
-* Click upgrades
-* Building upgrades
+* ~~Click upgrades~~
+* ~~Building upgrades~~
+* World upgrade
 * Achievements
 * Cloud Save
 * Account
@@ -12,12 +13,12 @@
 
 # Enhancements
 * Building production balance
-* More memes
-* Add version number
+* ~~More~~ MORE memes
+* ~~Add version number~~
 * Enhance save information (date, version, ...)
 
 # Technical debt
-* Move type to definition files
+* ~~Move type to definition files~~
 
 # Fixes
 *

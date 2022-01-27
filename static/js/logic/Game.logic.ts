@@ -6,12 +6,14 @@ import bootstrap from "../helper/Bootstrap.helper";
 import { log, logWithTimer } from "../helper/Console.helper";
 import Perk from "./Perk.logic";
 import app from "../../../package.json";
+import Bonus from "./Bonus.logic";
 
 interface ISave {
   buildings: IBaseBuilding[];
   currentAmount: number;
   currentDate: Date;
   stats: IStat;
+  bonus: IBaseBonus[];
 }
 
 interface IStat {
@@ -26,6 +28,7 @@ class Game {
   currentAmount: number;
   clicker: Clicker;
   perk: Perk;
+  bonus: Bonus;
   buildings: Building;
   level: number;
 
@@ -40,6 +43,7 @@ class Game {
     DomHandler.init();
     this.perk = new Perk();
     this.buildings = new Building();
+    this.bonus = new Bonus();
     this.routine();
     this.listenVisibility();
     this.level = 1;
@@ -55,8 +59,9 @@ class Game {
       currentAmount: this.currentAmount,
       currentDate: new Date(),
       stats: {
-        clickCount: this.clicker.count
+        clickCount: this.clicker.count,
       },
+      bonus: this.bonus.saveBonuses(),
     };
     localStorage.setItem("save", btoa(JSON.stringify(save)));
     logWithTimer(`Game has been saved !`, 1);
@@ -72,12 +77,16 @@ class Game {
         this.buildings.loadBuildings(saveObj.buildings);
       }
 
-      if(saveObj.stats && saveObj.stats.clickCount) {
+      if (saveObj.stats && saveObj.stats.clickCount) {
         this.clicker.count = saveObj.stats.clickCount;
       }
 
       if (saveObj.currentAmount) {
         this.setAmount(saveObj.currentAmount);
+      }
+
+      if (saveObj.bonus) {
+        this.bonus.loadBonusFromSave(saveObj.bonus);
       }
       log("Save loaded !", 1);
     }
@@ -97,7 +106,6 @@ class Game {
   }
 
   tick(): void {
-    this.buildings.checkAvailableBuildings();
     this.buildings.tick(config.game.incomeTick);
   }
 
@@ -107,6 +115,14 @@ class Game {
         this.tick();
       }
     }, config.game.incomeTick);
+
+    setInterval(() => {
+      if (!this.onBackground) {
+        this.buildings.checkAvailableBuildings();
+        this.bonus.checkAvailableBonus();
+        log("Check assets", 3);
+      }
+    }, config.game.checkAssetsTick);
 
     setInterval(() => {
       if (this.onBackground) {
@@ -121,9 +137,11 @@ class Game {
   listenVisibility(): void {
     document.addEventListener("visibilitychange", () => {
       // triggered when user switchs to another tab or desktop.
-      const game:Game = Game.getInstance();
+      const game: Game = Game.getInstance();
       game.onBackground = document.hidden;
-      if (game.onBackground) { game.backgroundDate = new Date(); } else {
+      if (game.onBackground) {
+        game.backgroundDate = new Date();
+      } else {
         game.backgroundUpgrade();
       }
     });

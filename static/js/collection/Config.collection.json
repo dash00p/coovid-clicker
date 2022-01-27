@@ -1,9 +1,10 @@
 {
-    "game":{
+  "game": {
     "initialAmount": 0,
     "incomeTick": 17,
     "saveTick": 30000,
-    "logLevel": 1,
+    "checkAssetsTick": 10000,
+    "logLevel": 3,
     "perk": {
       "duration": 11000,
       "minTimer": 60000,

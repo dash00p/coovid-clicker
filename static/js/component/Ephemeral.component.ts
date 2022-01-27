@@ -1,4 +1,4 @@
-import CoreComponent, { ICoreComponentProps } from "./Core.component";
+import CoreComponent from "./Core.component";
 import { memeList } from "../collection/Memes.collection";
 import config from "../collection/Config.collection.json";
 

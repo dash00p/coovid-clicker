@@ -1,4 +1,4 @@
-import CoreComponent, { ICoreComponentProps } from "./Core.component";
+import CoreComponent from "./Core.component";
 import EphemeralComponent from "./Ephemeral.component";
 import { clickerInstance } from "../logic/Clicker.logic";
 import { commarize } from "../helper/Dom.helper";

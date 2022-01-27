@@ -1,4 +1,4 @@
-import CoreComponent, { ICoreComponentProps, ICoreComponentsState } from "./Core.component";
+import CoreComponent from "./Core.component";
 
 interface IPerkState extends ICoreComponentsState {
     expirationTimestamp: number;
