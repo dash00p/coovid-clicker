@@ -3,7 +3,7 @@
     "initialAmount": 0,
     "incomeTick": 17,
     "saveTick": 30000,
-    "checkAssetsTick": 10000,
+    "checkAssetsTick": 5000,
     "logLevel": 3,
     "perk": {
       "duration": 11000,

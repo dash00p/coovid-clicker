@@ -23,3 +23,8 @@ declare interface IEnhancedHTMLElement extends HTMLElement {
   component?: CoreComponent;
   props?: any;
 }
+
+declare interface IEnhancedNode extends Node {
+  component?: CoreComponent;
+  props?: any;
+}

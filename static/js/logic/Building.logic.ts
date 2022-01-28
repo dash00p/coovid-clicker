@@ -197,6 +197,10 @@ class Building {
   static getInstance(): Building {
     return Building._instance;
   }
+
+  static deleteInstance(): void {
+    delete Building._instance;
+  }
 }
 
 export const buildInstance: () => Building = (): Building => {

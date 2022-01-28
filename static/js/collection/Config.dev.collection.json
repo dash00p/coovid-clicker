@@ -1,0 +1,17 @@
+{
+  "game": {
+    "initialAmount": 1e5,
+    "incomeTick": 17,
+    "saveTick": 30000,
+    "checkAssetsTick": 5000,
+    "logLevel": 3,
+    "perk": {
+      "duration": 10000,
+      "minTimer": 60000,
+      "maxTimer": 30000
+    }
+  },
+  "visual": {
+    "ephemeralTimer": 12000
+  }
+}

@@ -90,6 +90,10 @@ class Bonus {
   static getInstance(): Bonus {
     return Bonus._instance;
   }
+
+  static deleteInstance(): void {
+    delete Bonus._instance;
+  }
 }
 
 export const bonusInstance: () => Bonus = (): Bonus => {

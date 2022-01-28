@@ -51,6 +51,10 @@ class Clicker {
   static getInstance(): Clicker {
     return Clicker._instance;
   }
+
+  static deleteInstance(): void {
+    delete Clicker._instance;
+  }
 }
 
 export const clickerInstance: () => Clicker = (): Clicker => {

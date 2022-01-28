@@ -1,11 +1,13 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin"); 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 
-const config = require("./static/js/collection/Config.collection.json");
-
 module.exports = (env, argv) => {
+  const config = require(`./static/js/collection/Config.${
+    argv.mode === "development" ? `dev` : `prod`
+  }.collection.json`);
+
   return {
     entry: "./static/js/index.ts",
     module: {
@@ -18,9 +20,13 @@ module.exports = (env, argv) => {
             {
               loader: "sass-loader",
               options: {
-                additionalData: "$ephemeral-duration: " + config.visual.ephemeralTimer + "ms;"
-              }
-            }],
+                additionalData:
+                  "$ephemeral-duration: " +
+                  config.visual.ephemeralTimer +
+                  "ms;",
+              },
+            },
+          ],
           exclude: /node_modules/,
         },
         {
@@ -46,11 +52,11 @@ module.exports = (env, argv) => {
         ],
       }),
       new MiniCssExtractPlugin({
-        filename: "style.[contenthash].css"
+        filename: "style.[contenthash].css",
       }),
       new webpack.DefinePlugin({
-        IS_DEV: JSON.stringify(argv.mode === 'development')
-      })
+        IS_DEV: JSON.stringify(argv.mode === "development"),
+      }),
     ],
     resolve: {
       extensions: [".ts"],
@@ -58,4 +64,4 @@ module.exports = (env, argv) => {
     target: "web",
     watch: true,
   };
-}
+};

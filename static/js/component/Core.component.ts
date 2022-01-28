@@ -1,4 +1,4 @@
-import { oldInterval } from "../helper/Bootstrap.helper";
+import { oldInterval } from "../helper/Guard.helper";
 
 class CoreComponent extends HTMLElement {
   props: ICoreComponentProps;

@@ -1,6 +1,6 @@
 import CoreComponent from "./Core.component";
 import { memeList } from "../collection/Memes.collection";
-import config from "../collection/Config.collection.json";
+import config from "../logic/Config.logic";
 
 interface IEphemeralComponentProps extends ICoreComponentProps {
   icon: "goblin" | "pogvid" | "random" | "wow";

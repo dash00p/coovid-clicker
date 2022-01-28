@@ -92,6 +92,10 @@ class DomHandler {
     DomHandler.layout = new LayoutComponent();
     document.body.appendChild(DomHandler.layout);
   }
+
+  static removeLayout(): void {
+    document.body.removeChild(DomHandler.layout);
+  }
 }
 
 export default DomHandler;
