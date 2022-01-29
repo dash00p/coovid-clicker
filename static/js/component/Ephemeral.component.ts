@@ -78,7 +78,7 @@ class EphemeralComponent extends CoreComponent {
         ${animStyle}
         img {
           border:3px solid #fff;
-          animation: 2500ms alternate border-rainbow infinite;
+          animation: 2000ms alternate border-rainbow infinite;
           max-width: 85px;
           max-height: 85px;
           border-radius: 5px;
