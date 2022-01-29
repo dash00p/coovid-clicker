@@ -13,12 +13,14 @@ interface ISave {
   buildings: IBaseBuilding[];
   currentAmount: number;
   currentDate: Date;
+  startDate: Date;
   stats: IStat;
   bonus: IBaseBonus[];
 }
 
 interface IStat {
   clickCount: number;
+  totalEarnings: number;
 }
 
 class Game {
@@ -27,6 +29,7 @@ class Game {
   backgroundDate: Date;
   onBackground: boolean;
   currentAmount: number;
+  totalEarnings: number;
   clicker: Clicker;
   perk: Perk;
   bonus: Bonus;
@@ -51,6 +54,7 @@ class Game {
     this.routine();
     this.listenVisibility();
     this.level = 1;
+    this.totalEarnings = 0;
     // must be called after routine();
     initGuard();
     this.loadSave();
@@ -58,16 +62,24 @@ class Game {
 
   save(): void {
     const buildingToSave: IBaseBuilding[] = this.buildings.saveBuildings();
-    const save: ISave = {
+    let save: ISave = {
       version: this.version,
       buildings: buildingToSave,
       currentAmount: this.currentAmount,
       currentDate: new Date(),
+      startDate: new Date(),
       stats: {
         clickCount: this.clicker.count,
+        totalEarnings: this.totalEarnings,
       },
       bonus: this.bonus.saveBonuses(),
     };
+    const previousSaveString: string = localStorage.getItem("save");
+    if (previousSaveString) {
+      const previousSave = JSON.parse(atob(previousSaveString));
+      save.startDate = previousSave.startDate || new Date();
+    }
+
     localStorage.setItem("save", btoa(JSON.stringify(save)));
     logWithTimer(`Game has been saved !`, 1);
   }
@@ -75,15 +87,16 @@ class Game {
   loadSave(): void {
     let save: string | null = localStorage.getItem("save");
 
-    if (save !== null) {
+    if (save) {
       const saveObj: ISave = JSON.parse(atob(save));
 
       if (saveObj.buildings && saveObj.buildings.length) {
         this.buildings.loadBuildings(saveObj.buildings);
       }
 
-      if (saveObj.stats && saveObj.stats.clickCount) {
-        this.clicker.count = saveObj.stats.clickCount;
+      if (saveObj.stats) {
+        this.clicker.count = saveObj.stats.clickCount || 0;
+        this.totalEarnings = saveObj.stats.totalEarnings || 0;
       }
 
       if (saveObj.currentAmount) {
@@ -107,6 +120,7 @@ class Game {
 
   incrementAmount(increment: number): number {
     this.currentAmount += increment;
+    this.totalEarnings += increment;
     return this.currentAmount;
   }
 
