@@ -1,3 +1,5 @@
+import commonStyle from "../../css/common.component.scss";
+
 import CoreComponent from "./Core.component";
 import { buildInstance } from "../logic/Building.logic";
 import { commarize } from "../helper/Dom.helper";
@@ -12,19 +14,19 @@ interface IState {
   upgrades: IBuildingUpgrade[];
 }
 
-const styleContent:string = `
+const styleContent: string =
+  commonStyle +
+  `
   button {
     margin-right: 5px;
-    font-family: 'Quicksand', sans-serif;
   }
 `;
 
 export interface IBuildingComponentProps extends ICoreComponentProps, IBuilding {}
 
 class BuildingComponent extends CoreComponent {
-  props: IBuildingComponentProps;
-  wrapper: any;
-  state: IState;
+  declare props: IBuildingComponentProps;
+  declare state: IState;
 
   constructor(props: IBuildingComponentProps) {
     super(props);
@@ -56,11 +58,11 @@ class BuildingComponent extends CoreComponent {
       this.find("span"),
       `${this.getImageSrc() ? `<img src='${this.getImageSrc()}' />` : ""} ${
         this.state.name
-      } (${this.state.level}) - coût ${commarize(
+      } (${this.state.level}) - coût <span class="cost">${commarize(
         this.state.currentAmount
-      )} - production ${commarize(this.state.currentProduction)} (${commarize(
-        this.props.baseProduction
-      )} par unité)&nbsp;`
+      )}</span> - production <span class="income">${commarize(
+        this.state.currentProduction
+      )}</span> (${commarize(this.props.baseProduction)} par unité)&nbsp;`
     );
   }
 

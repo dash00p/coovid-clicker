@@ -1,0 +1,19 @@
+:host {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.pill {
+    border: 1px solid #f96c00;
+    border-radius: 3px;
+    padding:0 2px;
+}
+
+.cost {
+    @extend .pill;
+    border-color: #f96c00;
+}
+
+.income {
+    @extend .pill;
+    border-color: #00f9e8e2;
+}

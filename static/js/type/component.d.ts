@@ -1,3 +1,5 @@
+declare module "*.scss";
+
 declare class CoreComponent {
   props: ICoreComponentProps;
   wrapper: HTMLElement;

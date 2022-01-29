@@ -16,8 +16,7 @@ const styleTemplate: string = `
 `;
 
 class EphemeralComponent extends CoreComponent {
-  props: IEphemeralComponentProps;
-  wrapper: any;
+  declare props: IEphemeralComponentProps;
 
   constructor(props: IEphemeralComponentProps) {
     super(props);

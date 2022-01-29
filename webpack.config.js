@@ -13,10 +13,28 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.component.s[ac]ss$/i,
+          exclude: /node_modules/,
+          use: [
+            "sass-to-string",
+            {
+              loader: "sass-loader",
+              options: {
+                sassOptions: {
+                  outputStyle: "compressed",
+                },
+              },
+            },
+          ],
+        },
+        {
           test: /\.s[ac]ss$/i,
+          exclude: [/node_modules/, /\.component.(s(a|c)ss)$/],
           use: [
             MiniCssExtractPlugin.loader,
-            "css-loader",
+            {
+              loader: "css-loader",
+            },
             {
               loader: "sass-loader",
               options: {
@@ -27,7 +45,6 @@ module.exports = (env, argv) => {
               },
             },
           ],
-          exclude: /node_modules/,
         },
         {
           test: /\.ts$/,

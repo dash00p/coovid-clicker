@@ -1,15 +1,16 @@
+import commonStyle from "../../css/common.component.scss";
 import { bonusInstance } from "../logic/Bonus.logic";
 import CoreComponent from "./Core.component";
 
-interface IBonusState extends ICoreComponentsState {
-    multiplicator: number;
-  }
-
 export interface IBonusComponentProps extends IBonus, ICoreComponentProps {}
 
+const customstyle: string = `${commonStyle}
+  button { margin-left:5px; }`;
+
 class BonusComponent extends CoreComponent {
-    static customType: string = "game-bonus";
-    state: IBonusState;
+  static customType: string = "game-bonus";
+  description: string;
+  declare props: IBonusComponentProps;
 
     constructor(props: IBonusComponentProps = null) {
         super(props);
@@ -22,6 +23,7 @@ class BonusComponent extends CoreComponent {
         purchaseButton.onclick = this.handlePurchaseClick;
         this.appendChild(purchaseButton);
     }
+    this.setStyle(customstyle);
 
     handlePurchaseClick() {
         const newUpgrade: IBonus = bonusInstance().addBonus(this.component.props.id);

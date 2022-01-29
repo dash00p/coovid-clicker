@@ -2,13 +2,12 @@ import CoreComponent from "./Core.component";
 
 interface IStatComponenttProps extends ICoreComponentProps {
   img?: {
-    src: string
+    src: string;
   };
 }
 
 class StatComponent extends CoreComponent {
-  props: IStatComponenttProps;
-  wrapper: any;
+  declare props: IStatComponenttProps;
 
   constructor(props: IStatComponenttProps = null) {
     super(props);
@@ -16,14 +15,6 @@ class StatComponent extends CoreComponent {
     this.wrapper = this.createChildren("li", "<span></span>");
     this.render(this.wrapper);
   }
-
-  // static get observedAttributes() {
-  //   return ['text', 'level'];
-  // }
-
-  // get text(){
-  //   return this.props.text;
-  // }
 
   getImageSrc(): string {
     return this.props.img && this.props.img.src ? this.props.img.src : null;

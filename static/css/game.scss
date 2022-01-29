@@ -9,6 +9,10 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
+game-layout{
+  display: flex;
+}
+
 .ephemeral {
   position: absolute;
   width: 50px;

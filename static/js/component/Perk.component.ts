@@ -7,8 +7,8 @@ interface IPerkState extends ICoreComponentsState {
 export interface IPerkComponentProps extends IPerk, ICoreComponentProps {}
 
 class PerkComponent extends CoreComponent {
-    static customType: string = "game-perk";
-    state: IPerkState;
+  static customType: string = "game-perk";
+  declare state: IPerkState;
 
     constructor(props: IPerkComponentProps = null) {
         super(props);

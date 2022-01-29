@@ -14,7 +14,7 @@ class CoreComponent extends HTMLElement {
       rendered: false,
     };
     this.props = props || {};
-    this.attachShadow({ mode: "open" });
+    this.shadowRoot = this.attachShadow({ mode: "open" });
     if (props && props.children) {
       this.appendChild(props.children);
     }
