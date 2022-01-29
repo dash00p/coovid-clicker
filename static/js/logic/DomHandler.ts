@@ -85,6 +85,10 @@ class DomHandler {
     DomHandler.perksList.addPerk(newPerk);
   }
 
+  static removeAllPerks(): void {
+    DomHandler.perksList.removeAllPerks();
+  }
+
   static renderBonus(bonus: IBonus): void {
     DomHandler.bonusList.addBonus(bonus);
   }

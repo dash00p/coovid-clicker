@@ -149,14 +149,30 @@ class Perk {
     DomHandler.clicker.updateIncrement(clickerValue);
   }
 
+  clearActivePerks() {
+    this._activePerks = [];
+    this.clearActiveJobs();
+    this.applyPassivePerk();
+    this.applyActivePerk();
+    DomHandler.removeAllPerks();
+  }
+
+  clearActiveJobs() {
+    for (const job of this._jobs) {
+      clearInterval(job);
+      const jobIndex = this._jobs.indexOf(job);
+      if (jobIndex > -1) {
+        this._jobs.splice(jobIndex, 1);
+      }
+    }
+  }
+
   static getInstance(): Perk {
     return Perk._instance;
   }
 
   static deleteInstance(): void {
-    for (const job of Perk._instance._jobs) {
-      clearInterval(job);
-    }
+    Perk._instance.clearActiveJobs();
     delete Perk._instance;
   }
 }

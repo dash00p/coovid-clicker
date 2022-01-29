@@ -29,6 +29,14 @@ class DevToolsComponent extends CoreComponent {
     };
     this.appendChild(perkButton, this.find("div"));
 
+    const perkClearButton: IEnhancedHTMLElement =
+      document.createElement("button");
+    perkClearButton.textContent = "Clear all perks";
+    perkClearButton.onclick = () => {
+      perkInstance().clearActivePerks();
+    };
+    this.appendChild(perkClearButton, this.find("div"));
+
     const ephemeralButton: IEnhancedHTMLElement =
       document.createElement("button");
     ephemeralButton.textContent = "New ephemeral";

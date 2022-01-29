@@ -32,7 +32,7 @@ class Game {
   bonus: Bonus;
   buildings: Building;
   level: number;
-  jobs: number[];
+  private jobs: number[];
 
   constructor() {
     if (Game._instance) {

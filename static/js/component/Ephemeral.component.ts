@@ -29,7 +29,7 @@ class EphemeralComponent extends CoreComponent {
     this.render(this.wrapper);
     document.body.appendChild(this);
     this.setStyle();
-    if(props.event === memeEventType.perk) {
+    if (props.event === memeEventType.perk) {
       this.playSound("wow.mp3");
     }
 
@@ -38,7 +38,7 @@ class EphemeralComponent extends CoreComponent {
 
   playSound(file: string): void {
     const audio: HTMLAudioElement = new Audio(`./static/sound/${file}`);
-    audio.addEventListener("canplaythrough", event => {
+    audio.addEventListener("canplaythrough", (event) => {
       /* the audio is now playable; play it if permissions allow */
       audio.play();
     });
@@ -49,11 +49,11 @@ class EphemeralComponent extends CoreComponent {
     if (name === "random") {
       let list: IMeme[] = memeList;
       if (this.props.event) {
-        list = list.filter(mem => mem.event.includes(this.props.event));
+        list = list.filter((mem) => mem.event.includes(this.props.event));
       }
       sprite = list[Math.floor(Math.random() * list.length)];
     } else {
-      sprite = memeList.find(m => m.path === name);
+      sprite = memeList.find((m) => m.path === name);
     }
 
     if (sprite) {
@@ -85,19 +85,25 @@ class EphemeralComponent extends CoreComponent {
         `;
       }
     }
-    this.style.animationDuration = `${this.randomizeDuration().toFixed(2)}ms, 3.5s`;
+    this.style.animationDuration = `${this.randomizeDuration().toFixed(
+      2
+    )}ms, 3.5s`;
   }
 
   randomizePlacement(axis: "top" | "left"): number {
     const min: number = axis === "left" ? this.offsetWidth : this.offsetHeight;
-    const max: number = (axis === "left" ? window.innerWidth : window.innerHeight) - min;
+    const max: number =
+      (axis === "left" ? window.innerWidth : window.innerHeight) - min;
     return Math.floor(Math.random() * (max - min / 2));
   }
 
   randomizeDuration(): number {
-    const duration: number = this.props?.duration ?? config.visual.ephemeralTimer;
+    const duration: number =
+      this.props?.duration ?? config.visual.ephemeralTimer;
     const factor: number = 2;
-    const ephemeralTimer: number = (duration + (Math.random() * (duration / factor) - (duration / (factor * 2))));
+    const ephemeralTimer: number =
+      duration +
+      (Math.random() * (duration / factor) - duration / (factor * 2));
     return ephemeralTimer;
   }
 }

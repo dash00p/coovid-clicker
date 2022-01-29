@@ -6,6 +6,7 @@ class CoreComponent extends HTMLElement {
   state: ICoreComponentsState;
   component: any;
   shadowRoot: ShadowRoot;
+  _activeJobs: number[];
 
   constructor(props: ICoreComponentProps) {
     super();
@@ -15,15 +16,22 @@ class CoreComponent extends HTMLElement {
     };
     this.props = props || {};
     this.shadowRoot = this.attachShadow({ mode: "open" });
+    this._activeJobs = [];
     if (props && props.children) {
       this.appendChild(props.children);
     }
 
     if (props && props.handleClick) {
       const that: this = this;
-      this.onclick = function (this: GlobalEventHandlers, ev: MouseEvent, args?: any): any {
+      this.onclick = function (
+        this: GlobalEventHandlers,
+        ev: MouseEvent,
+        args?: any
+      ): any {
         props.handleClick.call(props.context ?? this, ev);
-        if (props.killOnClick) { that.kill(0); }
+        if (props.killOnClick) {
+          that.kill(0);
+        }
       };
     }
   }
@@ -42,7 +50,12 @@ class CoreComponent extends HTMLElement {
     this.className += className + " ";
   }
 
-  listen(ref: CoreComponent, name: string, val: string | number | object, callbackList: Function[]): void {
+  listen(
+    ref: CoreComponent,
+    name: string,
+    val: string | number | object,
+    callbackList: Function[]
+  ): void {
     const parent: CoreComponent = ref;
     Object.defineProperty(this.state, name, {
       get(): any {
@@ -64,7 +77,11 @@ class CoreComponent extends HTMLElement {
     node.innerHTML = ``;
   }
 
-  updateContent(node: Element, html: string, elementsToAppend?: IEnhancedHTMLElement[]): void {
+  updateContent(
+    node: Element,
+    html: string,
+    elementsToAppend?: IEnhancedHTMLElement[]
+  ): void {
     node.innerHTML = html;
     if (elementsToAppend && elementsToAppend.length) {
       for (const element of elementsToAppend) {
@@ -77,7 +94,11 @@ class CoreComponent extends HTMLElement {
     node.childNodes[0].textContent = html;
   }
 
-  createChildren(type: string, content: string = "", subChildren: IEnhancedHTMLElement = null): HTMLElement {
+  createChildren(
+    type: string,
+    content: string = "",
+    subChildren: IEnhancedHTMLElement = null
+  ): HTMLElement {
     const el: HTMLElement = document.createElement(type);
     el.innerHTML = content;
     if (subChildren) {
@@ -108,13 +129,42 @@ class CoreComponent extends HTMLElement {
   setHTML<T extends HTMLElement>(text: string, parent?: T): void {
     if (parent) {
       parent.innerHTML = text;
-    } else { this.shadowRoot.innerHTML = text; }
+    } else {
+      this.shadowRoot.innerHTML = text;
+    }
   }
 
-  appendChild<T extends Node>(element: T, parent?: T): T {
+  appendChild<
+    T extends IEnhancedHTMLElement | IEnhancedNode,
+    P extends ParentNode
+  >(element: T, parent?: P, attachComponent?: boolean): T {
+    if (attachComponent) element.component = this;
     if (parent) {
       return parent.appendChild(element);
-    } else { return this.shadowRoot.appendChild(element); }
+    } else {
+      return this.shadowRoot.appendChild(element);
+    }
+  }
+
+  prependChild<T extends ParentNode, N extends Node>(
+    element: N,
+    parent?: T
+  ): void {
+    if (parent) {
+      return parent.prepend(element);
+    } else {
+      return this.shadowRoot.prepend(element);
+    }
+  }
+
+  removeAllChild(parentNode?: ParentNode): void {
+    const el = parentNode ? parentNode : this;
+    while (el.lastChild) {
+      if ((el.lastChild as CoreComponent).clearActiveJobs) {
+        (el.lastChild as CoreComponent).clearActiveJobs();
+      }
+      el.removeChild(el.lastChild);
+    }
   }
 
   find(query: string): HTMLElement {
@@ -128,13 +178,24 @@ class CoreComponent extends HTMLElement {
   kill(lifetime: number): void {
     setTimeout(() => {
       this.remove();
+      this.clearActiveJobs();
     }, lifetime);
+  }
+
+  clearActiveJobs() {
+    for (const job of this._activeJobs) {
+      clearInterval(job);
+      const jobIndex = this._activeJobs.indexOf(job);
+      if (jobIndex > -1) {
+        this._activeJobs.splice(jobIndex, 1);
+      }
+    }
   }
 
   setStyle(styleContent: string): void {
     const style: HTMLStyleElement = document.createElement("style");
     style.textContent = styleContent;
-    this.shadowRoot.appendChild(style);
+    this.shadowRoot.prepend(style);
   }
 
   setInterval(
@@ -142,7 +203,9 @@ class CoreComponent extends HTMLElement {
     timeout?: number,
     ...args: any[]
   ): ReturnType<typeof setInterval> {
-    return oldInterval(handler, timeout, ...args);
+    const interval = oldInterval(handler, timeout, ...args);
+    this._activeJobs.push(interval);
+    return interval;
   }
 }
 
