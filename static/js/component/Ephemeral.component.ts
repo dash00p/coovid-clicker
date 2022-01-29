@@ -75,8 +75,8 @@ class EphemeralComponent extends CoreComponent {
         this.style.top = this.randomizePlacement("top").toString();
         style.textContent = `
         img {
-          max-width: 60px;
-          max-height: 60px;
+          max-width: 85px;
+          max-height: 85px;
           border-radius: 5px;
       }
           @keyframes y-1 {
