@@ -1,5 +1,10 @@
 export const memeList: IMeme[] = [
   {
+    path: "200IQ",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "ainsley",
     extension: "png",
     event: [memeEventType.click],
@@ -11,6 +16,11 @@ export const memeList: IMeme[] = [
   },
   {
     path: "badger",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "BatmanHmmm",
     extension: "gif",
     event: [memeEventType.click],
   },
@@ -115,6 +125,11 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "Doit",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "doot",
     extension: "png",
     event: [memeEventType.click],
@@ -135,6 +150,11 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "epicSax",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "fatCat",
     extension: "png",
     event: [memeEventType.click],
@@ -147,6 +167,16 @@ export const memeList: IMeme[] = [
   {
     path: "frankerz",
     extension: "png",
+    event: [memeEventType.click],
+  },
+  {
+    path: "GabenGet",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "gachiW",
+    extension: "gif",
     event: [memeEventType.click],
   },
   {
@@ -170,6 +200,21 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "HelloThere",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "heyWoah",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "Honk",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "hypeE",
     extension: "gif",
     event: [memeEventType.click],
@@ -185,6 +230,11 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "INSANECAT",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "kappa",
     extension: "png",
     event: [memeEventType.click],
@@ -195,12 +245,37 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "keanU",
+    extension: "png",
+    event: [memeEventType.click],
+  },
+  {
     path: "KEKLEO",
     extension: "png",
     event: [memeEventType.click],
   },
   {
+    path: "KirbyDance",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "lebronJAM",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "LennyFace",
+    extension: "png",
+    event: [memeEventType.click],
+  },
+  {
+    path: "loliTriggered",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "Mike",
     extension: "png",
     event: [memeEventType.click],
   },
@@ -211,6 +286,11 @@ export const memeList: IMeme[] = [
   },
   {
     path: "Monke",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "MONKE2",
     extension: "gif",
     event: [memeEventType.click],
   },
@@ -226,6 +306,11 @@ export const memeList: IMeme[] = [
   },
   {
     path: "noice",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "nootNoot",
     extension: "gif",
     event: [memeEventType.click],
   },
@@ -255,6 +340,11 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "OOOO",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "ouh",
     extension: "png",
     event: [memeEventType.click],
@@ -272,6 +362,11 @@ export const memeList: IMeme[] = [
   {
     path: "peepoClown",
     extension: "png",
+    event: [memeEventType.click],
+  },
+  {
+    path: "peepoDJ",
+    extension: "gif",
     event: [memeEventType.click],
   },
   {
@@ -315,6 +410,11 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "pinkGuy",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "plsFrog",
     extension: "gif",
     event: [memeEventType.click],
@@ -327,6 +427,11 @@ export const memeList: IMeme[] = [
   {
     path: "poggers",
     extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "PogU",
+    extension: "png",
     event: [memeEventType.click],
   },
   {
@@ -345,7 +450,17 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "pugPls",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "putinWalk",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "RareChar",
     extension: "gif",
     event: [memeEventType.click],
   },
@@ -371,6 +486,11 @@ export const memeList: IMeme[] = [
   },
   {
     path: "sanic",
+    extension: "png",
+    event: [memeEventType.click],
+  },
+  {
+    path: "shrekW",
     extension: "png",
     event: [memeEventType.click],
   },
@@ -425,8 +545,18 @@ export const memeList: IMeme[] = [
     event: [memeEventType.click],
   },
   {
+    path: "TobeyDance",
+    extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
     path: "travolta",
     extension: "gif",
+    event: [memeEventType.click],
+  },
+  {
+    path: "TrumpRage",
+    extension: "png",
     event: [memeEventType.click],
   },
   {
@@ -462,6 +592,6 @@ export const memeList: IMeme[] = [
   {
     path: "wow",
     extension: "gif",
-    event: [memeEventType.perk]
-  }
+    event: [memeEventType.perk],
+  },
 ];
