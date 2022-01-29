@@ -30,3 +30,12 @@ declare interface IEnhancedNode extends Node {
   component?: CoreComponent;
   props?: any;
 }
+
+declare interface ICreateElementOptions {
+  className?: string;
+  content?: string;
+  id?: string;
+  handleClick?:
+    | ((this: GlobalEventHandlers, ev: MouseEvent, args?: any) => any)
+    | null;
+}

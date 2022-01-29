@@ -6,7 +6,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Casio Pro",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 11,
@@ -15,7 +15,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Casio Plus",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 12,
@@ -24,7 +24,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Casio Pro Plus",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 20,
@@ -33,7 +33,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "La chloroquine pour les nuls",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 21,
@@ -42,7 +42,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Cloroquina para tontos",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 22,
@@ -51,7 +51,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Хлорохин для чайников",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 40,
@@ -60,7 +60,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Ouh.",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 41,
@@ -69,7 +69,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Ouh. Ouh.",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 42,
@@ -78,7 +78,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Ouh. Ouh. Ouh.",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 50,
@@ -87,7 +87,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Kit de survie pour scout",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 51,
@@ -96,7 +96,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Cape en nylon",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 52,
@@ -105,7 +105,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Richardmobile",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 60,
@@ -114,7 +114,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Séance de dédicace",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 61,
@@ -123,7 +123,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Compilation DVD",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 62,
@@ -132,7 +132,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Ouverture d'un compte JustFans",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 70,
@@ -141,7 +141,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Paire de mouffles",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 71,
@@ -150,7 +150,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Fermette à rénover",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 72,
@@ -159,7 +159,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "👌",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 80,
@@ -168,7 +168,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Optimisation fiscale",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 81,
@@ -177,7 +177,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Erreur de la banque en votre faveur",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 82,
@@ -186,7 +186,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Exempté d'impôt",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 90,
@@ -195,7 +195,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Abdul",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 91,
@@ -204,7 +204,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Coquelicot",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 92,
@@ -213,7 +213,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Abricot",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 100,
@@ -222,7 +222,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Forfait illimité",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 101,
@@ -231,7 +231,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Client premium à vie",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 102,
@@ -240,7 +240,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 3,
     name: "Nano-puce sous-cutanée",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 110,
@@ -249,7 +249,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "LEEEEEEEEEEEEEEEEEEEE",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 111,
@@ -258,7 +258,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "ROOOOOOOOOOOOY",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 112,
@@ -267,7 +267,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 3,
     name: "JEEEEEEEENNKINS",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 120,
@@ -276,7 +276,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Lampe à UV du commisaire Magret",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 121,
@@ -285,7 +285,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Ceinture de grenades canards",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 122,
@@ -294,7 +294,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Gant du conquérant",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 130,
@@ -303,7 +303,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Paquet de galettes Saint-Michel",
     description: "Pur beurre.",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 131,
@@ -312,7 +312,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "xXx D4RK J34NN3 xXx",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 132,
@@ -321,7 +321,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 3,
     name: "Manteau ignifugé",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 30,
@@ -330,7 +330,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Bâton de Merlin",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 31,
@@ -339,7 +339,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Couronne de joyaux",
     description: "Digne d'un grand monarque.",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 32,
@@ -348,7 +348,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 3,
     name: "Prophétie de Sylvanus Oriana",
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 140,
@@ -357,7 +357,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Keikogi en soie d'exception",
     description: "",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 141,
@@ -366,7 +366,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Mode d'emploi du Gōjū-ryū",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 142,
@@ -375,7 +375,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 3,
     name: `"Sensei 8": Autobiographie`,
     description: "",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
   {
     id: 150,
@@ -384,7 +384,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Larme saline",
     description: "Un immense topaze, joyau de la famille Lomsaley.",
-    requestedLevel: 10
+    requestedLevel: 10,
   },
   {
     id: 151,
@@ -393,7 +393,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 2,
     name: "Certificat de propriété d'une mine de sel",
     description: "",
-    requestedLevel: 20
+    requestedLevel: 20,
   },
   {
     id: 152,
@@ -402,7 +402,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     multiplicator: 3,
     name: `Triggered`,
     description: "Aren't you Bruce ?",
-    requestedLevel: 30
+    requestedLevel: 30,
   },
 ];
 
@@ -416,7 +416,7 @@ export const buildingList: IBuilding[] = [
   },
   {
     id: buildingType.raoult,
-    amountMultiplier: 1.2,
+    amountMultiplier: 1.15,
     baseAmount: 1.5e2,
     baseProduction: 1,
     name: "Raoult la fripouille",
@@ -438,7 +438,7 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.15,
     baseAmount: 1e4,
     baseProduction: 25,
-    "description": "Le justicier masqué",
+    description: "Le justicier masqué",
     name: "Richard sans peur",
     neededProduction: 50,
   },
@@ -550,7 +550,8 @@ export const buildingList: IBuilding[] = [
     baseAmount: 1e18,
     baseProduction: 1.5e11,
     name: "Heenok",
-    description:"Inclinez-vous devant le Roi, quitte à avoir mal aux chevilles.",
+    description:
+      "Inclinez-vous devant le Roi, quitte à avoir mal aux chevilles.",
     neededProduction: 1e10,
   },
   {

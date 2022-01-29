@@ -87,6 +87,18 @@ class CoreComponent extends HTMLElement {
     return el;
   }
 
+  static createElement(type: string, options?: ICreateElementOptions) {
+    const el: HTMLElement = document.createElement(type);
+
+    if (options) {
+      if (options.className) el.className = options.className;
+      if (options.id) el.id = options.id;
+      if (options.handleClick) el.onclick = options.handleClick;
+      if (options.content) el.innerHTML = options.content;
+    }
+    return el;
+  }
+
   create(type: string, content: string, customType: string = null): void {
     const el: HTMLElement = document.createElement(type, { is: customType });
     el.innerHTML = content;

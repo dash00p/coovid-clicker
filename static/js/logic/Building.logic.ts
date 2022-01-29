@@ -30,9 +30,10 @@ class Building {
     log("Checking newly available buildings", 3);
     const newAvailableBuildings: IBuilding[] = this.avalaibleBuildings.filter(
       (build) =>
-        ((!build.neededProduction && build.baseAmount <= gameInstance().currentAmount) ||
-          build.neededProduction <= this.totalProduction)
-        && !build.available
+        ((!build.neededProduction &&
+          build.baseAmount <= gameInstance().currentAmount) ||
+          build.neededProduction <= this.totalProduction) &&
+        !build.available
     );
     this.updateAvailableBuildings(newAvailableBuildings);
   }
@@ -67,7 +68,7 @@ class Building {
       level: 0,
       currentAmount: newBuilding.baseAmount,
       currentProduction: 0,
-      activeUpgrades: []
+      activeUpgrades: [],
     };
     this.currentBuildings.push(build);
     DomHandler.createBuilding(build);
@@ -97,7 +98,9 @@ class Building {
       DomHandler.renderCounter(
         gameInstance().incrementAmount(-building.currentAmount)
       );
-      clickerInstance().refreshIncrementFromBuildings(this.getTotalProduction());
+      clickerInstance().refreshIncrementFromBuildings(
+        this.getTotalProduction()
+      );
     }
 
     building.currentAmount =
@@ -109,9 +112,18 @@ class Building {
   }
 
   upgradeBuilding(upgradeId: number, fromSave: boolean = false): any {
-    const upgrade: IBuildingUpgrade = upgradeList.find(u => u.id === upgradeId);
-    const building: IBuilding = this.currentBuildings.find(b => b.id === upgrade.buildingId);
-    if (!fromSave && (!upgrade || !building || upgrade.cost > gameInstance().currentAmount)) { return false; }
+    const upgrade: IBuildingUpgrade = upgradeList.find(
+      (u) => u.id === upgradeId
+    );
+    const building: IBuilding = this.currentBuildings.find(
+      (b) => b.id === upgrade.buildingId
+    );
+    if (
+      !fromSave &&
+      (!upgrade || !building || upgrade.cost > gameInstance().currentAmount)
+    ) {
+      return false;
+    }
 
     const { id, multiplicator, name, description, cost } = upgrade;
     building.activeUpgrades.push({
@@ -119,27 +131,30 @@ class Building {
       cost,
       description,
       multiplicator,
-      name
+      name,
     });
     building.baseProduction *= multiplicator;
     building.currentProduction *= multiplicator;
 
     if (!fromSave) {
-      DomHandler.renderCounter(
-        gameInstance().incrementAmount(-cost)
+      DomHandler.renderCounter(gameInstance().incrementAmount(-cost));
+      clickerInstance().refreshIncrementFromBuildings(
+        this.getTotalProduction()
       );
-      clickerInstance().refreshIncrementFromBuildings(this.getTotalProduction());
     }
     return building;
   }
 
   tick(frequency: number, isBackground?: boolean): void {
     let totalBuildingsProduction: number = this.getTotalProduction();
-    const currentProduction: number = totalBuildingsProduction * this.currentMultiplicator;
+    const currentProduction: number =
+      totalBuildingsProduction * this.currentMultiplicator;
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
     totalBuildingsProduction = currentProduction * (frequency / 1000);
 
-    const increment: number = gameInstance().incrementAmount(totalBuildingsProduction);
+    const increment: number = gameInstance().incrementAmount(
+      totalBuildingsProduction
+    );
 
     if (!isBackground) {
       DomHandler.renderCounter(increment, currentProduction, frequency);
@@ -151,9 +166,9 @@ class Building {
       return {
         id: b.id,
         level: b.level,
-        activeUpgrades: b.activeUpgrades.map(u => {
+        activeUpgrades: b.activeUpgrades.map((u) => {
           return { id: u.id };
-        })
+        }),
       };
     });
   }
@@ -164,8 +179,9 @@ class Building {
       totalBuildingsProduction += building.currentProduction;
     }
     this.totalProductionWithoutMultiplicator = totalBuildingsProduction;
-    this.totalProduction = totalBuildingsProduction * bonusInstance().totalMultiplicator;
-    return totalBuildingsProduction;
+    this.totalProduction =
+      totalBuildingsProduction * bonusInstance().totalMultiplicator;
+    return this.totalProduction;
   }
 
   loadBuildings(buildings: IBaseBuilding[]): void {
@@ -179,7 +195,7 @@ class Building {
       const savedBuilding: IBaseBuilding = buildings.find(
         (b) => b.id === leveledUpBuilding.id
       );
-      let building:IBuilding = this.levelUpBuilding(
+      let building: IBuilding = this.levelUpBuilding(
         leveledUpBuilding.id,
         savedBuilding.level,
         true
@@ -189,9 +205,9 @@ class Building {
           building = this.upgradeBuilding(upgrade.id, true);
         }
       }
+      this.getTotalProduction();
       DomHandler.renderBuilding(building);
     }
-    clickerInstance().refreshIncrementFromBuildings(this.getTotalProduction());
   }
 
   static getInstance(): Building {

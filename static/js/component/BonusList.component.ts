@@ -5,12 +5,12 @@ class BonusListComponent extends CoreComponent {
   static customType: string = "game-bonus-list";
   constructor(props: object = null) {
     super(props);
-    this.create("h4","Mesures gouvernementales");
+    this.create("h4", "Mesures gouvernementales");
     this.create("ul", null);
   }
 
   addBonus(bonus: IBonus): void {
-      this.appendChild(new BonusComponent(bonus));
+    this.appendChild(new BonusComponent({ ...bonus, isPurchased: false }));
   }
 }
 

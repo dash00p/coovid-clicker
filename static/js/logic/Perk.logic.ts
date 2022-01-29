@@ -2,11 +2,12 @@ import config from "./Config.logic";
 import { perkList } from "../collection/Perk.collection";
 import { gameInstance } from "./Game.logic";
 import { clickerInstance } from "../logic/Clicker.logic";
-import { log } from "../helper/Console.helper";
+import { log, logWithTimer } from "../helper/Console.helper";
 import EphemeralComponent from "../component/Ephemeral.component";
 import DomHandler from "./DomHandler";
 import { buildInstance } from "./Building.logic";
 import { commarize } from "../helper/Dom.helper";
+import { bonusInstance } from "./Bonus.logic";
 
 class Perk {
   private static _instance: Perk;
@@ -32,8 +33,10 @@ class Perk {
   }
 
   routine(): void {
-    const min: number = config.game.perk.minTimer;
-    const max: number = config.game.perk.maxTimer;
+    const min: number =
+      config.game.perk.minTimer / (bonusInstance()?.perkTimerReducer || 1);
+    const max: number =
+      config.game.perk.maxTimer / (bonusInstance()?.perkTimerReducer || 1);
     const timer: number = Math.floor(Math.random() * (max - min)) + min;
 
     setTimeout(() => {
@@ -69,14 +72,14 @@ class Perk {
     // must be render after apply perk to render the proper name.
     DomHandler.renderPerk(this.activePerks.find((p) => p.id === id));
 
-    log(`New perk applied : ${newPerk.name}`, 1);
+    logWithTimer(`New perk applied : ${newPerk.name}`, 1);
     setTimeout(() => {
       this.activePerks.splice(
         this.activePerks.findIndex((p) => p.id === id),
         1
       );
       this.activePerks = [...this.activePerks];
-      log(`Perk unapplied : ${newPerk.name}`, 1);
+      logWithTimer(`Perk unapplied : ${newPerk.name}`, 1);
       this.applyPassivePerk();
       this.applyActivePerk();
     }, newPerk.duration);
@@ -113,7 +116,7 @@ class Perk {
             gameInstance().currentAmount / 10
           );
           gameInstance().currentAmount += perkAmount;
-          perk.name += ` (${commarize(perkAmount)})`;
+          perk.name += ` (+ ${commarize(perkAmount)})`;
           perk.isApplied = true;
           break;
       }
@@ -138,7 +141,7 @@ class Perk {
           ).toString().length;
           const perkAmount: number = Math.pow(10, exponent);
           clickerValue += perkAmount;
-          perk.name += `(+${commarize(perkAmount)})`;
+          perk.name += ` (+ ${commarize(perkAmount)} à chaque clic)`;
           break;
       }
     }

@@ -22,7 +22,7 @@ class DomHandler {
 
   static init(): void {
     DomHandler.initLayout();
-    const counter:CounterComponent = new CounterComponent();
+    const counter: CounterComponent = new CounterComponent();
     DomHandler.counter = counter.findById("counter");
     DomHandler.productionCounter = counter.findById("productionCounter");
     DomHandler.buildingList = new BuildingListComponent();
@@ -30,12 +30,12 @@ class DomHandler {
     DomHandler.clicker = new ClickerComponent();
     DomHandler.bonusList = new BonusListComponent();
     DomHandler.renderCounter(gameInstance().currentAmount);
-    DomHandler.layout.appendChild(counter);
-    DomHandler.layout.appendChild(DomHandler.clicker);
-    DomHandler.layout.appendChild(DomHandler.buildingList);
-    DomHandler.layout.appendChild(DomHandler.perksList);
-    DomHandler.layout.appendChild(DomHandler.bonusList);
-    DomHandler.layout.appendChild(new FooterComponent());
+    DomHandler.layout.appendMain(counter);
+    DomHandler.layout.appendMain(DomHandler.clicker);
+    DomHandler.layout.appendMain(DomHandler.buildingList);
+    DomHandler.layout.appendMain(DomHandler.perksList);
+    DomHandler.layout.appendAside(DomHandler.bonusList);
+    DomHandler.layout.appendMain(new FooterComponent());
   }
 
   static renderCounter(
@@ -45,13 +45,12 @@ class DomHandler {
   ): void {
     DomHandler.counter.textContent = commarize(value);
 
-    if (frequency && (DomHandler.tickFrequency++ > (1000 / frequency))) {
+    if (frequency && DomHandler.tickFrequency++ > 1000 / frequency) {
       if (!(typeof buildingsProduction === "undefined")) {
-        DomHandler.productionCounter.textContent = commarize(
-          buildingsProduction
-        );
+        DomHandler.productionCounter.textContent =
+          commarize(buildingsProduction);
       }
-      if (DomHandler.tickFrequency > (5000 / frequency)) {
+      if (DomHandler.tickFrequency > 5000 / frequency) {
         DomHandler.tickFrequency = 0;
         DomHandler.updateTitle(value);
       }
@@ -67,8 +66,10 @@ class DomHandler {
   }
 
   static renderBuilding(building: IBuilding): void {
-    const { level, currentAmount, currentProduction, activeUpgrades } = building;
-    const component: any = findChildrenbyId(DomHandler.buildingList,
+    const { level, currentAmount, currentProduction, activeUpgrades } =
+      building;
+    const component: any = findChildrenbyId(
+      DomHandler.buildingList,
       building.id
     );
 

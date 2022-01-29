@@ -40,7 +40,7 @@ class Clicker {
 
   refreshIncrementFromBuildings(totalBuildingsProduction: number): void {
     this.baseIncrement = Math.max(totalBuildingsProduction / 10, 1);
-    if(perkInstance().activePerks.length) {
+    if (perkInstance().activePerks.length) {
       perkInstance().applyPassivePerk();
     } else {
       this.increment = this.baseIncrement;

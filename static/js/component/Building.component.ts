@@ -22,7 +22,9 @@ const styleContent: string =
   }
 `;
 
-export interface IBuildingComponentProps extends ICoreComponentProps, IBuilding {}
+export interface IBuildingComponentProps
+  extends ICoreComponentProps,
+    IBuilding {}
 
 class BuildingComponent extends CoreComponent {
   declare props: IBuildingComponentProps;
@@ -35,11 +37,20 @@ class BuildingComponent extends CoreComponent {
     addButton.textContent = "Engager";
     addButton.onclick = this.handleBuyClick;
     this.wrapper = this.createChildren("li", "<span></span>", addButton);
-    this.wrapper.appendChild(this.createChildren("ul","<li></li>"));
-    this.listen(this, "level", this.props.level, [this.rerender, this.renderUpgrades]);
-    this.listen(this, "upgrades", this.props.activeUpgrades, [this.renderUpgrades]);
-    this.listen(this, "currentAmount", this.props.currentAmount, [this.rerender]);
-    this.listen(this, "currentProduction", this.props.currentProduction, [this.rerender]);
+    this.wrapper.appendChild(this.createChildren("ul", "<li></li>"));
+    this.listen(this, "level", this.props.level, [
+      this.rerender,
+      this.renderUpgrades,
+    ]);
+    this.listen(this, "upgrades", this.props.activeUpgrades, [
+      this.renderUpgrades,
+    ]);
+    this.listen(this, "currentAmount", this.props.currentAmount, [
+      this.rerender,
+    ]);
+    this.listen(this, "currentProduction", this.props.currentProduction, [
+      this.rerender,
+    ]);
     this.listen(this, "name", this.props.name, [this.rerender]);
     this.render(this.wrapper, [this.rerender, this.renderUpgrades]);
     this.setStyle(styleContent);
@@ -67,20 +78,29 @@ class BuildingComponent extends CoreComponent {
   }
 
   renderUpgrades(): void {
-    const activeUpgrades = this.state.upgrades.map( u => u.id);
-    const availableUpgrades: IBuildingUpgrade[] = upgradeList.filter( u =>
-      u.buildingId === this.props.id && u.requestedLevel <= this.state.level && !activeUpgrades.includes(u.id));
-    if(availableUpgrades.length) {
+    const activeUpgrades = this.state.upgrades.map((u) => u.id);
+    const availableUpgrades: IBuildingUpgrade[] = upgradeList.filter(
+      (u) =>
+        u.buildingId === this.props.id &&
+        u.requestedLevel <= this.state.level &&
+        !activeUpgrades.includes(u.id)
+    );
+    if (availableUpgrades.length) {
       this.setHTML("Améliorations: ", this.find("ul li"));
-      for(const upgrade of availableUpgrades) {
-        const upgradeButton: IEnhancedHTMLElement = document.createElement("button");
+      for (const upgrade of availableUpgrades) {
+        const upgradeButton: IEnhancedHTMLElement =
+          document.createElement("button");
         upgradeButton.props = {
-          initialText: `${upgrade.name} (${commarize(upgrade.cost)}) x${upgrade.multiplicator}`
-        }
+          initialText: `${upgrade.name} (${commarize(upgrade.cost)}) x${
+            upgrade.multiplicator
+          }`,
+        };
         upgradeButton.textContent = `${upgradeButton.props.initialText}`;
-        upgradeButton.onclick = (ev) => { this.handleUpgradeClick(upgrade.id, ev);};
+        upgradeButton.onclick = (ev) => {
+          this.handleUpgradeClick(upgrade.id, ev);
+        };
         this.appendChild(upgradeButton, this.find("ul li"));
-    }
+      }
       this.find("ul").style.display = "";
     } else {
       this.find("ul").style.display = "none";
@@ -109,17 +129,17 @@ class BuildingComponent extends CoreComponent {
   }
   handleUpgradeClick(upgradeId: number, event: MouseEvent): void {
     const newBuilding: any = buildInstance().upgradeBuilding(upgradeId);
-    if(newBuilding) {
+    if (newBuilding) {
       this.state.currentProduction = newBuilding.currentProduction;
       this.state.upgrades = [...newBuilding.activeUpgrades];
     } else {
-      const target: IEnhancedHTMLElement = (event.target as HTMLElement);
+      const target: IEnhancedHTMLElement = event.target as HTMLElement;
       const text: string = target.props.initialText;
-    //   if falsy, building couldn't be leveled up, then 👺
-    target.innerText = text+" 👺";
-       setTimeout(() => {
+      //   if falsy, building couldn't be leveled up, then 👺
+      target.innerText = text + " 👺";
+      setTimeout(() => {
         target.innerText = text;
-       }, 5000);
+      }, 5000);
     }
   }
 }
