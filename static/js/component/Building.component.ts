@@ -14,9 +14,12 @@ interface IState {
   upgrades: IBuildingUpgrade[];
 }
 
-const styleContent: string =
-  commonStyle +
-  `
+const styleContent: string = `
+  :host {
+    margin-bottom: 5px;
+    display: block;
+  }
+  ${commonStyle}
   button {
     margin-right: 5px;
   }

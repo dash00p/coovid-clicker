@@ -58,7 +58,7 @@ class BonusComponent extends CoreComponent {
         this.description = `augmente la production de ${multiplicator}%`;
         break;
       case bonusType.perkTimerReducer:
-        this.description = `reduit le temps d'apparition des perks par ${this.props.value}`;
+        this.description = `réduit le temps d'apparition des perks par ${this.props.value}`;
         break;
     }
   }

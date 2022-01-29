@@ -98,9 +98,6 @@ class Building {
       DomHandler.renderCounter(
         gameInstance().incrementAmount(-building.currentAmount)
       );
-      clickerInstance().refreshIncrementFromBuildings(
-        this.getTotalProduction()
-      );
     }
 
     building.currentAmount =
@@ -108,6 +105,12 @@ class Building {
     building.level += level;
     building.currentProduction += building.baseProduction * level;
     this.currentBuildings[buildingIndex] = building;
+
+    if (!fromSave) {
+      clickerInstance().refreshIncrementFromBuildings(
+        this.getTotalProduction()
+      );
+    }
     return building;
   }
 
