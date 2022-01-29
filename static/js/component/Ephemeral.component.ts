@@ -1,6 +1,7 @@
 import CoreComponent from "./Core.component";
 import { memeList } from "../collection/Memes.collection";
 import config from "../logic/Config.logic";
+import animStyle from "../../css/animation.component.scss";
 
 interface IEphemeralComponentProps extends ICoreComponentProps {
   icon: "goblin" | "pogvid" | "random" | "wow";
@@ -74,7 +75,10 @@ class EphemeralComponent extends CoreComponent {
         this.addClass("perk");
         this.style.top = this.randomizePlacement("top").toString();
         style.textContent = `
+        ${animStyle}
         img {
+          border:3px solid #fff;
+          animation: 2500ms alternate border-rainbow infinite;
           max-width: 85px;
           max-height: 85px;
           border-radius: 5px;

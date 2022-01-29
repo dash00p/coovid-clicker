@@ -5,11 +5,11 @@ $perk-animation-height: 30px;
 body {
   overflow: hidden;
   background: #1e1e1e;
-  color:#f9f9f9;
+  color: #f9f9f9;
   font-family: 'Quicksand', sans-serif;
 }
 
-game-layout{
+game-layout {
   display: flex;
 }
 
@@ -20,16 +20,19 @@ game-layout{
   top: -50px;
   left: 0px;
   animation: $ephemeral-duration linear 0.05s falling;
-  &:not(.interactive){
+
+  &:not(.interactive) {
     pointer-events: none;
   }
-  &.interactive{
-    cursor:pointer;
+
+  &.interactive {
+    cursor: pointer;
   }
-  &.perk{
+
+  &.perk {
     animation:
       $ephemeral-duration linear 0.05s flying-2,
-      3500ms cubic-bezier(.5,-700,.5, 700) y-1 infinite;
+      3500ms cubic-bezier(.5, -700, .5, 700) y-1 infinite;
     left: -2vh;
   }
 }
@@ -38,6 +41,7 @@ game-layout{
   from {
     transform: translateY(-50px);
   }
+
   to {
     transform: translateY(110vh);
   }
@@ -45,10 +49,11 @@ game-layout{
 
 @keyframes flying-2 {
   from {
-    left:-2vw;
+    left: -2vw;
   }
+
   to {
-    left:110vw;
+    left: 110vw;
   }
 }
 
@@ -56,37 +61,47 @@ game-layout{
   0% {
     transform: translate(-2vw, -$perk-animation-height);
   }
+
   10% {
     transform: translate(6.5vw, $perk-animation-height);
   }
+
   20% {
     transform: translate(18vw, -$perk-animation-height);
   }
+
   30% {
     transform: translate(29.5vw, $perk-animation-height);
   }
+
   40% {
     transform: translate(41vw, -$perk-animation-height);
   }
+
   50% {
-    transform: translate(52.5vw, $perk-animation-height);    
+    transform: translate(52.5vw, $perk-animation-height);
   }
+
   60% {
     transform: translate(64vw, -$perk-animation-height);
   }
+
   70% {
     transform: translate(75.5vw, $perk-animation-height);
   }
+
   80% {
     transform: translate(87vw, -$perk-animation-height);
   }
+
   90% {
-    transform: translate(98.5vw,$perk-animation-height);
+    transform: translate(98.5vw, $perk-animation-height);
   }
+
   100% {
     transform: translate(110vw, -$perk-animation-height);
   }
-  
+
 }
 
 // @keyframes y-1 {
