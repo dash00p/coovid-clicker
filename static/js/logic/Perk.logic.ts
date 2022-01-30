@@ -63,9 +63,11 @@ class Perk {
     const newPerk: IPerk =
       availablePerks[Math.floor(Math.random() * availablePerks.length)];
     const id: number = +new Date();
+    const duration: number =
+      newPerk.duration * bonusInstance().perkEffectMultiplicator;
     this.activePerks.push({
       ...newPerk,
-      duration: newPerk.duration * bonusInstance().perkEffectMultiplicator,
+      duration,
       id,
     });
     this.applyPassivePerk();
@@ -75,15 +77,14 @@ class Perk {
 
     logWithTimer(`New perk applied : ${newPerk.name}`, 1);
     setTimeout(() => {
-      this.activePerks.splice(
-        this.activePerks.findIndex((p) => p.id === id),
-        1
-      );
+      const index: number = this.activePerks.findIndex((p) => p.id === id);
+      if (index < 0) return;
+      this.activePerks.splice(index, 1);
       this.activePerks = [...this.activePerks];
       logWithTimer(`Perk unapplied : ${newPerk.name}`, 1);
       this.applyPassivePerk();
       this.applyActivePerk();
-    }, newPerk.duration);
+    }, duration);
   }
 
   // perk that do not imply user interaction.
