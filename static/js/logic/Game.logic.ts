@@ -48,8 +48,8 @@ class Game {
     this.currentAmount = config.game.initialAmount;
     DomHandler.init();
     this.perk = new Perk();
-    this.buildings = new Building();
     this.bonus = new Bonus();
+    this.buildings = new Building();
     this.jobs = [];
     this.routine();
     this.listenVisibility();

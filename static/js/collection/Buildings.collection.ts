@@ -2,7 +2,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   {
     id: 10,
     buildingId: buildingType.chercheur,
-    cost: 500,
+    cost: 5e2,
     multiplicator: 2,
     name: "Casio Pro",
     description: "",
@@ -11,7 +11,7 @@ export const upgradeList: IBuildingUpgrade[] = [
   {
     id: 11,
     buildingId: buildingType.chercheur,
-    cost: 5000,
+    cost: 5e3,
     multiplicator: 2,
     name: "Casio Plus",
     description: "",
@@ -20,11 +20,20 @@ export const upgradeList: IBuildingUpgrade[] = [
   {
     id: 12,
     buildingId: buildingType.chercheur,
-    cost: 20000,
+    cost: 2e4,
     multiplicator: 2,
     name: "Casio Pro Plus",
     description: "",
     requestedLevel: 30,
+  },
+  {
+    id: 13,
+    buildingId: buildingType.chercheur,
+    cost: 5e4,
+    multiplicator: 4,
+    name: "Casio X Texas",
+    description: "",
+    requestedLevel: 50,
   },
   {
     id: 20,

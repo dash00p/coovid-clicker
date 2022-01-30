@@ -16,8 +16,9 @@ export const findChildrenbyId: (parent: any, childrenId: any) => any = (
 };
 
 // https://gist.github.com/MartinMuzatko/1060fe584d17c7b9ca6e
-export const commarize: (number: number) => string = (
-  number: number
+export const commarize: (number: number, depth?: number) => string = (
+  number: number,
+  depth: number = 4
 ): string => {
   const units: string[] = [
     "Million",
@@ -43,9 +44,13 @@ export const commarize: (number: number) => string = (
     // calculate the remainder
     let num: number = number / (pow as number);
     const unitName: string = units[Math.floor(unit / 3) - 1];
-    return `${num.toFixed(num % 1 !== 0 ? 4 : 0)} ${unitName}${
+    return `${num.toFixed(num % 1 !== 0 ? depth : 0)} ${unitName}${
       num >= 2 ? "s" : ""
     }`;
   }
-  return number.toLocaleString();
+  let num;
+  if (number > 1e3) {
+    num = Math.round((number * 10) / 10);
+  } else num = number;
+  return num.toLocaleString();
 };

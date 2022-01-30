@@ -89,7 +89,8 @@ class BuildingComponent extends CoreComponent {
       )}</span> - production <span class="income">${commarize(
         this.state.currentProduction * this.state.currentMultiplicator
       )}</span> (${commarize(
-        this.props.baseProduction * this.state.currentMultiplicator
+        this.props.baseProduction * this.state.currentMultiplicator,
+        2
       )} par unité)&nbsp;`
     );
   }
