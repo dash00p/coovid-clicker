@@ -8,7 +8,7 @@ import { clickerInstance } from "./Clicker.logic";
 class Bonus {
   private static _instance: Bonus;
   private _availableBonus: IBonus[];
-  totalMultiplicator: number;
+  productionMultiplicator: number;
   perkTimerReducer: number;
   perkEffectMultiplicator: number;
   autoClickMultiplicator: number;
@@ -17,7 +17,7 @@ class Bonus {
     if (Bonus._instance) return Bonus._instance;
     Bonus._instance = this;
     this._availableBonus = [];
-    this.totalMultiplicator =
+    this.productionMultiplicator =
       this.perkTimerReducer =
       this.perkEffectMultiplicator =
       this.autoClickMultiplicator =
@@ -50,6 +50,7 @@ class Bonus {
     }
     this.applyBonus();
     this.checkAvailableBonus();
+    DomHandler.renderAllBuildings();
     clickerInstance().refreshIncrementFromBuildings(
       buildInstance().getTotalProduction()
     );
@@ -86,6 +87,9 @@ class Bonus {
     newBonus.isPurchased = true;
     DomHandler.renderCounter(gameInstance().incrementAmount(-newBonus.cost));
     this.applyBonus();
+    if (newBonus.type === bonusType.productionMultiplicator) {
+      DomHandler.renderAllBuildings();
+    }
     return newBonus;
   }
 
@@ -110,7 +114,7 @@ class Bonus {
           break;
       }
     }
-    this.totalMultiplicator = productionMultiplicator;
+    this.productionMultiplicator = productionMultiplicator;
     this.perkTimerReducer = perkTimerReducer;
     this.perkEffectMultiplicator = perkEffectMultiplicator;
     this.autoClickMultiplicator = autoClickMultiplicator;

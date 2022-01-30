@@ -183,7 +183,7 @@ class Building {
     }
     this.totalProductionWithoutMultiplicator = totalBuildingsProduction;
     this.totalProduction =
-      totalBuildingsProduction * bonusInstance().totalMultiplicator;
+      totalBuildingsProduction * bonusInstance().productionMultiplicator;
     return this.totalProduction;
   }
 

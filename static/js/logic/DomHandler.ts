@@ -8,6 +8,8 @@ import CounterComponent from "../component/Counter.component";
 import PerksListComponent from "../component/PerkList.component";
 import FooterComponent from "../component/Footer.component";
 import BonusListComponent from "../component/BonusList.component";
+import { buildInstance } from "./Building.logic";
+import { bonusInstance } from "./Bonus.logic";
 
 // this class is used to handle DOM interaction
 class DomHandler {
@@ -81,6 +83,14 @@ class DomHandler {
       component.state.currentAmount = currentAmount;
       component.state.currentProduction = currentProduction;
       component.state.upgrades = activeUpgrades;
+      component.state.currentMultiplicator =
+        bonusInstance().productionMultiplicator;
+    }
+  }
+
+  static renderAllBuildings(): void {
+    for (const building of buildInstance().currentBuildings) {
+      DomHandler.renderBuilding(building);
     }
   }
 

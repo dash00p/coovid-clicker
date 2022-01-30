@@ -4,12 +4,14 @@ import CoreComponent from "./Core.component";
 import { buildInstance } from "../logic/Building.logic";
 import { commarize } from "../helper/Dom.helper";
 import { upgradeList } from "../collection/Buildings.collection";
+import { bonusInstance } from "../logic/Bonus.logic";
 
 interface IState {
   level: number | null;
   rendered: boolean;
   currentAmount: number;
   currentProduction: number;
+  currentMultiplicator: number;
   name: string;
   upgrades: IBuildingUpgrade[];
 }
@@ -54,6 +56,12 @@ class BuildingComponent extends CoreComponent {
     this.listen(this, "currentProduction", this.props.currentProduction, [
       this.rerender,
     ]);
+    this.listen(
+      this,
+      "currentMultiplicator",
+      bonusInstance().productionMultiplicator,
+      [this.rerender]
+    );
     this.listen(this, "name", this.props.name, [this.rerender]);
     this.render(this.wrapper, [this.rerender, this.renderUpgrades]);
     this.setStyle(styleContent);
@@ -72,11 +80,17 @@ class BuildingComponent extends CoreComponent {
       this.find("span"),
       `${this.getImageSrc() ? `<img src='${this.getImageSrc()}' />` : ""} ${
         this.state.name
-      } (${this.state.level}) - coût <span class="cost">${commarize(
+      } (${this.state.level}${
+        this.state.upgrades.length
+          ? ` - Tier ${this.tierConverter(this.state.upgrades.length)}`
+          : ``
+      }) - coût <span class="cost">${commarize(
         this.state.currentAmount
       )}</span> - production <span class="income">${commarize(
-        this.state.currentProduction
-      )}</span> (${commarize(this.props.baseProduction)} par unité)&nbsp;`
+        this.state.currentProduction * this.state.currentMultiplicator
+      )}</span> (${commarize(
+        this.props.baseProduction * this.state.currentMultiplicator
+      )} par unité)&nbsp;`
     );
   }
 
@@ -143,6 +157,21 @@ class BuildingComponent extends CoreComponent {
       setTimeout(() => {
         target.innerText = text;
       }, 5000);
+    }
+  }
+
+  tierConverter(tier: number) {
+    switch (tier) {
+      case 1:
+        return "I";
+      case 2:
+        return "II";
+      case 3:
+        return "III";
+      case 4:
+        return "IV";
+      case 5:
+        return "V";
     }
   }
 }
