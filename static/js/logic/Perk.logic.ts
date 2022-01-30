@@ -63,6 +63,7 @@ class Perk {
     const newPerk: IPerk =
       availablePerks[Math.floor(Math.random() * availablePerks.length)];
     const id: number = +new Date();
+    newPerk.duration *= bonusInstance().perkEffectMultiplicator;
     this.activePerks.push({
       ...newPerk,
       id,
@@ -96,10 +97,12 @@ class Perk {
           productionMultiplicator *= perk.value;
           break;
         case perkType.clickAuto:
+          const perkValue: number =
+            perk.value * bonusInstance().autoClickMultiplicator;
           const instance: any = DomHandler.clicker;
           let intervalId: number = instance.setInterval(() => {
             DomHandler.clicker.handleClick();
-          }, 1000 / perk.value);
+          }, 1000 / perkValue);
           this._jobs.push(intervalId);
           setTimeout(() => {
             const jobIndex = this._jobs.indexOf(intervalId);
@@ -108,7 +111,7 @@ class Perk {
             }
             clearInterval(intervalId);
           }, perk.duration);
-          perk.name += ` (${perk.value}/s)`;
+          perk.name += ` (${perkValue}/s)`;
           perk.isApplied = true;
           break;
         case perkType.fortuneGift:

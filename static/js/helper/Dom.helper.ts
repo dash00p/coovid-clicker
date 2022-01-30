@@ -1,11 +1,14 @@
-export const findChildrenbyId:(parent:any, childrenId: any)=>any = (parent, childrenId) => {
-  let child:Node;
-  for (let i: number = 0; i < parent.shadowRoot.childNodes.length; i++) {
+export const findChildrenbyId: (parent: any, childrenId: any) => any = (
+  parent,
+  childrenId
+) => {
+  let child: Node;
+  for (let i: number = 0; i < parent.childNodes.length; i++) {
     if (
-      parent.shadowRoot.childNodes[i].props &&
-      parent.shadowRoot.childNodes[i].props.id === childrenId
+      parent.childNodes[i].props &&
+      parent.childNodes[i].props.id === childrenId
     ) {
-      child = parent.shadowRoot.childNodes[i];
+      child = parent.childNodes[i];
       break;
     }
   }

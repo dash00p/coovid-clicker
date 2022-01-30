@@ -1,7 +1,7 @@
 export const bonusList = [
   {
     id: 1,
-    cost: 1e5,
+    cost: 1e7,
     name: "Confinement I",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -9,7 +9,7 @@ export const bonusList = [
   },
   {
     id: 2,
-    cost: 1e6,
+    cost: 1e8,
     name: "Confinement II",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -17,7 +17,7 @@ export const bonusList = [
   },
   {
     id: 3,
-    cost: 1e7,
+    cost: 1e9,
     name: "Confinement III",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -25,7 +25,7 @@ export const bonusList = [
   },
   {
     id: 4,
-    cost: 1e8,
+    cost: 1e10,
     name: "Confinement IV",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -33,7 +33,7 @@ export const bonusList = [
   },
   {
     id: 5,
-    cost: 1e9,
+    cost: 1e11,
     name: "Confinement V",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -41,7 +41,7 @@ export const bonusList = [
   },
   {
     id: 6,
-    cost: 1e10,
+    cost: 1e12,
     name: "Confinement VI",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -49,7 +49,7 @@ export const bonusList = [
   },
   {
     id: 7,
-    cost: 1e11,
+    cost: 1e13,
     name: "Confinement VII",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -57,7 +57,7 @@ export const bonusList = [
   },
   {
     id: 8,
-    cost: 1e12,
+    cost: 1e14,
     name: "Confinement VIII",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -73,7 +73,7 @@ export const bonusList = [
   },
   {
     id: 10,
-    cost: 1e14,
+    cost: 1e15,
     name: "Confinement X",
     type: bonusType.productionMultiplicator,
     value: 1.05,
@@ -86,5 +86,21 @@ export const bonusList = [
     type: bonusType.perkTimerReducer,
     value: 2,
     neededProduction: 5e5,
+  },
+  {
+    id: 12,
+    cost: 1.5e12,
+    name: "Chômage partiel",
+    type: bonusType.autoClickMultiplicator,
+    value: 2,
+    neededProduction: 5e7,
+  },
+  {
+    id: 13,
+    cost: 4.5e12,
+    name: "Seconde vague",
+    type: bonusType.perkEffectMultiplicator,
+    value: 2,
+    neededProduction: 7.5e7,
   },
 ];

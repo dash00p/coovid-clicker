@@ -10,12 +10,18 @@ class Bonus {
   private _availableBonus: IBonus[];
   totalMultiplicator: number;
   perkTimerReducer: number;
+  perkEffectMultiplicator: number;
+  autoClickMultiplicator: number;
 
   constructor() {
     if (Bonus._instance) return Bonus._instance;
     Bonus._instance = this;
     this._availableBonus = [];
-    this.totalMultiplicator = this.perkTimerReducer = 1;
+    this.totalMultiplicator =
+      this.perkTimerReducer =
+      this.perkEffectMultiplicator =
+      this.autoClickMultiplicator =
+        1;
   }
 
   checkAvailableBonus(): void {
@@ -33,7 +39,7 @@ class Bonus {
 
   loadBonusFromSave(savedBonuses: IBaseBonus[]): void {
     for (const baseBonus of savedBonuses) {
-      const bonus = bonusList.find((b) => (b.id = baseBonus.id));
+      const bonus = bonusList.find((b) => b.id === baseBonus.id);
       if (bonus) {
         this._availableBonus.push({
           isPurchased: true,
@@ -84,8 +90,10 @@ class Bonus {
   }
 
   applyBonus() {
-    let productionMultiplicator = 1;
-    let perkTimerReducer = 1;
+    let productionMultiplicator = 1,
+      perkTimerReducer = 1,
+      perkEffectMultiplicator = 1,
+      autoClickMultiplicator = 1;
     for (const bonus of this._availableBonus.filter((b) => b.isPurchased)) {
       switch (bonus.type) {
         case bonusType.productionMultiplicator:
@@ -94,10 +102,18 @@ class Bonus {
         case bonusType.perkTimerReducer:
           perkTimerReducer *= bonus.value;
           break;
+        case bonusType.perkEffectMultiplicator:
+          perkEffectMultiplicator *= bonus.value;
+          break;
+        case bonusType.autoClickMultiplicator:
+          autoClickMultiplicator *= bonus.value;
+          break;
       }
     }
     this.totalMultiplicator = productionMultiplicator;
     this.perkTimerReducer = perkTimerReducer;
+    this.perkEffectMultiplicator = perkEffectMultiplicator;
+    this.autoClickMultiplicator = autoClickMultiplicator;
   }
 
   static getInstance(): Bonus {

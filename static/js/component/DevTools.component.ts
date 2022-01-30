@@ -1,3 +1,4 @@
+import { log } from "../helper/Console.helper";
 import { gameInstance } from "../logic/Game.logic";
 import { perkInstance } from "../logic/Perk.logic";
 import CoreComponent from "./Core.component";
@@ -51,6 +52,13 @@ class DevToolsComponent extends CoreComponent {
       gameInstance().reset();
     };
     this.appendChild(resetGame, this.find("div"));
+
+    const displaySave: IEnhancedHTMLElement = document.createElement("button");
+    displaySave.textContent = "Display save";
+    displaySave.onclick = () => {
+      log(JSON.parse(atob(localStorage.getItem("save"))), 3);
+    };
+    this.appendChild(displaySave, this.find("div"));
 
     this.setStyle(style);
   }

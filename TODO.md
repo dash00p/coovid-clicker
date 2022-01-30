@@ -6,7 +6,7 @@
 - ~~Sound effects~~
 - ~~Click upgrades~~
 - ~~Building upgrades~~
-- World upgrade
+- ~~World upgrade (Bonus)~~
 - Achievements
 - Cloud Save
 - Account
@@ -15,9 +15,13 @@
 # Enhancements
 
 - Building production balance
-- ~~More~~ MORE memes
+- ~~More memes~~
+- ~~MORE memes~~
 - ~~Add version number~~
 - Enhance save information (date, version, ...)
+- More bonuses
+- More perks
+- Buildings T4, T5 (50 & 100 units)
 
 # Technical debt
 
@@ -26,4 +30,4 @@
 # Fixes
 
 - Perk Ephemeral popping outside the browser's view but sound does play.
-- Click value is not updated correctly with a building update when a perk is active.
+- ~~Click value is not updated correctly with a building update when a perk is active.~~

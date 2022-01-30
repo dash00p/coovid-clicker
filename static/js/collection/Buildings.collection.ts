@@ -541,7 +541,7 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.1,
     baseAmount: 5e16,
     baseProduction: 5e9,
-    name: "Petyr",
+    name: "Petyr et Styven",
     neededProduction: 3e9,
   },
   {

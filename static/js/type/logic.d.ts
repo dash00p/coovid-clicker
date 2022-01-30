@@ -105,4 +105,6 @@ declare interface IBonus extends IBaseBonus {
 declare const enum bonusType {
   productionMultiplicator = "productionMultiplicator",
   perkTimerReducer = "perkTimerReducer",
+  perkEffectMultiplicator = "perkEffectMultiplicator",
+  autoClickMultiplicator = "autoClickMultiplicator",
 }

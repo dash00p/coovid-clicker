@@ -14,11 +14,11 @@ class DomHandler {
   static layout: LayoutComponent;
   static clicker;
   static tickFrequency = 0;
-  private static counter;
-  private static productionCounter;
-  private static buildingList;
-  private static perksList;
-  private static bonusList;
+  private static counter: Node;
+  private static productionCounter: Node;
+  private static buildingList: BuildingListComponent;
+  private static perksList: PerksListComponent;
+  private static bonusList: BonusListComponent;
 
   static init(): void {
     DomHandler.initLayout();
@@ -62,14 +62,17 @@ class DomHandler {
   }
 
   static createBuilding(newBuilding: IBuilding): void {
-    DomHandler.buildingList.appendChild(new BuildingComponent(newBuilding));
+    DomHandler.buildingList.appendChild(
+      new BuildingComponent(newBuilding),
+      DomHandler.buildingList.find("ul")
+    );
   }
 
   static renderBuilding(building: IBuilding): void {
     const { level, currentAmount, currentProduction, activeUpgrades } =
       building;
     const component: any = findChildrenbyId(
-      DomHandler.buildingList,
+      DomHandler.buildingList.find("ul"),
       building.id
     );
 
