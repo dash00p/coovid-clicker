@@ -148,8 +148,8 @@ class BuildingComponent extends CoreComponent {
   handleUpgradeClick(upgradeId: number, event: MouseEvent): void {
     const newBuilding: any = buildInstance().upgradeBuilding(upgradeId);
     if (newBuilding) {
-      this.state.currentProduction = newBuilding.currentProduction;
       this.state.upgrades = [...newBuilding.activeUpgrades];
+      this.state.currentProduction = newBuilding.currentProduction;
     } else {
       const target: IEnhancedHTMLElement = event.target as HTMLElement;
       const text: string = target.props.initialText;
