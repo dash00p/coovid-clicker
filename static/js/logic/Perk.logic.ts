@@ -63,9 +63,9 @@ class Perk {
     const newPerk: IPerk =
       availablePerks[Math.floor(Math.random() * availablePerks.length)];
     const id: number = +new Date();
-    newPerk.duration *= bonusInstance().perkEffectMultiplicator;
     this.activePerks.push({
       ...newPerk,
+      duration: newPerk.duration * bonusInstance().perkEffectMultiplicator,
       id,
     });
     this.applyPassivePerk();
