@@ -35,6 +35,7 @@ declare const enum buildingType {
   heenok,
   mother,
   katlyn,
+  bebou,
 }
 
 declare interface IBaseBuilding {
