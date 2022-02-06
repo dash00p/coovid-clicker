@@ -9,8 +9,8 @@ class Bonus {
   private static _instance: Bonus;
   private _availableBonus: IBonus[];
   productionMultiplicator: number;
-  perkTimerReducer: number;
-  perkEffectMultiplicator: number;
+  perkRoutineTimerReducer: number;
+  perkEffectTimerMultiplicator: number;
   autoClickMultiplicator: number;
 
   constructor() {
@@ -18,8 +18,8 @@ class Bonus {
     Bonus._instance = this;
     this._availableBonus = [];
     this.productionMultiplicator =
-      this.perkTimerReducer =
-      this.perkEffectMultiplicator =
+      this.perkRoutineTimerReducer =
+      this.perkEffectTimerMultiplicator =
       this.autoClickMultiplicator =
         1;
   }
@@ -115,8 +115,8 @@ class Bonus {
       }
     }
     this.productionMultiplicator = productionMultiplicator;
-    this.perkTimerReducer = perkTimerReducer;
-    this.perkEffectMultiplicator = perkEffectMultiplicator;
+    this.perkRoutineTimerReducer = perkTimerReducer;
+    this.perkEffectTimerMultiplicator = perkEffectMultiplicator;
     this.autoClickMultiplicator = autoClickMultiplicator;
   }
 

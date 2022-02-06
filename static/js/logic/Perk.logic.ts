@@ -34,9 +34,11 @@ class Perk {
 
   routine(): void {
     const min: number =
-      config.game.perk.minTimer / (bonusInstance()?.perkTimerReducer || 1);
+      config.game.perk.minTimer /
+      (bonusInstance()?.perkRoutineTimerReducer || 1);
     const max: number =
-      config.game.perk.maxTimer / (bonusInstance()?.perkTimerReducer || 1);
+      config.game.perk.maxTimer /
+      (bonusInstance()?.perkRoutineTimerReducer || 1);
     const timer: number = Math.floor(Math.random() * (max - min)) + min;
 
     setTimeout(() => {
@@ -64,7 +66,7 @@ class Perk {
       availablePerks[Math.floor(Math.random() * availablePerks.length)];
     const id: number = +new Date();
     const duration: number =
-      newPerk.duration * bonusInstance().perkEffectMultiplicator;
+      newPerk.duration * bonusInstance().perkEffectTimerMultiplicator;
     this.activePerks.push({
       ...newPerk,
       duration,
@@ -117,7 +119,7 @@ class Perk {
           break;
         case perkType.fortuneGift:
           const perkAmount: number = Math.trunc(
-            gameInstance().currentAmount / 10
+            gameInstance().currentAmount * perk.value
           );
           logWithTimer(
             `Applying fortune gift (+${commarize(

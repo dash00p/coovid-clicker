@@ -686,7 +686,7 @@ export const buildingList: IBuilding[] = [
     id: buildingType.bruce,
     amountMultiplier: 1.1,
     baseAmount: 1e15,
-    baseProduction: 4e8,
+    baseProduction: 8e8,
     name: "Bruce Lomsaley",
     neededProduction: 1e10,
   },
