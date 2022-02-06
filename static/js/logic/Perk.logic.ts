@@ -119,7 +119,18 @@ class Perk {
           const perkAmount: number = Math.trunc(
             gameInstance().currentAmount / 10
           );
+          logWithTimer(
+            `Applying fortune gift (+${commarize(
+              perkAmount
+            )}). Old bank value: ${commarize(gameInstance().currentAmount)}`,
+            1
+          );
           gameInstance().currentAmount += perkAmount;
+          logWithTimer(
+            `New bank value: ${commarize(gameInstance().currentAmount)}`,
+            1
+          );
+
           perk.name += ` (+ ${commarize(perkAmount)})`;
           perk.isApplied = true;
           break;

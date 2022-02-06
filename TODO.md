@@ -11,6 +11,14 @@
 - Cloud Save
 - Account
 - Hall of Fame
+- Modes :
+  - Chill (90% efficiency , no active perk)
+  - Hardcore (110% efficiency, all perk)
+- Factories (worker process)
+- Multiverse
+- Lore introduction
+- i18n ?
+- Offline production
 
 # Enhancements
 
@@ -18,14 +26,15 @@
 - ~~More memes~~
 - ~~MORE memes~~
 - ~~Add version number~~
-- Enhance save information (date, version, ...)
+- ~~Enhance save information (date, version, ...)~~
 - More bonuses
 - More perks
 - Buildings T4, T5 (50 & 100 units)
+- General UX
 
 # Technical debt
 
-- ~~Move type to definition files~~
+- ~~Move types to definition files~~
 
 # Fixes
 

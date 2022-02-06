@@ -23,7 +23,7 @@ class Building {
     );
     this.currentBuildings = [];
     this.currentMultiplicator = 1;
-    this.checkAvailableBuildings();
+    //this.checkAvailableBuildings();
   }
 
   checkAvailableBuildings(): void {
@@ -72,6 +72,15 @@ class Building {
     };
     this.currentBuildings.push(build);
     DomHandler.createBuilding(build);
+  }
+
+  removeBuilding(buildingId: number): void {
+    const jobIndex = this.currentBuildings.findIndex(
+      (b) => b.id === buildingId
+    );
+    if (jobIndex > -1) {
+      this.currentBuildings.splice(jobIndex, 1);
+    }
   }
 
   levelUpBuilding(
@@ -193,23 +202,36 @@ class Building {
       this.avalaibleBuildings.filter((build: IBuilding) =>
         buildingsId.includes(build.id)
       );
+
+    //Update available buildings with buildings from save + init basic buildings component
     this.updateAvailableBuildings(availableBuildingsFromSave);
+
     for (const leveledUpBuilding of availableBuildingsFromSave) {
       const savedBuilding: IBaseBuilding = buildings.find(
         (b) => b.id === leveledUpBuilding.id
       );
-      let building: IBuilding = this.levelUpBuilding(
+      const buildingBlueprint: IBuilding = this.avalaibleBuildings.find(
+        (b) => b.id === leveledUpBuilding.id
+      );
+      if (
+        buildingBlueprint.neededProduction &&
+        this.totalProduction < buildingBlueprint.neededProduction
+      ) {
+        this.removeBuilding(leveledUpBuilding.id);
+        return;
+      }
+      let newBuilding: IBuilding = this.levelUpBuilding(
         leveledUpBuilding.id,
         savedBuilding.level,
         true
       ) as IBuilding;
       if (savedBuilding.activeUpgrades) {
         for (const upgrade of savedBuilding.activeUpgrades) {
-          building = this.upgradeBuilding(upgrade.id, true);
+          newBuilding = this.upgradeBuilding(upgrade.id, true);
         }
       }
       this.getTotalProduction();
-      DomHandler.renderBuilding(building);
+      DomHandler.renderBuilding(newBuilding);
     }
   }
 

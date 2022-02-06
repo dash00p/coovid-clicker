@@ -70,6 +70,16 @@ class DomHandler {
     );
   }
 
+  static removeBuilding(buildingId: number): void {
+    const component: BuildingComponent = findChildrenbyId(
+      DomHandler.buildingList.find("ul"),
+      buildingId
+    ) as BuildingComponent;
+    if (component) {
+      component.kill(0);
+    }
+  }
+
   static renderBuilding(building: IBuilding): void {
     const { level, currentAmount, currentProduction, activeUpgrades } =
       building;
