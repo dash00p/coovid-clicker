@@ -279,6 +279,15 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 30,
   },
   {
+    id: 113,
+    buildingId: buildingType.leeroy,
+    cost: 1.6e12,
+    multiplicator: 4,
+    name: "Copains pour la vie",
+    description: "",
+    requestedLevel: 50,
+  },
+  {
     id: 120,
     buildingId: buildingType.canardMan,
     cost: 1.5e11,
@@ -291,7 +300,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     id: 121,
     buildingId: buildingType.canardMan,
     cost: 4.5e11,
-    multiplicator: 2,
+    multiplicator: 3,
     name: "Ceinture de grenades canards",
     description: "",
     requestedLevel: 20,
@@ -304,6 +313,15 @@ export const upgradeList: IBuildingUpgrade[] = [
     name: "Gant du conquérant",
     description: "",
     requestedLevel: 30,
+  },
+  {
+    id: 123,
+    buildingId: buildingType.canardMan,
+    cost: 8e12,
+    multiplicator: 4,
+    name: "Alliance avec l'Aigle de la Nuit",
+    description: "Le début de la ligue des oiseaux masqués.",
+    requestedLevel: 50,
   },
   {
     id: 130,
@@ -331,6 +349,15 @@ export const upgradeList: IBuildingUpgrade[] = [
     name: "Manteau ignifugé",
     description: "",
     requestedLevel: 30,
+  },
+  {
+    id: 133,
+    buildingId: buildingType.jeanne,
+    cost: 2.5e13,
+    multiplicator: 4,
+    name: "Message divin",
+    description: "",
+    requestedLevel: 50,
   },
   {
     id: 190,
@@ -361,6 +388,15 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 30,
   },
   {
+    id: 193,
+    buildingId: buildingType.katlyn,
+    cost: 5e13,
+    multiplicator: 4,
+    name: "Portail vers les Enfers.",
+    description: "Un accès direct aux mondes démoniaques.",
+    requestedLevel: 50,
+  },
+  {
     id: 30,
     buildingId: buildingType.christ,
     cost: 2.5e12,
@@ -388,6 +424,15 @@ export const upgradeList: IBuildingUpgrade[] = [
     requestedLevel: 30,
   },
   {
+    id: 33,
+    buildingId: buildingType.christ,
+    cost: 1.2e14,
+    multiplicator: 4,
+    name: "Légende de l'Homme vert",
+    description: "",
+    requestedLevel: 50,
+  },
+  {
     id: 140,
     buildingId: buildingType.miyagi,
     cost: 1e13,
@@ -413,6 +458,16 @@ export const upgradeList: IBuildingUpgrade[] = [
     name: `"Sensei 8": Autobiographie`,
     description: "",
     requestedLevel: 30,
+  },
+  {
+    id: 143,
+    buildingId: buildingType.miyagi,
+    cost: 4.5e14,
+    multiplicator: 4,
+    name: `Nunchaku laser`,
+    description:
+      "Mi nunchaku, mi sabre-laser. Et il brille dans la nuit en plus.",
+    requestedLevel: 50,
   },
   {
     id: 150,
@@ -550,10 +605,10 @@ export const buildingList: IBuilding[] = [
     neededProduction: 1e7,
   },
   {
-    id: buildingType.jeanne,
+    id: buildingType.katlyn,
     amountMultiplier: 1.1,
     baseAmount: 7e11,
-    baseProduction: 3e6,
+    baseProduction: 3.5e6,
     description: "L'enfant sauvage dôté de pouvoir mystique",
     name: "Katlyn, fille de Mowkaz",
     neededProduction: 3e7,
@@ -562,7 +617,7 @@ export const buildingList: IBuilding[] = [
     id: buildingType.christ,
     amountMultiplier: 1.2,
     baseAmount: 5e12,
-    baseProduction: 5e6,
+    baseProduction: 6e6,
     name: "Le Christ Cosmique",
     neededProduction: 5e7,
   },
@@ -580,7 +635,7 @@ export const buildingList: IBuilding[] = [
     baseAmount: 1e15,
     baseProduction: 2e8,
     name: "Bruce Lomsaley",
-    neededProduction: 1e9,
+    neededProduction: 1e10,
   },
   {
     id: buildingType.petyr,
@@ -588,7 +643,7 @@ export const buildingList: IBuilding[] = [
     baseAmount: 5e16,
     baseProduction: 5e9,
     name: "Petyr et Styven",
-    neededProduction: 3e9,
+    neededProduction: 3e12,
   },
   {
     id: buildingType.heenok,
@@ -598,7 +653,7 @@ export const buildingList: IBuilding[] = [
     name: "Heenok",
     description:
       "Inclinez-vous devant le Roi, quitte à avoir mal aux chevilles.",
-    neededProduction: 1e10,
+    neededProduction: 1e13,
   },
   {
     id: buildingType.mother,
@@ -606,9 +661,9 @@ export const buildingList: IBuilding[] = [
     baseAmount: 1.5e20,
     baseProduction: 3e13,
     name: "Mère",
-    neededProduction: 1e12,
+    neededProduction: 2e14,
   },
 ];
 export default {
-  buidlingList: buildingList,
+  buildingList,
 };
