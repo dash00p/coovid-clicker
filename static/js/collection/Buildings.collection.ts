@@ -541,6 +541,42 @@ export const upgradeList: IBuildingUpgrade[] = [
     description: "Qui peut le stopper ?",
     requestedLevel: 50,
   },
+  {
+    id: 160,
+    buildingId: buildingType.petyr,
+    cost: 4e17,
+    multiplicator: 2,
+    name: `Guide du reporter de l'extrême`,
+    description: "",
+    requestedLevel: 10,
+  },
+  {
+    id: 161,
+    buildingId: buildingType.petyr,
+    cost: 1.2e18,
+    multiplicator: 2,
+    name: `Infiltration d'un gang de la West Coast`,
+    description: `Le reportage rêvé après 6 mois dans les rues du Bosquet.`,
+    requestedLevel: 20,
+  },
+  {
+    id: 162,
+    buildingId: buildingType.petyr,
+    cost: 3.6e18,
+    multiplicator: 3,
+    name: `Théorie du complot des pangolins`,
+    description: "On nous cache tout.",
+    requestedLevel: 30,
+  },
+  {
+    id: 163,
+    buildingId: buildingType.petyr,
+    cost: 1.2e19,
+    multiplicator: 4,
+    name: `Prix Pulitzer`,
+    description: "",
+    requestedLevel: 50,
+  },
 ];
 
 export const buildingList: IBuilding[] = [
@@ -660,7 +696,7 @@ export const buildingList: IBuilding[] = [
   },
   {
     id: buildingType.christ,
-    amountMultiplier: 1.1,
+    amountMultiplier: 1.09,
     baseAmount: 5e12,
     baseProduction: 9e6,
     name: "Le Christ Cosmique",
@@ -668,7 +704,7 @@ export const buildingList: IBuilding[] = [
   },
   {
     id: buildingType.miyagi,
-    amountMultiplier: 1.1,
+    amountMultiplier: 1.09,
     baseAmount: 2e13,
     baseProduction: 2.25e7,
     name: "Maître Miyagi",
@@ -676,7 +712,7 @@ export const buildingList: IBuilding[] = [
   },
   {
     id: buildingType.bebou,
-    amountMultiplier: 1.1,
+    amountMultiplier: 1.08,
     baseAmount: 3e14,
     baseProduction: 1e8,
     name: "Beboux, Émissaire du Cringe",
@@ -684,8 +720,8 @@ export const buildingList: IBuilding[] = [
   },
   {
     id: buildingType.bruce,
-    amountMultiplier: 1.1,
-    baseAmount: 2e15,
+    amountMultiplier: 1.07,
+    baseAmount: 4e15,
     baseProduction: 5e8,
     name: "Bruce Lomsaley",
     neededProduction: 1e10,
@@ -703,9 +739,9 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.04,
     baseAmount: 1e18,
     baseProduction: 1.5e11,
-    name: "Heenok",
     description:
       "Inclinez-vous devant le Roi, quitte à avoir mal aux chevilles.",
+    name: "Heenok",
     neededProduction: 1e15,
   },
   {

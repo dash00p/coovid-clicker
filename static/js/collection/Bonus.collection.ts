@@ -150,6 +150,6 @@ export const bonusList = [
     type: bonusType.buildingCountMultiplicator,
     value: 0.01,
     value2: 100,
-    neededProduction: 5e8,
+    neededProduction: 8e10,
   },
 ];

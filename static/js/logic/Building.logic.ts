@@ -140,6 +140,7 @@ class Building {
       this.buildingCount % bonusInstance().buildingCountTrigger === 0
     ) {
       bonusInstance().applyBonus();
+      DomHandler.renderAllBuildings();
     }
     return building;
   }
