@@ -9,9 +9,9 @@ class Building {
   private static _instance: Building;
   avalaibleBuildings;
   currentBuildings: IBuilding[];
-  buildingCount: number;
   currentMultiplicator: number;
   totalProduction: number;
+  _buildingCount: number;
   totalProductionWithoutMultiplicator: number;
 
   constructor() {
@@ -24,8 +24,17 @@ class Building {
     );
     this.currentBuildings = [];
     this.currentMultiplicator = 1;
-    this.buildingCount = 0;
+    this._buildingCount = 0;
     //this.checkAvailableBuildings();
+  }
+
+  get buildingCount(): number {
+    return this._buildingCount;
+  }
+
+  set buildingCount(newValue: number) {
+    this._buildingCount = newValue;
+    DomHandler.updateBuildingCount(newValue);
   }
 
   checkAvailableBuildings(): void {

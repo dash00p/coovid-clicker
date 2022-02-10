@@ -70,6 +70,10 @@ class DomHandler {
     );
   }
 
+  static updateBuildingCount(count: number): void {
+    DomHandler.buildingList.state.buildingCount = count;
+  }
+
   static removeBuilding(buildingId: number): void {
     const component: BuildingComponent = findChildrenbyId(
       DomHandler.buildingList.find("ul"),

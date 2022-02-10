@@ -120,10 +120,15 @@ class CoreComponent extends HTMLElement {
     return el;
   }
 
-  create(type: string, content: string, customType: string = null): void {
+  create(
+    type: string,
+    content?: string,
+    customType: string = null
+  ): HTMLElement {
     const el: HTMLElement = document.createElement(type, { is: customType });
-    el.innerHTML = content;
+    el.innerHTML = content || null;
     this.shadowRoot.appendChild(el);
+    return el;
   }
 
   setHTML<T extends HTMLElement>(text: string, parent?: T): void {
