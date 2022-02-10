@@ -12,6 +12,7 @@ class Bonus {
   perkRoutineTimerReducer: number;
   perkEffectTimerMultiplicator: number;
   autoClickMultiplicator: number;
+  buildingCountTrigger: number;
 
   constructor() {
     if (Bonus._instance) return Bonus._instance;
@@ -111,6 +112,13 @@ class Bonus {
           break;
         case bonusType.autoClickMultiplicator:
           autoClickMultiplicator *= bonus.value;
+          break;
+        case bonusType.buildingCountMultiplicator:
+          this.buildingCountTrigger = bonus.value2;
+          const buildingCount = buildInstance().buildingCount;
+          const multiplicator =
+            Math.trunc(buildingCount / bonus.value2) * bonus.value;
+          productionMultiplicator *= 1 + multiplicator;
           break;
       }
     }

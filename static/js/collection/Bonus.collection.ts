@@ -130,9 +130,26 @@ export const bonusList = [
   {
     id: 17,
     cost: 1.08e14,
-    name: "Investissement dans les NFT",
+    name: "Investissement dans les crypto-monnaies",
     type: bonusType.productionMultiplicator,
     value: 2,
     neededProduction: 5e9,
+  },
+  {
+    id: 18,
+    cost: 1.08e16,
+    name: "Investissement dans les NFT",
+    type: bonusType.productionMultiplicator,
+    value: 2,
+    neededProduction: 5e11,
+  },
+  {
+    id: 19,
+    cost: 1.08e16,
+    name: "Prime à l'emploi",
+    type: bonusType.buildingCountMultiplicator,
+    value: 0.01,
+    value2: 100,
+    neededProduction: 5e8,
   },
 ];

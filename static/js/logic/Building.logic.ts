@@ -9,6 +9,7 @@ class Building {
   private static _instance: Building;
   avalaibleBuildings;
   currentBuildings: IBuilding[];
+  buildingCount: number;
   currentMultiplicator: number;
   totalProduction: number;
   totalProductionWithoutMultiplicator: number;
@@ -23,6 +24,7 @@ class Building {
     );
     this.currentBuildings = [];
     this.currentMultiplicator = 1;
+    this.buildingCount = 0;
     //this.checkAvailableBuildings();
   }
 
@@ -119,6 +121,16 @@ class Building {
       clickerInstance().refreshIncrementFromBuildings(
         this.getTotalProduction()
       );
+    }
+    this.buildingCount += level;
+
+    // trigger the recalculation of bonuses when the threshold of bonusType.buildingCountMultiplicator is met.
+    if (
+      !fromSave &&
+      bonusInstance().buildingCountTrigger &&
+      this.buildingCount % bonusInstance().buildingCountTrigger === 0
+    ) {
+      bonusInstance().applyBonus();
     }
     return building;
   }

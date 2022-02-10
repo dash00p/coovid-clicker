@@ -56,7 +56,9 @@ class BonusComponent extends CoreComponent {
   }
 
   setDescription() {
-    const value = Math.round((this.props.value - 1) * 100);
+    const value = Math.round(
+      (this.props.value - (this.props.value > 1 ? 1 : 0)) * 100
+    );
     switch (this.props.type) {
       case bonusType.productionMultiplicator:
         this.description = `augmente la production de ${value}%`;
@@ -71,6 +73,9 @@ class BonusComponent extends CoreComponent {
         break;
       case bonusType.autoClickMultiplicator:
         this.description = `augmente l'efficacité de l'autoclick de ${value}%`;
+        break;
+      case bonusType.buildingCountMultiplicator:
+        this.description = `augmente de ${value}% la production pour chaque lot de ${this.props.value2} unités.`;
         break;
     }
   }
