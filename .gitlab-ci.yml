@@ -22,6 +22,6 @@ deploy:front:prod:
   stage: deploy
   script:
     - scripts/deploy.sh
-  needs: ["build:front"]
+  needs: ["build:front:prod"]
   only:
     - master
