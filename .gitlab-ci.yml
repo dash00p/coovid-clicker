@@ -4,22 +4,34 @@ stages:
   - build
   - deploy
 
+.cache-build:
+  cache:
+    key: build-${CI_COMMIT_REF_SLUG}
+    paths:
+      - dist
+
+.cache-build-pull:
+  extends:
+    - .cache-build
+  cache:
+    policy: pull
+
 build:front:prod:
   stage: build
+  extends:
+    - .cache-build
   script:
-    - npm install
-    - npm run build:prod
-  artifacts:
-    paths:
-      - dist/
+    - scripts/build.sh
 
 deploy:front:prod:
+  stage: deploy
+  extends:
+    - .cache-build-pull
   image:
     name: amazon/aws-cli
     entrypoint: [""]
   environment:
     name: prod
-  stage: deploy
   script:
     - scripts/deploy.sh
   needs: ["build:front:prod"]
