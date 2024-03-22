@@ -1,6 +1,6 @@
-import CoreComponent from "./Core.component";
+import StyledComponent from "./common/Styled.component";
 
-const customStyle: string = `
+const style: string = `
   ul {
     padding-top:3px;
     max-height: 60vh;
@@ -12,20 +12,13 @@ interface IBuildingListState extends ICoreComponentsState {
   buildingCount: number | null;
 }
 
-class BuildingListComponent extends CoreComponent {
+class BuildingListComponent extends StyledComponent {
   static customType: string = "game-building-list";
   declare state: IBuildingListState;
 
   constructor(props: object = null) {
-    super(props);
+    super({ ...props, style });
     this.create("ul", null);
-    this.render(this.create("p", "Nombre d'unités total : <span></span>"));
-    this.listen(this, "buildingCount", 0, [this.renderBuildingCount]);
-    this.setStyle(customStyle);
-  }
-
-  renderBuildingCount(): void {
-    this.updateContent(this.find("span"), `${this.state.buildingCount}`);
   }
 }
 

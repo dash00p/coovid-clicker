@@ -1,5 +1,5 @@
 import BonusComponent from "./Bonus.component";
-import CoreComponent from "./Core.component";
+import CoreComponent from "./common/Core.component";
 
 class BonusListComponent extends CoreComponent {
   static customType: string = "game-bonus-list";

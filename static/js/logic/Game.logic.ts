@@ -1,12 +1,17 @@
-import Clicker from "./Clicker.logic";
+import Core from "./core/Core.logic";
+import Bonus from "./Bonus.logic";
 import Building from "./Building.logic";
-import DomHandler from "./DomHandler";
+import Clicker from "./Clicker.logic";
 import config from "./Config.logic";
+import Params from "./Params.logic";
+import Perk from "./Perk.logic";
+import Stats from "./Stats.logic";
+import app from "../../../package.json";
+
+import DomHandler from "./DomHandler";
+
 import { initGuard, killGuard } from "../helper/Guard.helper";
 import { log, logWithTimer } from "../helper/Console.helper";
-import Perk from "./Perk.logic";
-import app from "../../../package.json";
-import Bonus from "./Bonus.logic";
 
 interface ISave {
   version: string;
@@ -18,39 +23,35 @@ interface ISave {
   bonus: IBaseBonus[];
 }
 
-interface IStat {
-  clickCount: number;
-  totalEarnings: number;
-}
-
-class Game {
-  private static _instance: Game;
+class Game extends Core<Game> {
   version: string;
+  /** Datetime when user has switched the browser tab. */
   backgroundDate: Date;
+  /** True if the game's browser tab is not active. */
   onBackground: boolean;
+  /** Current amount available in the player's bank. */
   currentAmount: number;
   totalEarnings: number;
   clicker: Clicker;
   perk: Perk;
   bonus: Bonus;
   buildings: Building;
+  /** TODO: represents the amount of worlds fully completed. */
   level: number;
-  private jobs: number[];
+  stats: Stats;
+  //private jobs: number[];
 
   constructor() {
-    if (Game._instance) {
-      return Game._instance;
-    }
+    super();
 
-    Game._instance = this;
     this.version = app.version;
-    this.clicker = new Clicker();
+    this.clicker = Clicker.getInstance();
     this.currentAmount = config.game.initialAmount;
     DomHandler.init();
-    this.perk = new Perk();
-    this.bonus = new Bonus();
-    this.buildings = new Building();
-    this.jobs = [];
+    this.perk = Perk.getInstance();
+    this.bonus = Bonus.getInstance();
+    this.buildings = Building.getInstance();
+    //this.jobs = [];
     this.routine();
     this.listenVisibility();
     this.level = 1;
@@ -58,8 +59,10 @@ class Game {
     // must be called after routine();
     initGuard();
     this.loadSave();
+    this.stats = Stats.getInstance();
   }
 
+  /** Save the current game state to the local storage. */
   save(): void {
     const buildingToSave: IBaseBuilding[] = this.buildings.saveBuildings();
     let save: ISave = {
@@ -68,10 +71,7 @@ class Game {
       currentAmount: this.currentAmount,
       currentDate: new Date(),
       startDate: new Date(),
-      stats: {
-        clickCount: this.clicker.count,
-        totalEarnings: this.totalEarnings,
-      },
+      stats: this.stats.update(),
       bonus: this.bonus.saveBonuses(),
     };
     const previousSaveString: string = localStorage.getItem("save");
@@ -84,6 +84,7 @@ class Game {
     logWithTimer(`Game has been saved !`, 1);
   }
 
+  /** Load the save from the local storage. */
   loadSave(): void {
     let save: string | null = localStorage.getItem("save");
 
@@ -97,6 +98,7 @@ class Game {
       if (saveObj.stats) {
         this.clicker.count = saveObj.stats.clickCount || 0;
         this.totalEarnings = saveObj.stats.totalEarnings || 0;
+        this.perk.count = saveObj.stats.perkCount || 0;
       }
 
       if (saveObj.currentAmount) {
@@ -120,16 +122,24 @@ class Game {
 
   incrementAmount(increment: number): number {
     this.currentAmount += increment;
-    this.totalEarnings += increment;
+
+    // only increment totalEarnings if increment is positive because method is also used to decrease the amount (ie: building purchase)
+    if (increment > 0) {
+      this.totalEarnings += increment;
+    }
+
     return this.currentAmount;
   }
 
+  /**
+   * Handle ticks for buildings incomes. Triggered by the `routine` method.  */
   tick(): void {
     this.buildings.tick(config.game.incomeTick);
   }
 
+  /**  Handles all recurrent calls like incomes, building/bonus list updates, save & background task.*/
   routine(): void {
-    this.jobs.push(
+    this._jobs.push(
       setInterval(() => {
         if (!this.onBackground) {
           this.tick();
@@ -137,7 +147,7 @@ class Game {
       }, config.game.incomeTick)
     );
 
-    this.jobs.push(
+    this._jobs.push(
       setInterval(() => {
         if (!this.onBackground) {
           this.buildings.checkAvailableBuildings();
@@ -147,7 +157,15 @@ class Game {
       }, config.game.checkAssetsTick)
     );
 
-    this.jobs.push(
+    this._jobs.push(
+      setInterval(() => {
+        if (!this.onBackground) {
+          this.stats.update();
+        }
+      }, config.game.statsUpdateTick)
+    );
+
+    this._jobs.push(
       setInterval(() => {
         if (this.onBackground) {
           this.backgroundUpgrade();
@@ -167,6 +185,7 @@ class Game {
       if (game.onBackground) {
         game.backgroundDate = new Date();
       } else {
+        // if tab was previously hidden and now visible, a last update is needed to restore the proper income before income tick can resume.
         game.backgroundUpgrade();
       }
     });
@@ -181,26 +200,11 @@ class Game {
 
   reset(): void {
     localStorage.removeItem("save");
-    for (const job of this.jobs) {
-      clearInterval(job);
-    }
-    delete Game._instance;
-    Building.deleteInstance();
-    Clicker.deleteInstance();
-    Bonus.deleteInstance();
-    Perk.deleteInstance();
+    Game.disposeAll();
     DomHandler.removeLayout();
     killGuard();
-    new Game();
-  }
-
-  static getInstance(): Game {
-    return Game._instance;
+    Game.getInstance();
   }
 }
-
-export const gameInstance: () => Game = () => {
-  return Game.getInstance();
-};
 
 export default Game;

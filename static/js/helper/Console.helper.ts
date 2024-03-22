@@ -2,22 +2,24 @@ import config from "../logic/Config.logic";
 
 const logLevel: number = config.game.logLevel || 1;
 
-export const log: (message: string, grade: number) => void = (
+/** Logs a message to the console only if the grade is less than or equal to the log level. 
+ * The log level in `prod` should always be lower than in `dev`.
+*/
+export const log: (message: string, grade?: number) => void = (
   message,
-  grade
+  grade = 3
 ) => {
   if (grade <= logLevel) {
     console.log(message);
   }
 };
 
+/** Logs a message prefixed with the timestamp to the console only if the grade is less than or equal to the log level. */
 export const logWithTimer: (message: string, grade: number) => void = (
   message,
-  grade
+  grade = 3
 ) => {
-  if (grade <= logLevel) {
-    console.log(`[${new Date().toLocaleTimeString()}] ${message}`);
-  }
+  log(`[${new Date().toLocaleTimeString()}] ${message}`, grade);
 };
 
 export const warn: (message: any) => void = (message): void => {

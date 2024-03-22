@@ -54,6 +54,10 @@ declare interface IBuildingUpgrade {
   requestedLevel?: number;
 }
 
+declare interface IAvalailableBuilding extends IBuilding {
+  available?: boolean;
+}
+
 declare interface IBuilding extends IBaseBuilding {
   amountMultiplier: number;
   baseAmount: number;
@@ -67,6 +71,7 @@ declare interface IBuilding extends IBaseBuilding {
   name: string;
   neededProduction?: number;
 }
+
 
 // Perf definitions
 
@@ -83,6 +88,7 @@ declare interface IPerk {
   name: string;
   type: perkType;
   value?: number;
+  /** duration in millisecond */
   duration: number;
   requiredLevel: number;
   id?: number;
@@ -111,4 +117,21 @@ declare const enum bonusType {
   perkEffectMultiplicator = "perkEffectMultiplicator",
   autoClickMultiplicator = "autoClickMultiplicator",
   buildingCountMultiplicator = "buildingCountMultiplicator",
+  perkClickMultiplicator = "perkClickMultiplicator",
+  perkProductionMultiplicator = "productionPerkMultiplicator",
+}
+
+declare interface IBonusComponentProps extends IBonus, ICoreComponentProps { }
+
+// Stats definitions
+declare interface IStat {
+  buildingCount: number;
+  clickCount: number;
+  perkCount: number;
+  totalEarnings: number;
+}
+
+// Params definitions
+declare interface IParams {
+  soundActive: boolean;
 }

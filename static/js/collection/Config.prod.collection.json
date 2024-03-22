@@ -4,7 +4,8 @@
     "incomeTick": 17,
     "saveTick": 30000,
     "checkAssetsTick": 5000,
-    "logLevel": 3,
+    "statsUpdateTick": 5000,
+    "logLevel": 1,
     "perk": {
       "duration": 11000,
       "minTimer": 60000,

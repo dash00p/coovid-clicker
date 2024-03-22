@@ -2,12 +2,13 @@
   "game": {
     "initialAmount": 1e5,
     "incomeTick": 17,
-    "saveTick": 30000,
+    "saveTick": 10000,
     "checkAssetsTick": 5000,
+    "statsUpdateTick": 5000,
     "logLevel": 3,
     "perk": {
       "duration": 10000,
-      "minTimer": 60000,
+      "minTimer": 25000,
       "maxTimer": 30000
     }
   },

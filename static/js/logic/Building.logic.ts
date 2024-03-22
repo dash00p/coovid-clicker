@@ -1,13 +1,14 @@
-import { buildingList, upgradeList } from "../collection/Buildings.collection";
+import { buildingList } from "../collection/Buildings.collection";
+import { upgradeList } from "../collection/BuildingUpgrade.collection";
 import DomHandler from "./DomHandler";
-import { gameInstance } from "./Game.logic";
-import { log } from "../helper/Console.helper";
-import { clickerInstance } from "./Clicker.logic";
-import { bonusInstance } from "./Bonus.logic";
+import { log, warn } from "../helper/Console.helper";
+import Game from "./Game.logic";
+import Core from "./core/Core.logic";
+import Bonus from "./Bonus.logic";
+import Clicker from "./Clicker.logic";
 
-class Building {
-  private static _instance: Building;
-  avalaibleBuildings;
+class Building extends Core<Building> {
+  avalaibleBuildings: IAvalailableBuilding[];
   currentBuildings: IBuilding[];
   currentMultiplicator: number;
   totalProduction: number;
@@ -15,19 +16,17 @@ class Building {
   totalProductionWithoutMultiplicator: number;
 
   constructor() {
-    if (Building._instance) {
-      return Building._instance;
-    }
-    Building._instance = this;
+    super();
+
     this.avalaibleBuildings = buildingList.sort(
       (a, b) => a.baseAmount - b.baseAmount
     );
     this.currentBuildings = [];
     this.currentMultiplicator = 1;
     this._buildingCount = 0;
-    //this.checkAvailableBuildings();
   }
 
+  /** returns the total number of buildings currently owned */
   get buildingCount(): number {
     return this._buildingCount;
   }
@@ -42,7 +41,7 @@ class Building {
     const newAvailableBuildings: IBuilding[] = this.avalaibleBuildings.filter(
       (build) =>
         ((!build.neededProduction &&
-          build.baseAmount <= gameInstance().currentAmount) ||
+          build.baseAmount <= Game.getInstance().currentAmount) ||
           build.neededProduction <= this.totalProduction) &&
         !build.available
     );
@@ -104,19 +103,19 @@ class Building {
     );
 
     if (buildingIndex === -1) {
-      console.error("This building is not available yet");
+      warn("This building is not available yet");
       return false;
     }
 
     const building: IBuilding = this.currentBuildings[buildingIndex];
     if (!fromSave) {
-      if (gameInstance().currentAmount < building.currentAmount) {
-        console.error("This building is not affordable");
+      if (Game.getInstance().currentAmount < building.currentAmount) {
+        warn("This building is not affordable");
         return false;
       }
 
       DomHandler.renderCounter(
-        gameInstance().incrementAmount(-building.currentAmount)
+        Game.getInstance().incrementAmount(-building.currentAmount)
       );
     }
 
@@ -127,7 +126,7 @@ class Building {
     this.currentBuildings[buildingIndex] = building;
 
     if (!fromSave) {
-      clickerInstance().refreshIncrementFromBuildings(
+      Clicker.getInstance().refreshIncrementFromBuildings(
         this.getTotalProduction()
       );
     }
@@ -136,10 +135,10 @@ class Building {
     // trigger the recalculation of bonuses when the threshold of bonusType.buildingCountMultiplicator is met.
     if (
       !fromSave &&
-      bonusInstance().buildingCountTrigger &&
-      this.buildingCount % bonusInstance().buildingCountTrigger === 0
+      Bonus.getInstance().buildingCountTrigger &&
+      this.buildingCount % Bonus.getInstance().buildingCountTrigger === 0
     ) {
-      bonusInstance().applyBonus();
+      Bonus.getInstance().applyBonus();
       DomHandler.renderAllBuildings();
     }
     return building;
@@ -154,7 +153,7 @@ class Building {
     );
     if (
       !fromSave &&
-      (!upgrade || !building || upgrade.cost > gameInstance().currentAmount)
+      (!upgrade || !building || upgrade.cost > Game.getInstance().currentAmount)
     ) {
       return false;
     }
@@ -171,8 +170,8 @@ class Building {
     building.currentProduction *= multiplicator;
 
     if (!fromSave) {
-      DomHandler.renderCounter(gameInstance().incrementAmount(-cost));
-      clickerInstance().refreshIncrementFromBuildings(
+      DomHandler.renderCounter(Game.getInstance().incrementAmount(-cost));
+      Clicker.getInstance().refreshIncrementFromBuildings(
         this.getTotalProduction()
       );
     }
@@ -186,7 +185,7 @@ class Building {
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
     totalBuildingsProduction = currentProduction * (frequency / 1000);
 
-    const increment: number = gameInstance().incrementAmount(
+    const increment: number = Game.getInstance().incrementAmount(
       totalBuildingsProduction
     );
 
@@ -207,6 +206,7 @@ class Building {
     });
   }
 
+  /** Get total building production income, including bonus and excluding perks. */
   getTotalProduction(): number {
     let totalBuildingsProduction: number = 0;
     for (const building of this.currentBuildings) {
@@ -214,7 +214,7 @@ class Building {
     }
     this.totalProductionWithoutMultiplicator = totalBuildingsProduction;
     this.totalProduction =
-      totalBuildingsProduction * bonusInstance().productionMultiplicator;
+      totalBuildingsProduction * Bonus.getInstance().productionMultiplicator;
     return this.totalProduction;
   }
 
@@ -256,18 +256,6 @@ class Building {
       DomHandler.renderBuilding(newBuilding);
     }
   }
-
-  static getInstance(): Building {
-    return Building._instance;
-  }
-
-  static deleteInstance(): void {
-    delete Building._instance;
-  }
 }
-
-export const buildInstance: () => Building = (): Building => {
-  return Building.getInstance();
-};
 
 export default Building;

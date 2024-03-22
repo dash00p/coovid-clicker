@@ -1,28 +1,26 @@
 import DomHandler from "./DomHandler";
-import { gameInstance } from "./Game.logic";
-import { perkInstance } from "./Perk.logic";
+import { log } from "../helper/Console.helper";
+import Perk from "./Perk.logic";
+import Game from "./Game.logic";
+import Core from "./core/Core.logic";
 
-class Clicker {
-  private static _instance: Clicker;
+class Clicker extends Core<Clicker> {
   amount: number;
   count: number;
   increment: number; // current click value
   baseIncrement: number;
 
   constructor(count: number = 0, increment: number = 1, amount: number = 0) {
-    if (Clicker._instance) {
-      return Clicker._instance;
-    }
-    Clicker._instance = this;
-    console.log("Clicker alive");
+    super();
+    log("Clicker alive", 3);
     this.count = count;
     this.increment = increment;
     this.baseIncrement = increment;
   }
 
   triggerClick(): number {
-    console.log("Trigger click");
-    return gameInstance().incrementAmount(this.addClick());
+    log("Trigger click", 3);
+    return Game.getInstance().incrementAmount(this.addClick());
   }
 
   addClick(): number {
@@ -40,25 +38,13 @@ class Clicker {
 
   refreshIncrementFromBuildings(totalBuildingsProduction: number): void {
     this.baseIncrement = Math.max(totalBuildingsProduction / 10, 1);
-    if (perkInstance().activePerks.length) {
-      perkInstance().applyPassivePerk();
+    if (Perk.getInstance().activePerks.length) {
+      Perk.getInstance().applyPassivePerk();
     } else {
       this.increment = this.baseIncrement;
       DomHandler.clicker.updateIncrement(this.increment);
     }
   }
-
-  static getInstance(): Clicker {
-    return Clicker._instance;
-  }
-
-  static deleteInstance(): void {
-    delete Clicker._instance;
-  }
 }
-
-export const clickerInstance: () => Clicker = (): Clicker => {
-  return Clicker.getInstance();
-};
 
 export default Clicker;

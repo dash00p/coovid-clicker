@@ -1,4 +1,4 @@
-import CoreComponent from "./Core.component";
+import CoreComponent from "./common/Core.component";
 import { memeList } from "../collection/Memes.collection";
 import config from "../logic/Config.logic";
 import animStyle from "../../css/animation.component.scss";

@@ -1,6 +1,6 @@
 import { warn } from "./Console.helper";
 
-export const oldInterval: (
+export const realSetInterval: (
   handler: TimerHandler,
   timeout?: number,
   ...args: any[]
@@ -14,7 +14,7 @@ export const initGuard: () => void = (): void => {
     ...args: any[]
   ): ReturnType<typeof setInterval> => {
     if (!lockInterval) {
-      let intervalId: ReturnType<typeof setInterval> = oldInterval(
+      let intervalId: ReturnType<typeof setInterval> = realSetInterval(
         handler,
         timeout,
         ...args
@@ -28,7 +28,7 @@ export const initGuard: () => void = (): void => {
 };
 
 export const killGuard: () => void = () => {
-  window.setInterval = oldInterval;
+  window.setInterval = realSetInterval;
 };
 
 export default {

@@ -1,28 +1,33 @@
-import { gameInstance } from "./Game.logic";
 import { bonusList } from "../collection/Bonus.collection";
 import { warn } from "../helper/Console.helper";
-import { buildInstance } from "./Building.logic";
 import DomHandler from "./DomHandler";
-import { clickerInstance } from "./Clicker.logic";
+import Game from "./Game.logic";
+import Building from "./Building.logic";
+import Core from "./core/Core.logic";
+import Clicker from "./Clicker.logic";
 // this class represents a game bonus, should not be confused with the "Perk" class.
-class Bonus {
-  private static _instance: Bonus;
+class Bonus extends Core<Bonus> {
   private _availableBonus: IBonus[];
   productionMultiplicator: number;
   perkRoutineTimerReducer: number;
   perkEffectTimerMultiplicator: number;
   autoClickMultiplicator: number;
   buildingCountTrigger: number;
+  pentaClickMultiplicator: number;
 
   constructor() {
-    if (Bonus._instance) return Bonus._instance;
-    Bonus._instance = this;
+    super();
     this._availableBonus = [];
     this.productionMultiplicator =
       this.perkRoutineTimerReducer =
       this.perkEffectTimerMultiplicator =
       this.autoClickMultiplicator =
-        1;
+      this.pentaClickMultiplicator =
+      1;
+  }
+
+  get availableBonus(): IBonus[] {
+    return this._availableBonus;
   }
 
   checkAvailableBonus(): void {
@@ -30,7 +35,7 @@ class Bonus {
     const newBonuses = bonusList.filter(
       (b) =>
         !availableBonusList.includes(b.id) &&
-        b.neededProduction <= buildInstance().totalProduction
+        b.neededProduction <= Building.getInstance().totalProduction
     );
     for (const bonus of newBonuses) {
       this._availableBonus.push(bonus);
@@ -52,8 +57,8 @@ class Bonus {
     this.applyBonus();
     this.checkAvailableBonus();
     DomHandler.renderAllBuildings();
-    clickerInstance().refreshIncrementFromBuildings(
-      buildInstance().getTotalProduction()
+    Clicker.getInstance().refreshIncrementFromBuildings(
+      Building.getInstance().getTotalProduction()
     );
   }
 
@@ -76,7 +81,7 @@ class Bonus {
 
     let newBonus = this._availableBonus[bonusIndex];
 
-    if (newBonus.cost > gameInstance().currentAmount) {
+    if (newBonus.cost > Game.getInstance().currentAmount) {
       warn("Bonus not affordable");
       return;
     }
@@ -86,7 +91,7 @@ class Bonus {
       return;
     }
     newBonus.isPurchased = true;
-    DomHandler.renderCounter(gameInstance().incrementAmount(-newBonus.cost));
+    DomHandler.renderCounter(Game.getInstance().incrementAmount(-newBonus.cost));
     this.applyBonus();
     if (newBonus.type === bonusType.productionMultiplicator) {
       DomHandler.renderAllBuildings();
@@ -98,7 +103,8 @@ class Bonus {
     let productionMultiplicator = 1,
       perkTimerReducer = 1,
       perkEffectMultiplicator = 1,
-      autoClickMultiplicator = 1;
+      autoClickMultiplicator = 1,
+      pentaClickMultiplicator = 1;
     for (const bonus of this._availableBonus.filter((b) => b.isPurchased)) {
       switch (bonus.type) {
         case bonusType.productionMultiplicator:
@@ -115,10 +121,13 @@ class Bonus {
           break;
         case bonusType.buildingCountMultiplicator:
           this.buildingCountTrigger = bonus.value2;
-          const buildingCount = buildInstance().buildingCount;
+          const buildingCount = Building.getInstance().buildingCount;
           const multiplicator =
             Math.trunc(buildingCount / bonus.value2) * bonus.value;
           productionMultiplicator *= 1 + multiplicator;
+          break;
+        case bonusType.perkClickMultiplicator:
+          pentaClickMultiplicator *= bonus.value;
           break;
       }
     }
@@ -126,19 +135,8 @@ class Bonus {
     this.perkRoutineTimerReducer = perkTimerReducer;
     this.perkEffectTimerMultiplicator = perkEffectMultiplicator;
     this.autoClickMultiplicator = autoClickMultiplicator;
-  }
-
-  static getInstance(): Bonus {
-    return Bonus._instance;
-  }
-
-  static deleteInstance(): void {
-    delete Bonus._instance;
+    this.pentaClickMultiplicator = pentaClickMultiplicator;
   }
 }
-
-export const bonusInstance: () => Bonus = (): Bonus => {
-  return Bonus.getInstance();
-};
 
 export default Bonus;

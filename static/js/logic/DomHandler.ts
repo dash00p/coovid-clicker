@@ -1,20 +1,22 @@
+import Game from "./Game.logic";
+
 import BuildingComponent from "../component/Building.component";
 import LayoutComponent from "../component/Layout.component";
-import { findChildrenbyId, commarize } from "../helper/Dom.helper";
-import { gameInstance } from "./Game.logic";
 import ClickerComponent from "../component/Clicker.component";
 import BuildingListComponent from "../component/BuildingList.component";
 import CounterComponent from "../component/Counter.component";
 import PerksListComponent from "../component/PerkList.component";
 import FooterComponent from "../component/Footer.component";
 import BonusListComponent from "../component/BonusList.component";
-import { buildInstance } from "./Building.logic";
-import { bonusInstance } from "./Bonus.logic";
+
+import { findChildrenbyId, commarize } from "../helper/Dom.helper";
+import Bonus from "./Bonus.logic";
+import Building from "./Building.logic";
 
 // this class is used to handle DOM interaction
 class DomHandler {
   static layout: LayoutComponent;
-  static clicker;
+  static clicker: ClickerComponent;
   static tickFrequency = 0;
   private static counter: Node;
   private static productionCounter: Node;
@@ -31,7 +33,7 @@ class DomHandler {
     DomHandler.perksList = new PerksListComponent();
     DomHandler.clicker = new ClickerComponent();
     DomHandler.bonusList = new BonusListComponent();
-    DomHandler.renderCounter(gameInstance().currentAmount);
+    DomHandler.renderCounter(Game.getInstance().currentAmount);
     DomHandler.layout.appendMain(counter);
     DomHandler.layout.appendMain(DomHandler.clicker);
     DomHandler.layout.appendMain(DomHandler.buildingList);
@@ -98,12 +100,12 @@ class DomHandler {
       component.state.currentProduction = currentProduction;
       component.state.upgrades = activeUpgrades;
       component.state.currentMultiplicator =
-        bonusInstance().productionMultiplicator;
+        Bonus.getInstance().productionMultiplicator;
     }
   }
 
   static renderAllBuildings(): void {
-    for (const building of buildInstance().currentBuildings) {
+    for (const building of Building.getInstance().currentBuildings) {
       DomHandler.renderBuilding(building);
     }
   }

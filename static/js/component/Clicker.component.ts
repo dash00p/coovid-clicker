@@ -1,7 +1,7 @@
-import CoreComponent from "./Core.component";
+import CoreComponent from "./common/Core.component";
 import EphemeralComponent from "./Ephemeral.component";
-import { clickerInstance } from "../logic/Clicker.logic";
 import { commarize } from "../helper/Dom.helper";
+import Clicker from "../logic/Clicker.logic";
 
 const styleContent = `
   button {
@@ -12,7 +12,7 @@ const styleContent = `
 class ClickerComponent extends CoreComponent {
   static customType: string = "game-clicker";
 
-  constructor(props:ICoreComponentProps = null) {
+  constructor(props: ICoreComponentProps = null) {
     super(props);
     this.create("button", "Click click", ClickerComponent.customType);
     this.onclick = this.handleClick;
@@ -25,7 +25,7 @@ class ClickerComponent extends CoreComponent {
       icon: "random",
       event: memeEventType.click
     });
-    clickerInstance().triggerClick();
+    Clicker.getInstance().triggerClick();
   }
 
   updateIncrement(newIncrement: number): void {

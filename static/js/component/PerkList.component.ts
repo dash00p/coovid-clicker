@@ -1,4 +1,4 @@
-import CoreComponent from "./Core.component";
+import CoreComponent from "./common/Core.component";
 import PerkComponent from "./Perk.component";
 
 class PerksListComponent extends CoreComponent {

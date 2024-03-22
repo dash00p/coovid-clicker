@@ -1,0 +1,27 @@
+image: node:21-bullseye
+
+stages:
+  - build
+  - deploy
+
+build:front:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+
+deploy:front:prod:
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  environment:
+    name: prod
+  stage: deploy
+  script:
+    - scripts/deploy.sh
+  needs: ["build:front"]
+  only:
+    - master

@@ -1,10 +1,10 @@
-import commonStyle from "../../css/common.component.scss";
+import commonStyle from "./common/common.component.scss";
 
-import CoreComponent from "./Core.component";
-import { buildInstance } from "../logic/Building.logic";
+import CoreComponent from "./common/Core.component";
 import { commarize } from "../helper/Dom.helper";
-import { upgradeList } from "../collection/Buildings.collection";
-import { bonusInstance } from "../logic/Bonus.logic";
+import { upgradeList } from "../collection/BuildingUpgrade.collection";
+import Building from "../logic/Building.logic";
+import Bonus from "../logic/Bonus.logic";
 
 interface IState {
   level: number | null;
@@ -29,7 +29,7 @@ const styleContent: string = `
 
 export interface IBuildingComponentProps
   extends ICoreComponentProps,
-    IBuilding {}
+  IBuilding { }
 
 class BuildingComponent extends CoreComponent {
   declare props: IBuildingComponentProps;
@@ -59,7 +59,7 @@ class BuildingComponent extends CoreComponent {
     this.listen(
       this,
       "currentMultiplicator",
-      bonusInstance().productionMultiplicator,
+      Bonus.getInstance().productionMultiplicator,
       [this.rerender]
     );
     this.listen(this, "name", this.props.name, [this.rerender]);
@@ -78,19 +78,17 @@ class BuildingComponent extends CoreComponent {
   rerender(): void {
     this.updateContent(
       this.find("span"),
-      `${this.getImageSrc() ? `<img src='${this.getImageSrc()}' />` : ""} ${
-        this.state.name
-      } (${this.state.level}${
-        this.state.upgrades.length
-          ? ` - Tier ${this.tierConverter(this.state.upgrades.length)}`
-          : ``
+      `${this.getImageSrc() ? `<img src='${this.getImageSrc()}' />` : ""} ${this.state.name
+      } (${this.state.level}${this.state.upgrades.length
+        ? ` - Tier ${this.tierConverter(this.state.upgrades.length)}`
+        : ``
       }) - coût <span class="cost">${commarize(
         this.state.currentAmount
       )}</span> - production <span class="income">${commarize(
-        this.state.currentProduction * this.state.currentMultiplicator
+        this.state.currentProduction * this.state.currentMultiplicator, 4, true
       )}</span> (${commarize(
         this.props.baseProduction * this.state.currentMultiplicator,
-        2
+        2, true
       )} par unité)&nbsp;`
     );
   }
@@ -109,9 +107,8 @@ class BuildingComponent extends CoreComponent {
         const upgradeButton: IEnhancedHTMLElement =
           document.createElement("button");
         upgradeButton.props = {
-          initialText: `${upgrade.name} (${commarize(upgrade.cost)}) x${
-            upgrade.multiplicator
-          }`,
+          initialText: `${upgrade.name} (${commarize(upgrade.cost)}) x${upgrade.multiplicator
+            }`,
         };
         upgradeButton.textContent = `${upgradeButton.props.initialText}`;
         upgradeButton.onclick = (ev) => {
@@ -130,7 +127,7 @@ class BuildingComponent extends CoreComponent {
   }
 
   handleBuyClick(): void {
-    const newBuilding: IBuilding = buildInstance().levelUpBuilding(
+    const newBuilding: IBuilding = Building.getInstance().levelUpBuilding(
       this.component.props.id
     ) as IBuilding;
     if (newBuilding) {
@@ -145,8 +142,9 @@ class BuildingComponent extends CoreComponent {
       }, 5000);
     }
   }
+
   handleUpgradeClick(upgradeId: number, event: MouseEvent): void {
-    const newBuilding: any = buildInstance().upgradeBuilding(upgradeId);
+    const newBuilding: any = Building.getInstance().upgradeBuilding(upgradeId);
     if (newBuilding) {
       this.state.upgrades = [...newBuilding.activeUpgrades];
       this.state.currentProduction = newBuilding.currentProduction;

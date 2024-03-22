@@ -1,4 +1,4 @@
-import { oldInterval } from "../helper/Guard.helper";
+import { realSetInterval } from "../../helper/Guard.helper";
 
 class CoreComponent extends HTMLElement {
   props: ICoreComponentProps;
@@ -50,10 +50,11 @@ class CoreComponent extends HTMLElement {
     this.className += className + " ";
   }
 
+  /** TODO: Refactor & document this method. initialValue should be a ref to avoid a copy inside the component. */
   listen(
     ref: CoreComponent,
     name: string,
-    val: string | number | object,
+    initialValue: string | number | object,
     callbackList: Function[]
   ): void {
     const parent: CoreComponent = ref;
@@ -70,7 +71,7 @@ class CoreComponent extends HTMLElement {
         }
       },
     });
-    parent.state[name] = val;
+    parent.state[name] = initialValue;
   }
 
   clearContent(node: Element): void {
@@ -108,8 +109,18 @@ class CoreComponent extends HTMLElement {
     return el;
   }
 
-  static createElement(type: string, options?: ICreateElementOptions) {
+  addElements(container: HTMLElement, ...elements: HTMLElement[]) {
+    for (const el of elements) {
+      this.appendChild(el, container);
+    }
+  }
+
+  static createElement(type: string, options?: ICreateElementOptions | string) {
     const el: HTMLElement = document.createElement(type);
+
+    if (typeof options === 'string') {
+      options = { content: options };
+    }
 
     if (options) {
       if (options.className) el.className = options.className;
@@ -128,6 +139,7 @@ class CoreComponent extends HTMLElement {
     const el: HTMLElement = document.createElement(type, { is: customType });
     el.innerHTML = content || null;
     this.shadowRoot.appendChild(el);
+    this.state.rendered = true;
     return el;
   }
 
@@ -151,21 +163,22 @@ class CoreComponent extends HTMLElement {
     }
   }
 
-  prependChild<T extends ParentNode, N extends Node>(
+  prependChild<N extends Node | string, T extends ParentNode>(
     element: N,
     parent?: T
-  ): void {
+  ): HTMLElement {
     if (parent) {
-      return parent.prepend(element);
+      parent.prepend(element);
     } else {
-      return this.shadowRoot.prepend(element);
+      this.shadowRoot.prepend(element);
     }
+    return element as HTMLElement;
   }
 
   removeAllChild(parentNode?: ParentNode): void {
-    const el = parentNode ? parentNode : this;
+    const el = parentNode || this;
     while (el.lastChild) {
-      if ((el.lastChild as CoreComponent).clearActiveJobs) {
+      if (typeof (el.lastChild as CoreComponent).clearActiveJobs === "function") {
         (el.lastChild as CoreComponent).clearActiveJobs();
       }
       el.removeChild(el.lastChild);
@@ -180,11 +193,11 @@ class CoreComponent extends HTMLElement {
     return this.shadowRoot.getElementById(query);
   }
 
-  kill(lifetime: number): void {
+  kill(delay: number = 0): void {
     setTimeout(() => {
       this.remove();
       this.clearActiveJobs();
-    }, lifetime);
+    }, delay);
   }
 
   clearActiveJobs() {
@@ -208,7 +221,7 @@ class CoreComponent extends HTMLElement {
     timeout?: number,
     ...args: any[]
   ): ReturnType<typeof setInterval> {
-    const interval = oldInterval(handler, timeout, ...args);
+    const interval = realSetInterval(handler, timeout, ...args);
     this._activeJobs.push(interval);
     return interval;
   }

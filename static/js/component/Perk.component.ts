@@ -1,10 +1,10 @@
-import CoreComponent from "./Core.component";
+import CoreComponent from "./common/Core.component";
 
 interface IPerkState extends ICoreComponentsState {
   expirationTimestamp: number;
 }
 
-export interface IPerkComponentProps extends IPerk, ICoreComponentProps {}
+export interface IPerkComponentProps extends IPerk, ICoreComponentProps { }
 
 class PerkComponent extends CoreComponent {
   static customType: string = "game-perk";
