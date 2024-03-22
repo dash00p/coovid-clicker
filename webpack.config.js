@@ -4,9 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 
 module.exports = (env, argv) => {
-  const config = require(`./static/js/collection/Config.${
-    argv.mode === "development" ? `dev` : `prod`
-  }.collection.json`);
+  const config = require(`./static/js/collection/Config.${argv.mode === "development" ? `dev` : `prod`
+    }.collection.json`);
 
   return {
     entry: "./static/js/index.ts",
@@ -79,6 +78,6 @@ module.exports = (env, argv) => {
       extensions: [".ts"],
     },
     target: "web",
-    watch: true,
+    watch: argv.mode === "development",
   };
 };

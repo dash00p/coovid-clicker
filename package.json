@@ -22,6 +22,6 @@
   },
   "scripts": {
     "build:dev": "./node_modules/.bin/webpack --mode=development",
-    "build:prod": "./node_modules/.bin/webpack --mode=production"
+    "build:prod": "./node_modules/.bin/webpack --mode=production --bail"
   }
 }
