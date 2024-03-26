@@ -1,4 +1,5 @@
 import { realSetInterval } from "../../helper/Guard.helper";
+import commonStyle from "./common.component.scss";
 
 class CoreComponent extends HTMLElement {
   props: ICoreComponentProps;
@@ -16,6 +17,7 @@ class CoreComponent extends HTMLElement {
     };
     this.props = props || {};
     this.shadowRoot = this.attachShadow({ mode: "open" });
+    this.setDefaultStyle(commonStyle);
     this._activeJobs = [];
     if (props && props.children) {
       this.appendChild(props.children);
@@ -208,6 +210,13 @@ class CoreComponent extends HTMLElement {
         this._activeJobs.splice(jobIndex, 1);
       }
     }
+  }
+
+  // internal method to use the default style
+  private setDefaultStyle(styleContent: string): void {
+    const style: HTMLStyleElement = document.createElement("style");
+    style.textContent = styleContent;
+    this.shadowRoot.prepend(style);
   }
 
   setStyle(styleContent: string): void {

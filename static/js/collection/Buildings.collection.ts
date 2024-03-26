@@ -5,6 +5,9 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.03,
     baseAmount: 25,
     baseProduction: 0.2,
+    img: {
+      src: "./static/img/building/scientist.jpg",
+    },
     name: "Chercheur",
   },
   {
@@ -12,7 +15,10 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.03,
     baseAmount: 1.25e2,
     baseProduction: 1,
-    name: "Raoult la fripouille",
+    img: {
+      src: "./static/img/building/raoult.jpg",
+    },
+    name: "Raoul la fripouille",
     neededProduction: 1,
   },
   {
@@ -32,6 +38,9 @@ export const buildingList: IBuilding[] = [
     baseAmount: 5e3,
     baseProduction: 25,
     description: "Le justicier masqué",
+    img: {
+      src: "./static/img/building/richard.jpg",
+    },
     name: "Richard sans peur",
     neededProduction: 50,
   },
@@ -40,6 +49,9 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.03,
     baseAmount: 2.5e4,
     baseProduction: 1e2,
+    img: {
+      src: "./static/img/building/lorenzo.jpg",
+    },
     name: "Lorenzo Lovegun",
     neededProduction: 300,
   },
@@ -48,6 +60,9 @@ export const buildingList: IBuilding[] = [
     amountMultiplier: 1.05,
     baseAmount: 1e5,
     baseProduction: 3e2,
+    img: {
+      src: "./static/img/building/thamos.jpg",
+    },
     name: "Thamos, destructeur des mondes",
     neededProduction: 1e3,
   },
@@ -57,16 +72,22 @@ export const buildingList: IBuilding[] = [
     baseAmount: 5e5,
     baseProduction: 1e3,
     description: "Faîtes moi confiances les potos.",
+    img: {
+      src: "./static/img/building/patoche.jpg",
+    },
     name: "Patoche Balkanoche",
     neededProduction: 6e3,
   },
   {
-    id: buildingType.sardoche,
+    id: buildingType.sardox,
     amountMultiplier: 1.05,
     baseAmount: 2e6,
     baseProduction: 3.5e3,
     description: "C'était sûr qu'il allait venir.",
-    name: "Sardoche",
+    img: {
+      src: "./static/img/building/sardox.jpg",
+    },
+    name: "Sardox",
     neededProduction: 2.5e4,
   },
   {
@@ -75,6 +96,9 @@ export const buildingList: IBuilding[] = [
     baseAmount: 1e7,
     baseProduction: 1.5e4,
     description: "Quelqu'un a le code de la wifi ?",
+    img: {
+      src: "./static/img/building/jean-michel.jpg",
+    },
     name: "Jean-Michel Cinquejet",
     neededProduction: 7.5e4,
   },
@@ -84,6 +108,9 @@ export const buildingList: IBuilding[] = [
     baseAmount: 9e7,
     baseProduction: 1e5,
     description: "Vous voulez du poulet ?",
+    img: {
+      src: "./static/img/building/leeroy.jpg",
+    },
     name: "Leeroy Jenkins",
     neededProduction: 1.5e5,
   },

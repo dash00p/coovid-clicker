@@ -14,6 +14,7 @@ class Bonus extends Core<Bonus> {
   autoClickMultiplicator: number;
   buildingCountTrigger: number;
   pentaClickMultiplicator: number;
+  buildingPurchaseDivisor: number;
 
   constructor() {
     super();
@@ -23,6 +24,7 @@ class Bonus extends Core<Bonus> {
       this.perkEffectTimerMultiplicator =
       this.autoClickMultiplicator =
       this.pentaClickMultiplicator =
+      this.buildingPurchaseDivisor =
       1;
   }
 
@@ -51,7 +53,6 @@ class Bonus extends Core<Bonus> {
           isPurchased: true,
           ...bonus,
         });
-        //DomHandler.renderBonus(bonus);
       }
     }
     this.applyBonus();
@@ -90,10 +91,11 @@ class Bonus extends Core<Bonus> {
       warn("Bonus already unlocked");
       return;
     }
+
     newBonus.isPurchased = true;
     DomHandler.renderCounter(Game.getInstance().incrementAmount(-newBonus.cost));
     this.applyBonus();
-    if (newBonus.type === bonusType.productionMultiplicator) {
+    if ([bonusType.productionMultiplicator, bonusType.buildingPurchaseDivisor].includes(newBonus.type)) {
       DomHandler.renderAllBuildings();
     }
     return newBonus;
@@ -104,7 +106,8 @@ class Bonus extends Core<Bonus> {
       perkTimerReducer = 1,
       perkEffectMultiplicator = 1,
       autoClickMultiplicator = 1,
-      pentaClickMultiplicator = 1;
+      pentaClickMultiplicator = 1,
+      buildingPurchaseDivisor = 1;
     for (const bonus of this._availableBonus.filter((b) => b.isPurchased)) {
       switch (bonus.type) {
         case bonusType.productionMultiplicator:
@@ -129,6 +132,9 @@ class Bonus extends Core<Bonus> {
         case bonusType.perkClickMultiplicator:
           pentaClickMultiplicator *= bonus.value;
           break;
+        case bonusType.buildingPurchaseDivisor:
+          buildingPurchaseDivisor *= bonus.value;
+          break;
       }
     }
     this.productionMultiplicator = productionMultiplicator;
@@ -136,6 +142,7 @@ class Bonus extends Core<Bonus> {
     this.perkEffectTimerMultiplicator = perkEffectMultiplicator;
     this.autoClickMultiplicator = autoClickMultiplicator;
     this.pentaClickMultiplicator = pentaClickMultiplicator;
+    this.buildingPurchaseDivisor = buildingPurchaseDivisor;
   }
 }
 

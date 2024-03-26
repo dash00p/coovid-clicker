@@ -11,10 +11,14 @@ declare class CoreComponent {
 declare interface ICoreComponentProps {
   children?: Node;
   handleClick?:
-    | ((this: GlobalEventHandlers, ev: MouseEvent, args?: any) => any)
-    | null;
+  | ((this: GlobalEventHandlers, ev: MouseEvent, args?: any) => any)
+  | null;
   context?: any;
   killOnClick?: boolean;
+}
+
+declare interface IStyledComponentProps extends ICoreComponentProps {
+  style?: string;
 }
 
 declare interface ICoreComponentsState {
@@ -36,6 +40,6 @@ declare interface ICreateElementOptions {
   content?: string;
   id?: string;
   handleClick?:
-    | ((this: GlobalEventHandlers, ev: MouseEvent, args?: any) => any)
-    | null;
+  | ((this: GlobalEventHandlers, ev: MouseEvent, args?: any) => any)
+  | null;
 }

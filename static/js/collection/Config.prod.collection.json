@@ -9,7 +9,8 @@
     "perk": {
       "duration": 11000,
       "minTimer": 60000,
-      "maxTimer": 180000
+      "maxTimer": 180000,
+      "active": true
     }
   },
   "visual": {

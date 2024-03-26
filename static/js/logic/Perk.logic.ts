@@ -40,6 +40,8 @@ class Perk extends Core<Perk> {
   }
 
   routine(): void {
+    if (!config.game.perk.active) return;
+
     const min: number =
       config.game.perk.minTimer /
       (Bonus.getInstance()?.perkRoutineTimerReducer || 1);

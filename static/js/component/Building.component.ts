@@ -1,10 +1,10 @@
 import commonStyle from "./common/common.component.scss";
 
-import CoreComponent from "./common/Core.component";
 import { commarize } from "../helper/Dom.helper";
 import { upgradeList } from "../collection/BuildingUpgrade.collection";
 import Building from "../logic/Building.logic";
 import Bonus from "../logic/Bonus.logic";
+import StyledComponent from "./common/Styled.component";
 
 interface IState {
   level: number | null;
@@ -12,36 +12,41 @@ interface IState {
   currentAmount: number;
   currentProduction: number;
   currentMultiplicator: number;
+  currentPriceDivider: number;
   name: string;
   upgrades: IBuildingUpgrade[];
 }
 
-const styleContent: string = `
+const style: string = `
   :host {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     display: block;
   }
   ${commonStyle}
   button {
     margin-right: 5px;
   }
+  img {
+    max-width: 60px;
+  }
 `;
 
 export interface IBuildingComponentProps
-  extends ICoreComponentProps,
+  extends IStyledComponentProps,
   IBuilding { }
 
-class BuildingComponent extends CoreComponent {
+class BuildingComponent extends StyledComponent {
   declare props: IBuildingComponentProps;
   declare state: IState;
 
   constructor(props: IBuildingComponentProps) {
-    super(props);
+    super({ ...props, style });
 
     const addButton: IEnhancedHTMLElement = document.createElement("button");
     addButton.textContent = "Engager";
+    addButton.className = "custom-button";
     addButton.onclick = this.handleBuyClick;
-    this.wrapper = this.createChildren("li", "<span></span>", addButton);
+    this.wrapper = this.createChildren("li", "<div></div>", addButton);
     this.wrapper.appendChild(this.createChildren("ul", "<li></li>"));
     this.listen(this, "level", this.props.level, [
       this.rerender,
@@ -58,13 +63,18 @@ class BuildingComponent extends CoreComponent {
     ]);
     this.listen(
       this,
+      "currentPriceDivider",
+      Bonus.getInstance().buildingPurchaseDivisor,
+      [this.rerender]
+    );
+    this.listen(
+      this,
       "currentMultiplicator",
       Bonus.getInstance().productionMultiplicator,
       [this.rerender]
     );
     this.listen(this, "name", this.props.name, [this.rerender]);
     this.render(this.wrapper, [this.rerender, this.renderUpgrades]);
-    this.setStyle(styleContent);
   }
 
   getLevel(): number {
@@ -77,19 +87,19 @@ class BuildingComponent extends CoreComponent {
 
   rerender(): void {
     this.updateContent(
-      this.find("span"),
-      `${this.getImageSrc() ? `<img src='${this.getImageSrc()}' />` : ""} ${this.state.name
+      this.find("div"),
+      `${this.getImageSrc() ? `<div class="inline-block ${this.props.description ? "tooltip" : ""}" data-tooltip="${this.props.description}"><img src="${this.getImageSrc()}"  /></div>` : ""} ${this.state.name
       } (${this.state.level}${this.state.upgrades.length
         ? ` - Tier ${this.tierConverter(this.state.upgrades.length)}`
         : ``
-      }) - coût <span class="cost">${commarize(
-        this.state.currentAmount
-      )}</span> - production <span class="income">${commarize(
+      }) - <span class="cost">coût: ${commarize(
+        this.state.currentAmount * this.state.currentPriceDivider
+      )}</span> - <span class="income">production: ${commarize(
         this.state.currentProduction * this.state.currentMultiplicator, 4, true
-      )}</span> (${commarize(
+      )} (${commarize(
         this.props.baseProduction * this.state.currentMultiplicator,
         2, true
-      )} par unité)&nbsp;`
+      )} par unité)</span>&nbsp;`
     );
   }
 

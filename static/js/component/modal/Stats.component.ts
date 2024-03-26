@@ -8,11 +8,17 @@ interface IStatsComponentState extends ICoreComponentsState {
     list: IStat;
 }
 
+const style: string = `
+  img {
+    max-width: 40px;
+  }
+`;
+
 class StatsComponent extends ModalComponent {
     declare state: IStatsComponentState;
 
     constructor(props: IModalComponentProps = null) {
-        super(props);
+        super({ ...props, style });
 
         this.render();
         this.listen(this, "list", Stats.getInstance().list, [this.renderStats]);
@@ -42,7 +48,7 @@ class StatsComponent extends ModalComponent {
         </ul>
         <h2>Améliorations débloquées</h2>
         <ul>
-            ${BuildingUpgrades.map((bonus) => `<li>${bonus.img ? `<img src="${bonus.img.src}" />` : bonus.name} 
+            ${BuildingUpgrades.map((bonus) => `<li>${bonus.img ? `<img src="${bonus.img.src}" />` : ``} ${bonus.name} 
                 <ul>
                     ${bonus.upgrades.map((upgrade) => `<li>${upgrade.name}</li>`).join("")}
                 </ul>

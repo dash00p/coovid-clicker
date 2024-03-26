@@ -24,7 +24,7 @@ declare const enum buildingType {
   lorenzo,
   thamos,
   patoche,
-  sardoche,
+  sardox,
   jeanMichel,
   leeroy,
   canardMan,
@@ -119,6 +119,7 @@ declare const enum bonusType {
   buildingCountMultiplicator = "buildingCountMultiplicator",
   perkClickMultiplicator = "perkClickMultiplicator",
   perkProductionMultiplicator = "productionPerkMultiplicator",
+  buildingPurchaseDivisor = "buildingPurchaseDivisor",
 }
 
 declare interface IBonusComponentProps extends IBonus, ICoreComponentProps { }

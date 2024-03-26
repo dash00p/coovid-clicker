@@ -44,7 +44,7 @@ export const bonusList = [
     cost: 1e12,
     name: "Confinement VI",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.1,
     neededProduction: 1e9,
   },
   {
@@ -52,7 +52,7 @@ export const bonusList = [
     cost: 1e13,
     name: "Confinement VII",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.1,
     neededProduction: 1e10,
   },
   {
@@ -60,7 +60,7 @@ export const bonusList = [
     cost: 1e14,
     name: "Confinement VIII",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.1,
     neededProduction: 1e11,
   },
   {
@@ -68,7 +68,7 @@ export const bonusList = [
     cost: 1e15,
     name: "Confinement IX",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.1,
     neededProduction: 1e12,
   },
   {
@@ -76,7 +76,7 @@ export const bonusList = [
     cost: 1e16,
     name: "Confinement X",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.1,
     neededProduction: 1e13,
   },
   {
@@ -84,7 +84,7 @@ export const bonusList = [
     cost: 1e17,
     name: "Confinement XI",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.15,
     neededProduction: 1e14,
   },
   {
@@ -92,7 +92,7 @@ export const bonusList = [
     cost: 1e18,
     name: "Confinement XII",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.15,
     neededProduction: 1e15,
   },
   {
@@ -100,8 +100,24 @@ export const bonusList = [
     cost: 1e19,
     name: "Confinement XIII",
     type: bonusType.productionMultiplicator,
-    value: 1.05,
+    value: 1.15,
     neededProduction: 1e16,
+  },
+  {
+    id: 25,
+    cost: 1e21,
+    name: "Confinement XIV",
+    type: bonusType.productionMultiplicator,
+    value: 1.15,
+    neededProduction: 1e17,
+  },
+  {
+    id: 26,
+    cost: 1e22,
+    name: "Confinement XV",
+    type: bonusType.productionMultiplicator,
+    value: 1.15,
+    neededProduction: 1e18,
   },
   {
     id: 11,
@@ -183,5 +199,21 @@ export const bonusList = [
     type: bonusType.perkClickMultiplicator,
     value: 3,
     neededProduction: 5e12,
+  },
+  {
+    id: 24,
+    cost: 9e17,
+    name: "Augmentation du SMIC V",
+    type: bonusType.perkClickMultiplicator,
+    value: 4,
+    neededProduction: 5e14,
+  },
+  {
+    id: 27,
+    cost: 6e11,
+    name: "Partenariat avec Pfizza Pharmaceuticals",
+    type: bonusType.buildingPurchaseDivisor,
+    value: 0.8,
+    neededProduction: 2.5e7,
   },
 ];

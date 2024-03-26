@@ -75,6 +75,10 @@ class BonusComponent extends StyledComponent {
         break;
       case bonusType.perkClickMultiplicator:
         this.description = `multiplie la valeur du "Super click" par ${this.props.value}`;
+        break
+      case bonusType.buildingPurchaseDivisor:
+        this.description = `Réduit de ${100 - value}% le coût d'une nouvelle unité.`;
+        break;
     }
   }
 }

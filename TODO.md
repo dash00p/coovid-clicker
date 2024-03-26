@@ -18,11 +18,11 @@
 - Multiverse
 - Lore introduction
 - i18n ?
-- Offline production
+- ~~Offline production~~
 
 # Enhancements
 
-- Building production balance
+- ~~Building production balance~~
 - ~~More memes~~
 - ~~MORE memes~~
 - ~~Add version number~~

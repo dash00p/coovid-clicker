@@ -10,9 +10,15 @@ class ParamsComponent extends ModalComponent {
 
         this.find(".modal-content").appendChild(CoreComponent.createElement("div", `<h2>Paramètres</h2>
         <ul>
-            <li>Activer le son <input type="checkbox" ${params ? "checked" : ""}></li>
-            </li>
         </ul>`)); // Use CoreComponent to call createElement
+
+        const paramSound: IEnhancedHTMLElement = document.createElement("li");
+        paramSound.innerHTML = `<label>Activer le son <input type="checkbox" name="param_sound"  ${params.list.soundActive ? "checked" : ""}/></label>`;
+        paramSound.querySelector("input").addEventListener("change", (e) => {
+            params.toggleSound();
+        });
+
+        this.find(".modal-content ul").appendChild(paramSound);
     }
 }
 

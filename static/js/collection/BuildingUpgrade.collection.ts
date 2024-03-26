@@ -199,7 +199,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     },
     {
         id: 90,
-        buildingId: buildingType.sardoche,
+        buildingId: buildingType.sardox,
         cost: 7e8,
         multiplicator: 2,
         name: "Abdul",
@@ -208,7 +208,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     },
     {
         id: 91,
-        buildingId: buildingType.sardoche,
+        buildingId: buildingType.sardox,
         cost: 1.2e9,
         multiplicator: 2,
         name: "Coquelicot",
@@ -217,7 +217,7 @@ export const upgradeList: IBuildingUpgrade[] = [
     },
     {
         id: 92,
-        buildingId: buildingType.sardoche,
+        buildingId: buildingType.sardox,
         cost: 6e9,
         multiplicator: 2,
         name: "Abricot",

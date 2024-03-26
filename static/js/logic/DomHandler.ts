@@ -101,6 +101,7 @@ class DomHandler {
       component.state.upgrades = activeUpgrades;
       component.state.currentMultiplicator =
         Bonus.getInstance().productionMultiplicator;
+      component.state.currentPriceDivider = Bonus.getInstance().buildingPurchaseDivisor;
     }
   }
 

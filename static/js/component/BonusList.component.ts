@@ -1,10 +1,12 @@
 import BonusComponent from "./Bonus.component";
-import CoreComponent from "./common/Core.component";
+import style from "../../css/bonus.component.scss";
+import StyledComponent from "./common/Styled.component";
 
-class BonusListComponent extends CoreComponent {
+
+class BonusListComponent extends StyledComponent {
   static customType: string = "game-bonus-list";
   constructor(props: object = null) {
-    super(props);
+    super({ ...props, style });
     this.create("h4", "Mesures gouvernementales");
     this.create("ul", null);
   }

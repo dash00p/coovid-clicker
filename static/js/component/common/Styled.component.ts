@@ -1,11 +1,7 @@
 import CoreComponent from "./Core.component";
 
-interface IStyledProps extends ICoreComponentProps {
-    style: string;
-}
-
 class StyledComponent extends CoreComponent {
-    constructor(props: IStyledProps = null) {
+    constructor(props: IStyledComponentProps = null) {
         super(props);
         this.setStyle(props.style);
     }

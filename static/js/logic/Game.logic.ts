@@ -21,6 +21,7 @@ interface ISave {
   startDate: Date;
   stats: IStat;
   bonus: IBaseBonus[];
+  params: IParams;
 }
 
 class Game extends Core<Game> {
@@ -36,6 +37,7 @@ class Game extends Core<Game> {
   perk: Perk;
   bonus: Bonus;
   buildings: Building;
+  params: Params;
   /** TODO: represents the amount of worlds fully completed. */
   level: number;
   stats: Stats;
@@ -51,6 +53,7 @@ class Game extends Core<Game> {
     this.perk = Perk.getInstance();
     this.bonus = Bonus.getInstance();
     this.buildings = Building.getInstance();
+    this.params = Params.getInstance();
     //this.jobs = [];
     this.routine();
     this.listenVisibility();
@@ -73,6 +76,7 @@ class Game extends Core<Game> {
       startDate: new Date(),
       stats: this.stats.update(),
       bonus: this.bonus.saveBonuses(),
+      params: this.params.save(),
     };
     const previousSaveString: string = localStorage.getItem("save");
     if (previousSaveString) {
@@ -107,6 +111,10 @@ class Game extends Core<Game> {
 
       if (saveObj.bonus) {
         this.bonus.loadBonusFromSave(saveObj.bonus);
+      }
+
+      if (saveObj.params) {
+        this.params.loadFromSave(saveObj.params);
       }
       log("Save loaded !", 1);
     }

@@ -53,13 +53,14 @@ const style: string = `
 
 export interface IModalComponentProps {
     content: Node;
+    style?: string;
 }
 
 class ModalComponent extends StyledComponent {
     private modal: HTMLElement;
 
     constructor(props: IModalComponentProps = null) {
-        super({ ...props, style });
+        super({ ...props, style: style + props?.style });
         this.modal = this.create("div", `<div class="modal-content">
     <span class="close" id="closeModalBtn">&times;</span>
     </div>`, "modal");

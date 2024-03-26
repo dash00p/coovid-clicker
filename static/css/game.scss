@@ -7,6 +7,8 @@ body {
   background: #1e1e1e;
   color: #f9f9f9;
   font-family: 'Quicksand', sans-serif;
+  margin: 0;
+  padding: 8px
 }
 
 game-layout {
@@ -15,11 +17,14 @@ game-layout {
 
 .ephemeral {
   position: absolute;
-  width: 50px;
-  height: 50px;
   top: -50px;
   left: 0px;
-  animation: $ephemeral-duration linear 0.05s falling;
+
+  &:not(.perk) {
+    animation: $ephemeral-duration linear 0.05s falling;
+    width: 50px;
+    height: 50px;
+  }
 
   &:not(.interactive) {
     pointer-events: none;
@@ -27,13 +32,6 @@ game-layout {
 
   &.interactive {
     cursor: pointer;
-  }
-
-  &.perk {
-    animation:
-      $ephemeral-duration linear 0.05s flying-2,
-      3500ms cubic-bezier(.5, -700, .5, 700) y-1 infinite;
-    left: -2vh;
   }
 }
 

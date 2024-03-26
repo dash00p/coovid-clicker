@@ -109,13 +109,15 @@ class Building extends Core<Building> {
 
     const building: IBuilding = this.currentBuildings[buildingIndex];
     if (!fromSave) {
-      if (Game.getInstance().currentAmount < building.currentAmount) {
+      // check if the player has enough money to buy the building after divider bonus has been applied to the cost.
+      const actualBuildingPrice = building.currentAmount * Bonus.getInstance().buildingPurchaseDivisor;
+      if (Game.getInstance().currentAmount < actualBuildingPrice) {
         warn("This building is not affordable");
         return false;
       }
 
       DomHandler.renderCounter(
-        Game.getInstance().incrementAmount(-building.currentAmount)
+        Game.getInstance().incrementAmount(-actualBuildingPrice)
       );
     }
 
@@ -180,6 +182,7 @@ class Building extends Core<Building> {
 
   tick(frequency: number, isBackground?: boolean): void {
     let totalBuildingsProduction: number = this.getTotalProduction();
+    // production multiplied by current perk production multiplicators
     const currentProduction: number =
       totalBuildingsProduction * this.currentMultiplicator;
     // production should be calculated every second but the tick is faster so we have to divide by the current frequency.
