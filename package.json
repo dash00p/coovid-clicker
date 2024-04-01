@@ -21,7 +21,7 @@
     "webpack-cli": "^4.5.0"
   },
   "scripts": {
-    "build:dev": "./node_modules/.bin/webpack --mode=development",
-    "build:prod": "./node_modules/.bin/webpack --mode=production --bail"
+    "dev": "./node_modules/.bin/webpack --mode=development",
+    "build": "./node_modules/.bin/webpack --mode=production --bail"
   }
 }

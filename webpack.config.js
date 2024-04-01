@@ -4,11 +4,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 
 module.exports = (env, argv) => {
-  const config = require(`./static/js/collection/Config.${argv.mode === "development" ? `dev` : `prod`
-    }.collection.json`);
+  const config = require(`./src/config/${argv.mode === "development" ? `dev` : `prod`
+    }.json`);
 
   return {
-    entry: "./static/js/index.ts",
+    entry: "./src/index.tsx",
     module: {
       rules: [
         {
@@ -46,7 +46,7 @@ module.exports = (env, argv) => {
           ],
         },
         {
-          test: /\.ts$/,
+          test: /\.tsx?$/,
           use: "ts-loader",
           exclude: /node_modules/,
         },
@@ -63,8 +63,7 @@ module.exports = (env, argv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          { from: "static/img/", to: "static/img/" },
-          { from: "static/sound/", to: "static/sound/" },
+          { from: "src/assets/", to: "static/" },
         ],
       }),
       new MiniCssExtractPlugin({
@@ -75,9 +74,10 @@ module.exports = (env, argv) => {
       }),
     ],
     resolve: {
-      extensions: [".ts"],
+      extensions: [".ts", ".tsx"],
     },
     target: "web",
     watch: argv.mode === "development",
+    devtool: argv.mode === "development" ? "source-map" : false,
   };
 };

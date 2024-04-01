@@ -16,24 +16,45 @@ stages:
   cache:
     policy: pull
 
-build:front:prod:
+.env:dev:
+  environment:
+    name: dev
+    url: ${ENV_URL}
+
+.env:prod:
+  environment:
+    name: prod
+    url: ${ENV_URL}
+
+build:front:
   stage: build
   extends:
     - .cache-build
   script:
-    - scripts/build.sh
+    - npm install
+    - npm run build
 
-deploy:front:prod:
+.deploy:front:
   stage: deploy
   extends:
     - .cache-build-pull
   image:
     name: amazon/aws-cli
     entrypoint: [""]
-  environment:
-    name: prod
   script:
     - scripts/deploy.sh
-  needs: ["build:front:prod"]
+  needs: ["build:front"]
+
+deploy:front:prod:
+  extends:
+    - .env:prod
+    - .deploy:front
   only:
+    - master
+
+deploy:front:dev:
+  extends:
+    - .env:dev
+    - .deploy:front
+  except:
     - master
