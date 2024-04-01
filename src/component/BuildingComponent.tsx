@@ -106,7 +106,7 @@ class BuildingComponentV2 extends BaseComponent<IBuildingComponentV2Props> {
           {` - `}
           <span className="income">
             <span className={(building.currentProduction !== currentProductionWithMulti ? "tooltip" : "")} dataset={{ tooltip: `Production sans mesures gouvernementales : ${building.currentProduction} doses/s` }}>Production: {commarize(currentProductionWithMulti, 4, true)} dose{currentProductionWithMulti >= 2 && 's'}/s
-              {` `}Par unité: {commarize(unitProduction, 0, true)} dose{unitProduction >= 2 && 's'}/s
+              {` `}Par unité: {commarize(unitProduction, 2, true)} dose{unitProduction >= 2 && 's'}/s
             </span>
           </span>
         </div>
