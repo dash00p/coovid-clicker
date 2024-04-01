@@ -92,7 +92,7 @@ class BuildingComponentV2 extends BaseComponent<IBuildingComponentV2Props> {
       <li>
         <div>
           <div className={(building.description ? "tooltip" : "") + " inline-block"} dataset={{ tooltip: building.description }}>
-            {building.img ? <img src={building.img.src} alt={building.name} /> : null}
+            {building.img ? <img src={building.img.src} alt={building.name} /> : <></>}
           </div>
           {` `}
           {building.name?.length > 0 && <h4 className="inline-block">{building.name}</h4>}
