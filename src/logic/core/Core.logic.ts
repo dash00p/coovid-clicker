@@ -37,7 +37,7 @@ class Core<T extends Core<T>> extends Singleton<T> {
                 let propertyToObserve = property;
                 if (typeof value === 'object' && value !== null) {
                     // Check if the object is not already a proxy and also if the root object hasn't any observers to avoid deep proxying on complex objects.
-                    if (!value.isProxy && !target._observers?.self) value = this.setProxy(value);
+                    if (!value.isProxy/* && !target._observers?.self*/) value = this.setProxy(value);
                     propertyToObserve = "self";
                 } else if (Array.isArray(target) && property === "length" && value === 0) {
                     propertyToObserve = "self";
@@ -58,7 +58,7 @@ class Core<T extends Core<T>> extends Singleton<T> {
 
         if (typeof initialValue === 'object' && initialValue !== null) {
             for (let key in initialValue) {
-                if (typeof initialValue[key] === 'object' && initialValue[key] !== null) {
+                if (typeof initialValue[key] === 'object' && initialValue[key] !== null && key !== "_observers") {
                     initialValue[key] = this.setProxy(initialValue[key]);
                 }
             }

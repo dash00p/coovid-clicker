@@ -72,7 +72,17 @@ class EphemeralComponent extends BaseComponent<IEphemeralComponentProps> {
   }
 
   render() {
-    return (<div className="ephemeral-content" onclick={() => this.props.handleClick && this.props.handleClick()}>
+    return (<div className="ephemeral-content" onclick={() => {
+      if (this.props.handleClick) {
+        this.props.handleClick();
+
+        if (this.state.perkAnimationRef) {
+          cancelAnimationFrame(this.state.perkAnimationRef);
+        }
+
+        this.kill();
+      }
+    }}>
       <img src={this.getSprite(this.props.icon)} />
     </div>);
   }

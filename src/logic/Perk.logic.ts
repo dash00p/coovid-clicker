@@ -100,6 +100,7 @@ class Perk extends Core<Perk> {
   }
 
   selectRandomPerk(): any {
+    const perkInstance: Perk = Perk.getInstance();
     const availablePerks: IPerk[] = perkList.filter(
       (p) => p.requiredLevel <= Game.getInstance().level
     );
@@ -108,25 +109,25 @@ class Perk extends Core<Perk> {
     const id: number = +new Date();
     const duration: number =
       newPerk.duration * Bonus.getInstance().perkEffectTimerMultiplicator;
-    this.state.activePerks.push({
+    perkInstance.state.activePerks.push({
       ...newPerk,
       duration,
       id,
     });
-    this.applyPassivePerk();
-    this.applyActivePerk();
+    perkInstance.applyPassivePerk();
+    perkInstance.applyActivePerk();
 
-    this.count++;
+    perkInstance.count++;
 
     logWithTimer(`New perk applied : ${newPerk.name}`, 1);
     setTimeout(() => {
-      const index: number = this.state.activePerks.findIndex((p) => p.id === id);
+      const index: number = perkInstance.activePerks.findIndex((p) => p.id === id);
       if (index < 0) return;
-      this.state.activePerks.splice(index, 1);
+      perkInstance.state.activePerks.splice(index, 1);
       //this.activePerks = [...this.activePerks];
       logWithTimer(`Perk unapplied : ${newPerk.name}`, 1);
-      this.applyPassivePerk();
-      this.applyActivePerk();
+      perkInstance.applyPassivePerk();
+      perkInstance.applyActivePerk();
     }, duration);
   }
 

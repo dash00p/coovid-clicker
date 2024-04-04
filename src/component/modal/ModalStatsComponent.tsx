@@ -56,7 +56,7 @@ class ModalStatsComponent extends BaseComponent {
 
     constructor(props: object = null) {
         super({ ...props, style });
-        this.buildingUpgrades = Building.getInstance().currentBuildings
+        this.buildingUpgrades = Building.getInstance().state.currentBuildings
             .filter(b => b.activeUpgrades.length)
             .map(building => ({ name: building.name, img: building.img, upgrades: building.activeUpgrades }));
     }

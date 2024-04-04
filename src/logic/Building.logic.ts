@@ -13,7 +13,7 @@ class Building extends Core<Building> {
   };
 
   avalaibleBuildings: IAvalailableBuilding[];
-  currentBuildings: IBuilding[];
+  //currentBuildings: IBuilding[];
   currentMultiplicator: number;
   totalProduction: number;
   _buildingCount: number;
@@ -32,7 +32,6 @@ class Building extends Core<Building> {
       currentBuildings: [],
       currentMultiplicator: this.currentMultiplicator,
     });
-    this.currentBuildings = this.state.currentBuildings;
   }
 
   /** returns the total number of buildings currently owned */
@@ -68,13 +67,13 @@ class Building extends Core<Building> {
       });
 
       for (const newBuilding of newBuildings) {
-        this.addBuilding(newBuilding);
+        this.addBuilding({ ...newBuilding, img: { ...newBuilding.img } });
       }
     }
   }
 
   addBuilding(newBuilding: IBuilding): void {
-    const buildingIndex: number = this.currentBuildings.findIndex(
+    const buildingIndex: number = this.state.currentBuildings.findIndex(
       (b) => b.id === newBuilding.id
     );
     if (buildingIndex !== -1) {
@@ -89,14 +88,15 @@ class Building extends Core<Building> {
       activeUpgrades: [],
     };
     this.state.currentBuildings.push(build);
+    console.log(this.state.currentBuildings);
   }
 
   removeBuilding(buildingId: number): void {
-    const jobIndex = this.currentBuildings.findIndex(
+    const jobIndex = this.state.currentBuildings.findIndex(
       (b) => b.id === buildingId
     );
     if (jobIndex > -1) {
-      this.currentBuildings.splice(jobIndex, 1);
+      this.state.currentBuildings.splice(jobIndex, 1);
     }
   }
 
@@ -105,7 +105,7 @@ class Building extends Core<Building> {
     level: number = 1,
     fromSave: boolean = false
   ): IBuilding | boolean {
-    const buildingIndex: number = this.currentBuildings.findIndex(
+    const buildingIndex: number = this.state.currentBuildings.findIndex(
       (b) => b.id === id
     );
 
@@ -154,7 +154,7 @@ class Building extends Core<Building> {
     const upgrade: IBuildingUpgrade = upgradeList.find(
       (u) => u.id === upgradeId
     );
-    const building: IBuilding = this.currentBuildings.find(
+    const building: IBuilding = this.state.currentBuildings.find(
       (b) => b.id === upgrade.buildingId
     );
 
@@ -204,7 +204,7 @@ class Building extends Core<Building> {
   }
 
   saveBuildings(): IBaseBuilding[] {
-    return this.currentBuildings.map((b) => {
+    return this.state.currentBuildings.map((b) => {
       return {
         id: b.id,
         level: b.level,
@@ -218,7 +218,7 @@ class Building extends Core<Building> {
   /** Get total building production income, including bonus and excluding perks. */
   getTotalProduction(): number {
     let totalBuildingsProduction: number = 0;
-    for (const building of this.currentBuildings) {
+    for (const building of this.state.currentBuildings) {
       totalBuildingsProduction += building.currentProduction;
     }
     this.totalProductionWithoutMultiplicator = totalBuildingsProduction;
