@@ -1,6 +1,7 @@
 import BaseComponent from "./common/BaseComponent";
 import ElementRender from "../logic/core/Element.logic";
 
+import HeadComponent from "./HeadComponent";
 import FooterComponent from "./FooterComponent";
 import CounterComponent from "./CounterComponent";
 import ClickerComponent from "./ClickerComponent";
@@ -20,6 +21,7 @@ const style: string = `
 class LayoutComponent extends BaseComponent {
   constructor(props: ICoreComponentProps = null) {
     super({ ...props, style });
+    new HeadComponent();
   }
 
   render() {

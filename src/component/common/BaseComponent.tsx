@@ -20,12 +20,18 @@ class BaseComponent<T extends IBaseComponentProps = IBaseComponentProps> extends
         this.state = {};
         this._activeJobs = [];
 
-        this.shadowRoot = this.attachShadow({ mode: "open" });
+        if (!props.disableShadow)
+            this.shadowRoot = this.attachShadow({ mode: "open" });
+
         this.setStyle(props?.style);
     }
 
     connectedCallback() {
-        this.shadowRoot.appendChild(this.render());
+        if (this.shadowRoot)
+            this.shadowRoot.appendChild(this.render());
+        else
+            this.appendChild(this.render());
+
         this.baseCallbackAfterConnect();
         // ensure callbackAfterConnect is called after render.
         setTimeout(() => {

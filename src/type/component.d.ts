@@ -19,6 +19,7 @@ declare interface ICoreComponentProps {
 
 declare interface IBaseComponentProps {
   style?: string;
+  disableShadow?: boolean;
 }
 
 declare interface IStyledComponentProps extends ICoreComponentProps {
