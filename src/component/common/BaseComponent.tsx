@@ -1,6 +1,6 @@
 // Will replace CoreComponent.tsx. Comments to remove when done.
 
-import { addObserver } from "../../helper/Dom.helper";
+import { addWatcher } from "../../helper/Dom.helper";
 import { realSetInterval } from "../../helper/Guard.helper";
 
 class BaseComponent<T extends IBaseComponentProps = IBaseComponentProps> extends HTMLElement {
@@ -8,7 +8,7 @@ class BaseComponent<T extends IBaseComponentProps = IBaseComponentProps> extends
     state?: any;
     shadowRoot: ShadowRoot;
     private _activeJobs: number[];
-    private _observers: { objectObserved: any, propertyObservers: string, callback: () => void }[] = [];
+    private _watchers: { objectObserved: any, propertyObservers: string, callback: () => void }[] = [];
 
     constructor(props: T) {
         super();
@@ -68,7 +68,7 @@ class BaseComponent<T extends IBaseComponentProps = IBaseComponentProps> extends
     }
 
     private _clearObservers() {
-        for (const observerToDelete of this._observers) {
+        for (const observerToDelete of this._watchers) {
             let observers;
             const propertyObserved = observerToDelete.objectObserved[observerToDelete.propertyObservers];
 
@@ -115,12 +115,12 @@ class BaseComponent<T extends IBaseComponentProps = IBaseComponentProps> extends
             }
             else this.rerender();
         };
-        this._observers.push({
+        this._watchers.push({
             objectObserved: obj,
             propertyObservers: property,
             callback
         });
-        addObserver(obj, property, callback);
+        addWatcher(obj, property, callback);
 
         // Called only once to set initial state value.
         this.state[stateProperty || property] = obj[property];

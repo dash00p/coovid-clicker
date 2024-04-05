@@ -61,7 +61,12 @@ class ElementRender {
         children.forEach(child => {
             if (Array.isArray(child)) {
                 child.forEach(subChild => {
-                    fragment.appendChild(subChild);
+                    if (['string', 'number'].includes(typeof subChild)) {
+                        const textNode = document.createTextNode(subChild);
+                        fragment.appendChild(textNode);
+                    } else {
+                        fragment.appendChild(subChild);
+                    }
                 });
             } else if (['string', 'number'].includes(typeof child)) {
                 const textNode = document.createTextNode(child);

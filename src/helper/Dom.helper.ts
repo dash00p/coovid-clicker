@@ -58,7 +58,7 @@ export const commarize: (input: number, depth?: number, displayDecimal?: boolean
   return number.toLocaleString();
 };
 
-export const addObserver = (obj: any, property: string, callback: () => void): void => {
+export const addWatcher = (obj: any, property: string, callback: () => void): void => {
   let objectToObserve: any;
   let propertyToObserve: string = property;
 

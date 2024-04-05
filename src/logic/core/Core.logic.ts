@@ -1,3 +1,4 @@
+import { log } from "../../helper/Console.helper";
 import Game from "../Game.logic";
 import Singleton from "./Singleton.logic";
 
@@ -31,13 +32,18 @@ class Core<T extends Core<T>> extends Singleton<T> {
         }
     }
 
-    setProxy(initialValue: any): any {
+    setProxy(initialValue: any, depth: number = 0, propertyName?: string): any {
+        if (depth > 5) {
+            log("Max depth reached, returning initial value")
+            return initialValue;
+        }
+
         const handler = {
-            set: (target: any, property: any, value: any) => {
+            set: (target: any, property: string, value: any) => {
                 let propertyToObserve = property;
                 if (typeof value === 'object' && value !== null) {
                     // Check if the object is not already a proxy and also if the root object hasn't any observers to avoid deep proxying on complex objects.
-                    if (!value.isProxy/* && !target._observers?.self*/) value = this.setProxy(value);
+                    if (!value.isProxy/* && !target._observers?.self*/) value = this.setProxy(value, depth + 1);
                     propertyToObserve = "self";
                 } else if (Array.isArray(target) && property === "length" && value === 0) {
                     propertyToObserve = "self";
@@ -56,14 +62,21 @@ class Core<T extends Core<T>> extends Singleton<T> {
             }
         };
 
+        const isHtmlElement = initialValue instanceof HTMLElement;
         if (typeof initialValue === 'object' && initialValue !== null) {
             for (let key in initialValue) {
-                if (typeof initialValue[key] === 'object' && initialValue[key] !== null && key !== "_observers") {
-                    initialValue[key] = this.setProxy(initialValue[key]);
+                if (typeof initialValue[key] === 'object' &&
+                    initialValue[key] !== null &&
+                    key !== "_observers" &&
+                    (!isHtmlElement || ["state", "props"].includes(key))
+                    //&& (depth < 2 || ["state", "props"].includes(key))
+                ) {
+                    initialValue[key] = this.setProxy(initialValue[key], depth + 1, key);
                 }
             }
         }
 
+        if (isHtmlElement) return initialValue;
         return new Proxy(this.initProxy(initialValue), handler);
     }
 
