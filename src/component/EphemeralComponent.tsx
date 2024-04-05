@@ -25,6 +25,7 @@ class EphemeralComponent extends BaseComponent<IEphemeralComponentProps> {
   declare props: IEphemeralComponentProps;
   declare state: {
     perkAnimationRef: number;
+    onBackground: boolean;
   }
 
   private animationContext: {
