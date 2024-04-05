@@ -49,19 +49,16 @@ class EphemeralComponent extends BaseComponent<IEphemeralComponentProps> {
       timeStampStart: Date.now(),
       frame: 0
     };
-    // this.wrapper = this.createChildren(
-    //   "div",
-    //   `<img src="${this.getSprite(props.icon)}" />`
-    // );
-    // this.wrapper.className += "ephemeral-content";
-    // this.render(this.wrapper);
+
     document.body.appendChild(this);
     this.setAnimation();
     if (props.event === memeEventType.perk) {
       if (Params.getInstance().list.soundActive) this.playSound("wow.mp3");
-      this.state.perkAnimationRef = this.perkMoveAnimation();
       // Add an observer to the game state to pause the animation when the game is on the background
       this.observe(Game.getInstance().state, 'onBackground', null, this.perkMoveAnimation);
+      if (!this.state.onBackground) {
+        this.state.perkAnimationRef = this.perkMoveAnimation();
+      }
     }
 
     if (props.event !== memeEventType.perk) {
@@ -140,24 +137,23 @@ class EphemeralComponent extends BaseComponent<IEphemeralComponentProps> {
   }
 
   perkMoveAnimation(): number {
-    const isOnBackground = Game.getInstance().state.onBackground;
     const context = this.animationContext;
 
     const { dx, dy, frame, timeStampStart, duration, elapsedTime } = context;
 
-    // Animation is paused when the game is on the background but ephemeral elements are still created and lifecycle needs to be managed.
-    if (isOnBackground) {
+    // Animation is paused when the game is on the background but ephemeral elements are still created and lifecycle needs to be managed. In this case, frame
+    if (frame === 0) {
       this.animationContext.elapsedTime = Date.now() - timeStampStart;
+
+      if (this.state.perkAnimationRef) {
+        cancelAnimationFrame(this.state.perkAnimationRef);
+      }
 
       if (this.animationContext.elapsedTime > duration) {
         this.kill();
         return;
       }
       return;
-    }
-
-    if (this.state.perkAnimationRef) {
-      cancelAnimationFrame(this.state.perkAnimationRef);
     }
 
     const logoWidth = this.offsetWidth;

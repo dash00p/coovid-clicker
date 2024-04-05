@@ -67,7 +67,7 @@ class Building extends Core<Building> {
       });
 
       for (const newBuilding of newBuildings) {
-        this.addBuilding({ ...newBuilding, img: { ...newBuilding.img } });
+        this.addBuilding(structuredClone(newBuilding));
       }
     }
   }
@@ -88,7 +88,6 @@ class Building extends Core<Building> {
       activeUpgrades: [],
     };
     this.state.currentBuildings.push(build);
-    console.log(this.state.currentBuildings);
   }
 
   removeBuilding(buildingId: number): void {
