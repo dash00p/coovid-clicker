@@ -142,7 +142,7 @@ class EphemeralComponent extends BaseComponent<IEphemeralComponentProps> {
 
     const { dx, dy, frame, timeStampStart, duration, elapsedTime } = context;
 
-    // Animation is paused when the game is on the background but ephemeral elements are still created and lifecycle needs to be managed. In this case, frame
+    // Animation is paused when the game is on the background but ephemeral elements are still created and lifecycle needs to be managed. In this case, frame is equal to 0 even if ephemeral was created since several seconds.
     if (frame === 0) {
       this.animationContext.elapsedTime = Date.now() - timeStampStart;
 
@@ -154,7 +154,6 @@ class EphemeralComponent extends BaseComponent<IEphemeralComponentProps> {
         this.kill();
         return;
       }
-      return;
     }
 
     const logoWidth = this.offsetWidth;
