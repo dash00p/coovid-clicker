@@ -14,16 +14,6 @@ export const log: (message: string, grade?: number) => void = (
   }
 };
 
-/** Logs a message prefixed with the timestamp to the console only if the grade is less than or equal to the log level.
- * @deprecated since native log function already logs the timestamp.
- */
-export const logWithTimer: (message: string, grade: number) => void = (
-  message,
-  grade = 3
-) => {
-  log(`[${new Date().toLocaleTimeString()}] ${message}`, grade);
-};
-
 export const warn: (message: any) => void = (message): void => {
   console.warn(
     `%c${message}`,

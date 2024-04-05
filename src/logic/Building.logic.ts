@@ -44,7 +44,7 @@ class Building extends Core<Building> {
   }
 
   checkAvailableBuildings(): void {
-    log("Checking newly available buildings", 3);
+    log("Checking newly available buildings");
     const newAvailableBuildings: IBuilding[] = this.avalaibleBuildings.filter(
       (build) =>
         ((!build.neededProduction &&

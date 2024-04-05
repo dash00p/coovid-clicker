@@ -1,6 +1,6 @@
 import config from "./Config.logic";
 import { perkList } from "../collection/Perk.collection";
-import { log, logWithTimer } from "../helper/Console.helper";
+import { log } from "../helper/Console.helper";
 import EphemeralComponent from "../component/EphemeralComponent";
 import { commarize } from "../helper/Dom.helper";
 import Core from "./core/Core.logic";
@@ -119,13 +119,13 @@ class Perk extends Core<Perk> {
 
     perkInstance.count++;
 
-    logWithTimer(`New perk applied : ${newPerk.name}`, 1);
+    log(`New perk applied : ${newPerk.name}`);
     setTimeout(() => {
       const index: number = perkInstance.activePerks.findIndex((p) => p.id === id);
       if (index < 0) return;
       perkInstance.state.activePerks.splice(index, 1);
       //this.activePerks = [...this.activePerks];
-      logWithTimer(`Perk unapplied : ${newPerk.name}`, 1);
+      log(`Perk unapplied : ${newPerk.name}`);
       perkInstance.applyPassivePerk();
       perkInstance.applyActivePerk();
     }, duration);
@@ -163,16 +163,14 @@ class Perk extends Core<Perk> {
           const perkAmount: number = Math.trunc(
             Game.getInstance().getAmount() * perk.value
           );
-          logWithTimer(
+          log(
             `Applying fortune gift (+${commarize(
               perkAmount
-            )}). Old bank value: ${commarize(Game.getInstance().getAmount())}`,
-            1
+            )}). Old bank value: ${commarize(Game.getInstance().getAmount())}`
           );
           Game.getInstance().incrementAmount(perkAmount);
-          logWithTimer(
-            `New bank value: ${commarize(Game.getInstance().getAmount())}`,
-            1
+          log(
+            `New bank value: ${commarize(Game.getInstance().getAmount())}`
           );
 
           perk.name += ` (+ ${commarize(perkAmount)})`;

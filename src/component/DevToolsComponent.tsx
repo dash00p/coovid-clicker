@@ -32,7 +32,7 @@ class DevToolsComponent extends DeprecatedStyledComponent {
         <button onclick={() => Perk.getInstance().clearActivePerks()}>Clear all perks</button>
         <button onclick={() => Perk.getInstance().createEphemeral()}>New ephemeral</button>
         <button onclick={() => Game.getInstance().reset()}>New game</button>
-        <button onclick={() => log(JSON.parse(atob(localStorage.getItem("save"))), 3)}>Display save</button>
+        <button onclick={() => log(JSON.parse(atob(localStorage.getItem("save"))))}>Display save</button>
         <button onclick={() => {
           const game = Game.getInstance();
           game.incrementAmount(game.getAmount())

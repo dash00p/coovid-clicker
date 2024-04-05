@@ -11,7 +11,7 @@ import app from "../../package.json";
 import DomHandler from "./DomHandler";
 
 import { initGuard, killGuard } from "../helper/Guard.helper";
-import { log, logWithTimer } from "../helper/Console.helper";
+import { log } from "../helper/Console.helper";
 
 interface ISave {
   version: string;
@@ -93,7 +93,7 @@ class Game extends Core<Game> {
     };
 
     localStorage.setItem("save", btoa(JSON.stringify(save)));
-    logWithTimer(`Game has been saved !`, 1);
+    log(`Game has been saved !`);
   }
 
   /** Load the save from the local storage. */
@@ -174,7 +174,7 @@ class Game extends Core<Game> {
         if (!this.state.onBackground) {
           this.buildings.checkAvailableBuildings();
           this.bonus.checkAvailableBonus();
-          log("Check assets", 3);
+          log("Check assets");
         }
       }, config.game.checkAssetsTick)
     );
