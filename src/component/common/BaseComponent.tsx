@@ -13,7 +13,7 @@ class BaseComponent<T extends IBaseComponentProps = IBaseComponentProps> extends
     constructor(props: T) {
         super();
         if (new.target === BaseComponent) {
-            throw new TypeError("Cannot construct BaseComponent instances directly");
+            throw new TypeError("Cannot construct BaseComponent instance directly");
         }
 
         this.props = props;
@@ -98,6 +98,18 @@ class BaseComponent<T extends IBaseComponentProps = IBaseComponentProps> extends
         setTimeout(() => {
             this.remove();
         }, timer);
+    }
+
+    static createRef() {
+        const refObject = {
+            current: null,
+            bind: (ref: HTMLElement) => {
+                refObject.current = ref;
+                return ref;
+            }
+        };
+
+        return refObject;
     }
 
     // Implemented in child class.

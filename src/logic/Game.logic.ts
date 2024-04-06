@@ -11,7 +11,7 @@ import app from "../../package.json";
 import DomHandler from "./DomHandler";
 
 import { initGuard, killGuard } from "../helper/Guard.helper";
-import { log } from "../helper/Console.helper";
+import { log, warn } from "../helper/Console.helper";
 
 interface ISave {
   version: string;
@@ -94,6 +94,23 @@ class Game extends Core<Game> {
 
     localStorage.setItem("save", btoa(JSON.stringify(save)));
     log(`Game has been saved !`);
+  }
+
+  importSave(saveString: string): boolean {
+    try {
+      const checkSave: ISave = JSON.parse(atob(saveString));
+      if (!checkSave.version) {
+        warn("Invalid save format");
+        return false;
+      }
+      localStorage.setItem("save", saveString);
+      this.reset(true);
+      return true;
+    } catch (e) {
+      warn("Invalid save format");
+      return false;
+    }
+
   }
 
   /** Load the save from the local storage. */
@@ -221,8 +238,9 @@ class Game extends Core<Game> {
     this.updateBrowserTitle();
   }
 
-  reset(): void {
-    localStorage.removeItem("save");
+  reset(isGameImport: boolean = false): void {
+    if (!isGameImport)
+      localStorage.removeItem("save");
     Game.disposeAll();
     killGuard();
     document.body.removeChild(document.getElementsByTagName('game-container')[0])

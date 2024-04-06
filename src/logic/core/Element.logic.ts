@@ -13,9 +13,15 @@ class ElementRender {
         const container = element;
 
         // Destructure dataset from props and assign the rest to propsToAssign because dataset object is not directly assignable to element.
-        const { dataset, ...propsToAssign } = props || {};
+        const { dataset, unusedStyle, ...propsToAssign } = props || {};
 
         Object.assign(element, propsToAssign);
+
+        if (props?.style) {
+            Object.keys(props.style).forEach(key => {
+                element.style[key] = props.style[key];
+            });
+        }
 
         if (dataset) {
             Object.keys(dataset).forEach(key => {

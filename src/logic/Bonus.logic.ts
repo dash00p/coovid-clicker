@@ -51,7 +51,7 @@ class Bonus extends Core<Bonus> {
         b.neededProduction <= Building.getInstance().totalProduction
     );
     for (const bonus of newBonuses) {
-      this.state.availableBonus.push(bonus);
+      this.state.availableBonus.push(structuredClone(bonus));
     }
   }
 
